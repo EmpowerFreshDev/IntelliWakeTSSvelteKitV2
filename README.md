@@ -1,58 +1,42 @@
-# create-svelte
+# IntelliWake TS SvelteKit V2
 
-Everything you need to build a Svelte library, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Overview
+This NPM package provides common functions and components that enhance a SvelteKit project.
 
-Read more about creating a library [in the docs](https://kit.svelte.dev/docs/packaging).
+It leverages other IntelliWake modules.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+## Installation
+Installing this package can be done with `npm` or `pnpm`
+```shell
+pnpm install @solidbasisventures/intelliwaketssveltekitv2
 ```
 
-## Developing
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Usage
 
-```bash
-npm run dev
+### Styling
+For the styling of this package to work, tailwind must be installed on the host project. Then the following line should
+be added to `tailwind.config.cjs` in the host project.
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+`'./node_modules/@solidbasisventures/intelliwaketssveltekitv1/**/*.{svelte,js,ts,jsx,tsx}'`
+
+The end result should look like this:
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+    content: [
+        './src/**/*.{html,js,svelte,ts}',
+        './node_modules/@solidbasisventures/intelliwaketssveltekitv1/**/*.{svelte,js,ts,jsx,tsx}'
+    ],
+}
 ```
 
-Everything inside `src/lib` is part of your library, everything inside `src/routes` can be used as a showcase or preview app.
+This will cause tailwind to automatically include the tailwind classes found in this library.
 
-## Building
+### Importing
+All imports are named imports and should look as follows
 
-To build your library:
-
-```bash
-npm run package
-```
-
-To create a production version of your showcase app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-## Publishing
-
-Go into the `package.json` and give your package the desired name through the `"name"` option. Also consider adding a `"license"` field and point it to a `LICENSE` file which you can create from a template (one popular option is the [MIT license](https://opensource.org/license/mit/)).
-
-To publish your library to [npm](https://www.npmjs.com):
-
-```bash
-npm publish
+```javascript
+import {ComponentName} from "@solidbasisventures/intelliwaketssveltekitv1"
 ```

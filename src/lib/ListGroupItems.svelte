@@ -1,0 +1,339 @@
+<script lang='ts'>
+	import type {PathAnalyzer} from '$lib/PathAnalyzer.js'
+	import {faAngleDown} from '@fortawesome/free-solid-svg-icons'
+	import type {TFindIsActive} from '@solidbasisventures/intelliwaketsfoundation'
+	import {ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
+	import Fa from 'svelte-fa/src/fa.svelte'
+	import type {TListGroupItem} from './Definitions.js'
+	import DisplayHTML from './DisplayHTML.svelte'
+	import {KEY_STRING_ENTER, KEY_STRING_SPACE} from '$lib/Functions.js'
+
+	export let listItems: TListGroupItem[] = []
+	export let emptyListMessage: string | null = null
+	export let subsExist = false
+	export let topValue: string | null = null
+	export let active: TFindIsActive = true
+	export let indentLevel = 0
+	export let collapsedValues: string[] = []
+	export let collapsedSections: string[] = []
+	export let rememberKey: string | null = null
+	export let pathAnalyzer: PathAnalyzer | null = null
+	export let wrapText = false
+	export let ellipses = false
+	export let noLinkReplace = false
+	export let rounded = false
+
+	const pathFromItem = (modalItem: TListGroupItem): string => {
+		return modalItem.href ??
+			(ToPascalCase((modalItem.title ?? '').toString()) + (modalItem.value ? `:${modalItem.value}` : ''))
+	}
+
+	interface IGroupItemPath extends TListGroupItem {
+		pathFromItem?: string
+		isOpen: boolean
+	}
+
+	$: useSubsExist = !!subsExist || listItems.some(item => !!item.parent_value && (active === null || item.hidden !== active))
+
+	$: subItems = (listItems ?? [])
+		.filter(item => shouldShowTopItem(item, topValue, active, listItems))
+		.map<IGroupItemPath>(listItem => ({
+			...listItem,
+			pathFromItem: !pathAnalyzer ? undefined : pathAnalyzer.open(pathFromItem(listItem)),
+			isOpen: !!pathAnalyzer && pathAnalyzer.isOpen(pathFromItem(listItem)),
+			collapsed: collapsedValues.includes(listItem.value ?? ''),
+			subs: !useSubsExist ? [] : (listItems ?? [])
+				.filter(item => item.parent_value === listItem.value && (active === null || item.hidden !== active))
+				.map<IGroupItemPath>(listItemSub => ({
+					...listItemSub,
+					pathFromItem: !pathAnalyzer ? undefined : pathAnalyzer.open(pathFromItem(listItemSub)),
+					isOpen: !!pathAnalyzer && pathAnalyzer.isOpen(pathFromItem(listItemSub)),
+					collapsed: collapsedValues.includes(listItemSub.value ?? '')
+				}))
+		}))
+
+	const shouldShowTopItem = (item: TListGroupItem, useTopValue: string | null, useActive: TFindIsActive,
+	                           useListItems: TListGroupItem[]): boolean => {
+		const isTopValue = (item.parent_value ?? null) === useTopValue
+		const isShown = useActive === null || useActive === !item.hidden
+		const hasVisibleChild = useListItems.some(listItem => {
+			const hasChild = listItem.parent_value && listItem.parent_value === item.value
+			const isChildShown = useActive === null || useActive === !listItem.hidden
+
+			return hasChild && isChildShown
+		})
+
+		return isTopValue && (isShown || hasVisibleChild)
+	}
+
+	/*let rememberTimeout = setTimeout(() => {
+	}, 100)
+	let rememberRestoreAttempted = false
+
+	const rememberReturn = (items: IGroupItemPath[]) => {
+		clearTimeout(rememberTimeout)
+
+		if (rememberKey && !rememberRestoreAttempted && !!items.length) {
+			rememberRestoreAttempted = true
+			const rememberValue = window.localStorage.getItem(`MDRememberPath-${mdPath}-${rememberKey}`)
+
+			if (rememberValue && rememberValue !== openPathString && items.some(item => item.pathFromItem === rememberValue)) {
+				setTimeout(() => {
+					$StoreTransitionToRight = null
+					Router.addFrom(mdPath, rememberValue)
+				}, 250)
+			}
+		}
+	}
+	$: rememberReturn(useListItems)
+
+	onDestroy(() => {
+		clearTimeout(rememberTimeout)
+	}) */
+
+	/*const selectRoute = (modalItem?: IGroupItemPath | null) => {
+		$StoreTransitionToRight = null
+		if (!modalItem?.disabled) {
+			if (!modalItem) {
+				if (rememberKey) {
+					window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
+				}
+				Router.back(mdPath)
+			} else {
+				if (modalItem.isOpen) {
+					if (rememberKey) {
+						window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
+					}
+					Router.back(mdPath)
+				} else {
+					if (rememberKey) {
+						window.localStorage.setItem(`MDRememberPath-${mdPath}-${rememberKey}`, modalItem.pathFromItem)
+					}
+					Router.addFrom(mdPath, modalItem.pathFromItem)
+				}
+			}
+		}
+	} */
+
+	const collapseToggle = (value: string | null | undefined) => {
+		if (value) {
+			if ((collapsedValues ?? []).includes(value)) {
+				collapsedValues = collapsedValues.filter(val => val !== value)
+			} else {
+				collapsedValues = [...collapsedValues, value]
+			}
+		}
+	}
+
+	/* const doRouterBack = (e: CustomEvent) => {
+		$StoreTransitionToRight = null
+		if (rememberKey && !!window.localStorage.getItem(`MDRememberPath-${mdPath}-${rememberKey}`) && e.detail.includes(`${mdPath}/~`)) {
+			window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
+		}
+	} */
+
+	function getKey(listItem: TListGroupItem) {
+		return listItem.key ?? `${listItem.value ?? 'v'}:${listItem.title ?? listItem.paneName ?? 't'}:${listItem.sub_title ?? 'st'}:${listItem.badgeValue ?? 'bv'}:${listItem.rightText ?? 'rt'}}`
+	}
+
+	function sectionClick(section: string) {
+		if ((collapsedSections ?? []).includes(section)) {
+			collapsedSections = collapsedSections.filter(cS => cS !== section)
+		} else {
+			collapsedSections = [...(collapsedSections ?? []), section]
+		}
+	}
+
+	function doKeyExecute(e: KeyboardEvent, doFunction: (() => void) | undefined) {
+		if ((e.key === KEY_STRING_ENTER || e.key === KEY_STRING_SPACE) && doFunction) {
+			doFunction()
+		}
+	}
+</script>
+
+<!--<svelte:window on:RouterBack={doRouterBack}/>-->
+
+<ul class='listGroup'
+    class:px-2={rounded}
+    class:ml-4={!!indentLevel}
+    class:max-sm:text-xl={true}>
+	{#if !subItems.length && (!!emptyListMessage || $$slots.empty)}
+		<li class='block w-full select-none text-slate-500 italic p-1 text-sm'>
+			<DisplayHTML noLinkReplace
+			             value={emptyListMessage}/>
+			<slot name='empty'/>
+		</li>
+	{:else}
+		{#each subItems as listItem, idx (getKey(listItem))}
+			{#if listItem.section && listItem.section !== subItems[idx - 1]?.section}
+				<li class='block w-full select-none bg-primary-main text-white opacity-80 hover:opacity-70 font-bold p-1 cursor-pointer'
+				    class:mb-2={rounded}
+				    class:overflow-x-hidden={wrapText || ellipses}
+				    class:whitespace-nowrap={!wrapText}
+				    class:mt-1={idx > 0}
+				    title={listItem.hover_title}
+				    role='menuitem'
+				    tabindex={0}
+				    on:keydown={e => doKeyExecute(e, () => sectionClick(listItem.section ?? ""))}
+				    on:click={() => sectionClick(listItem.section ?? "")}>
+					<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+					             value={listItem.section}/>
+				</li>
+			{/if}
+
+			{#if !listItem.section || !(collapsedSections ?? []).includes(listItem.section)}
+				<li class={`w-full select-none listGroupItem ${listItem.itemClass ?? ''}`}
+				    class:overflow-x-hidden={wrapText || ellipses}
+				    class:cursor-pointer={!listItem.disabled}
+				    class:border-b={!useSubsExist}
+				    class:border-gray-200={!useSubsExist}
+				    class:dark:border-slate-500={!useSubsExist}
+				    class:block={!useSubsExist}
+				    class:grid={useSubsExist}
+				    class:grid-cols-[2rem_1fr]={useSubsExist}
+				    class:line-through={!!listItem.strikeThrough}
+				    class:selected={listItem.isOpen}
+				    class:disabled={listItem.disabled}
+				    class:p-0={rounded}
+				    class:border-none={rounded}
+				    class:rounded-md={rounded}
+				    class:hover:bg-grey-300={rounded}
+				    title={listItem.hover_title}
+				    role='menuitem'
+				    tabindex={listItem.pathFromItem && !listItem.linkClick ? -1 : 0}
+				    on:keydown={e => doKeyExecute(e, listItem.linkClick)}
+				    on:click={listItem.linkClick}>
+					{#if useSubsExist}
+						<div class='cursor-pointer text-center pt-3'
+						     role='button'
+						     tabindex={-1}
+						     on:keydown|stopPropagation={() => collapseToggle(listItem.value)}
+						     on:click|stopPropagation={() => collapseToggle(listItem.value)}>
+							{#if (listItem.subs ?? []).length}
+								<Fa rotate={listItem.collapsed ? "270" : "0"}
+								    class='inline'
+								    icon={faAngleDown}
+								    fw/>
+							{/if}
+						</div>
+					{/if}
+					{#if listItem.pathFromItem && !listItem.linkClick}
+						<a href={listItem.pathFromItem}
+						   tabindex={0}
+						   data-sveltekit-preload-data={listItem.dataSvelteKitPreloadData ?? "tap"}
+						   class='py-2 pr-3 w-full grid grid-cols-[auto,1fr,auto] overflow-x-hidden'
+						   class:pl-3={!useSubsExist}>
+							<div
+								class='inline-block relative'
+								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
+								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
+								{#if !!listItem.faProps}
+									<Fa fw
+									    class={`mr-2 inline-block ${!listItem.bigIcon ? '' : 'ml-2'}`}
+									    scale={!listItem.bigIcon ? 1 : 2}
+									    {...listItem.faProps}/>
+								{/if}
+								{#if !!listItem.icon}
+									<Fa fw
+									    icon={listItem.icon}
+									    scale={!listItem.bigIcon ? 1 : 2}
+									    class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}/>
+								{/if}
+							</div>
+							<div class='overflow-hidden'
+							     class:whitespace-nowrap={!wrapText}
+							     class:text-ellipsis={!wrapText && ellipses}
+							     title={!ellipses ? undefined : listItem.title}>
+								<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+								             value={listItem.title}/>
+								{#if listItem.sub_title}
+									<div class='text-sm font-thin'>
+										<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+										             value={listItem.sub_title}/>
+									</div>
+								{/if}
+							</div>
+							<div class='inline-block'>
+								{#if listItem.badgeValue !== undefined && listItem.badgeValue !== null}
+									<div class='inline-block px-1 rounded-full ml-2 text-sm py-0 mt-1 min-w-[1em] leading-tight {listItem.badgeClass ?? ""}'
+									     class:bg-primary-main={!listItem.isOpen}
+									     class:text-white={!listItem.isOpen}
+									     class:bg-white={listItem.isOpen}
+									     class:text-black={listItem.isOpen}
+									     style={listItem.isOpen ? listItem.badgeColor ? `color: ${listItem.badgeColor}` : undefined : listItem.badgeColor ? `background-color: ${listItem.badgeColor}` : undefined}>
+										{listItem.badgeValue}
+									</div>
+								{/if}
+								{#if listItem.rightText !== undefined && listItem.rightText !== null}
+									<div class='inline-block float-right px-1 ml-2 py-0 mt-0.5 min-w-[1em] leading-tight'>
+										{listItem.rightText}
+									</div>
+								{/if}
+							</div>
+						</a>
+					{:else}
+						<div class='py-2 px-3 grid grid-cols-[auto,1fr,auto] overflow-hidden'
+						     class:pl-3={!useSubsExist}>
+							<div
+								class='inline-block relative'
+								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
+								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
+								{#if !!listItem.faProps}
+									<Fa
+										fw
+										{...listItem.faProps}
+										scale={!listItem.bigIcon ? 1 : 2}
+										class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'ml-2'}`}
+									/>
+								{/if}
+								{#if !!listItem.icon}
+									<Fa
+										fw
+										icon={listItem.icon}
+										scale={!listItem.bigIcon ? 1 : 2}
+										class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}
+									/>
+								{/if}
+							</div>
+							<div class='overflow-hidden'
+							     class:whitespace-nowrap={!wrapText}
+							     class:text-ellipsis={!wrapText && ellipses}
+							     title={!ellipses ? undefined : listItem.title}>
+								<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+								             value={listItem.title}/>
+								{#if listItem.sub_title}
+									<div class='text-sm font-thin'>
+										<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+										             value={listItem.sub_title}/>
+									</div>
+								{/if}
+							</div>
+							{#if listItem.badgeValue !== undefined && listItem.badgeValue !== null}
+								<div>
+									<div class='px-1 rounded-full ml-2 text-[0.75em] py-0 mt-1 leading-tight {listItem.badgeClass ?? ""}'
+									     class:bg-primary-main={!listItem.isOpen}
+									     class:text-white={!listItem.isOpen}
+									     class:bg-white={listItem.isOpen}
+									     class:text-black={listItem.isOpen}
+									     style={listItem.isOpen ? listItem.badgeColor ? `color: ${listItem.badgeColor}` : undefined : listItem.badgeColor ? `background-color: ${listItem.badgeColor}` : undefined}>
+										{listItem.badgeValue}
+									</div>
+								</div>
+							{/if}
+						</div>
+					{/if}
+				</li>
+				{#if !listItem.collapsed && (listItem.subs ?? []).length > 0}
+					<svelte:self listItems={listItems}
+					             topValue={listItem.value}
+					             {pathAnalyzer}
+					             subsExist={useSubsExist}
+					             indentLevel={indentLevel + 1}
+					             {rememberKey}
+					             {active}
+					             bind:collapsedValues/>
+				{/if}
+			{/if}
+		{/each}
+	{/if}
+</ul>
