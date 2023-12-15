@@ -1,0 +1,50 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+**/node_modules
+/vendor
+/.pnp
+.pnp.js
+
+testfiles
+
+# misc
+.DS_Store
+Thumbs.db
+.sass-cache/
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+DeveloperFiles
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Idea
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/shelf
+
+# NPM
+.npmrc
+
+stage_files
+
+dist
+
+ecosystem.config.*
+
+*.dump
+
+./build
