@@ -5,7 +5,7 @@
   "private": false,
   "scripts": {
     "dev": "vite dev",
-    "Publish": "bun version patch && git push --tags && bun svelte-package && bun publish && git push",
+    "Publish": "pnpm version patch && git push --tags && pnpm svelte-package && pnpm publish && git push",
     "build": "vite build && npm run package",
     "preview": "vite preview",
     "package": "svelte-kit sync && svelte-package && publint",
