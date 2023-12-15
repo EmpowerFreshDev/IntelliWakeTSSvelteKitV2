@@ -1,6 +1,6 @@
 {
   "name": "@solidbasisventures/intelliwaketssveltekitv2",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -32,9 +32,9 @@
   ],
   "peerDependencies": {
     "svelte": "^4.0.0",
-	  "@sveltejs/kit": "^2.0.0",
-	  "@fortawesome/free-solid-svg-icons": "^6.4.0",
-	  "@solidbasisventures/intelliwaketsfoundation": "latest"
+    "@sveltejs/kit": "^2.0.0",
+    "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@solidbasisventures/intelliwaketsfoundation": "latest"
   },
   "devDependencies": {
     "@sveltejs/adapter-auto": "^3.0.0",
