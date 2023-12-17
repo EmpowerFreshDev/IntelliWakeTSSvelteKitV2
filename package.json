@@ -15,9 +15,8 @@
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"Bun-Install": "bun install",
-		"Install-IntelliWake": "bun install && bun update @solidbasisventures/intelliwaketsfoundation@latest",
-		"Version-Minor-Advance": "bun version minor"
+		"Install-IntelliWake": "pnpm install && pnpm update @solidbasisventures/intelliwaketsfoundation@latest",
+		"Version-Minor-Advance": "pnpm version minor"
 	},
 	"exports": {
 		".": {
