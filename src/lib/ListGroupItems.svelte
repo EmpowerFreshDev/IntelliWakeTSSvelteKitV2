@@ -3,7 +3,7 @@
 	import {faAngleDown} from '@fortawesome/free-solid-svg-icons'
 	import type {TFindIsActive} from '@solidbasisventures/intelliwaketsfoundation'
 	import {ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from "svelte-awesome"
 	import type {TListGroupItem} from './Definitions.js'
 	import DisplayHTML from './DisplayHTML.svelte'
 	import {KEY_STRING_ENTER, KEY_STRING_SPACE} from '$lib/Functions.js'
@@ -210,9 +210,9 @@
 						     on:keydown|stopPropagation={() => collapseToggle(listItem.value)}
 						     on:click|stopPropagation={() => collapseToggle(listItem.value)}>
 							{#if (listItem.subs ?? []).length}
-								<Fa rotate={listItem.collapsed ? "270" : "0"}
+								<Icon rotate={listItem.collapsed ? "270" : "0"}
 								    class='inline'
-								    icon={faAngleDown}
+								    data={faAngleDown}
 								    fw/>
 							{/if}
 						</div>
@@ -228,14 +228,14 @@
 								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
 								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
 								{#if !!listItem.faProps}
-									<Fa fw
+									<Icon fw
 									    class={`mr-2 inline-block ${!listItem.bigIcon ? '' : 'ml-2'}`}
 									    scale={!listItem.bigIcon ? 1 : 2}
 									    {...listItem.faProps}/>
 								{/if}
 								{#if !!listItem.icon}
-									<Fa fw
-									    icon={listItem.icon}
+									<Icon fw
+									    data={listItem.icon}
 									    scale={!listItem.bigIcon ? 1 : 2}
 									    class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}/>
 								{/if}
@@ -279,7 +279,7 @@
 								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
 								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
 								{#if !!listItem.faProps}
-									<Fa
+									<Icon
 										fw
 										{...listItem.faProps}
 										scale={!listItem.bigIcon ? 1 : 2}
@@ -287,9 +287,9 @@
 									/>
 								{/if}
 								{#if !!listItem.icon}
-									<Fa
+									<Icon
 										fw
-										icon={listItem.icon}
+										data={listItem.icon}
 										scale={!listItem.bigIcon ? 1 : 2}
 										class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}
 									/>

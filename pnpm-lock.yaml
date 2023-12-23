@@ -61,12 +61,12 @@ devDependencies:
   publint:
     specifier: ^0.1.9
     version: 0.1.16
+  svelte-awesome:
+    specifier: ^3.3.0
+    version: 3.3.0(svelte@4.2.8)
   svelte-check:
     specifier: ^3.6.2
     version: 3.6.2(postcss@8.4.32)(svelte@4.2.8)
-  svelte-fa:
-    specifier: ^3.0.4
-    version: 3.0.4
   tailwindcss:
     specifier: ^3.4.0
     version: 3.4.0
@@ -2560,6 +2560,14 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
+  /svelte-awesome@3.3.0(svelte@4.2.8):
+    resolution: {integrity: sha512-5adEs7YyxuevKNTasKTpLjmp/HUTMjQkUzAB0At69shhMSEFvF20xfUi4g9SCTWJUc+gbTw/cqgZIDNTZVzNLg==}
+    peerDependencies:
+      svelte: ^3.43.1 || ^4.0.0
+    dependencies:
+      svelte: 4.2.8
+    dev: true
+
   /svelte-check@3.6.2(postcss@8.4.32)(svelte@4.2.8):
     resolution: {integrity: sha512-E6iFh4aUCGJLRz6QZXH3gcN/VFfkzwtruWSRmlKrLWQTiO6VzLsivR6q02WYLGNAGecV3EocqZuCDrC2uttZ0g==}
     hasBin: true
@@ -2602,10 +2610,6 @@ packages:
       postcss: 8.4.32
       postcss-scss: 4.0.9(postcss@8.4.32)
       svelte: 4.2.8
-    dev: true
-
-  /svelte-fa@3.0.4:
-    resolution: {integrity: sha512-y04vEuAoV1wwVDItSCzPW7lzT6v1bj/y1p+W1V+NtIMpQ+8hj8MBkx7JFD7JHSnalPU1QiI8BVfguqheEA3nPg==}
     dev: true
 
   /svelte-hmr@0.15.3(svelte@4.2.8):

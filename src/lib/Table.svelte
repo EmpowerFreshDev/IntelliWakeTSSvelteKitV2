@@ -15,7 +15,7 @@
 	import Search from './Search.svelte'
 	import DropDown from './DropDown.svelte'
 	import {CopyRefToClipboard} from './Functions'
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from "svelte-awesome"
 	import {faCopy} from '@fortawesome/free-solid-svg-icons'
 	import {browser} from '$app/environment'
 
@@ -182,7 +182,7 @@
 			{#if copyButton}
 				<button class='btnLink'
 				        on:click={copyTable}>
-					<Fa icon={faCopy}/>
+					<Icon data={faCopy}/>
 				</button>
 			{/if}
 		</div>

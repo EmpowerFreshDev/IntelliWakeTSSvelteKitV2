@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import type {IDDAction} from './Definitions'
 	import {tick} from 'svelte'
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from "svelte-awesome"
 	import {slide} from 'svelte/transition'
 	import {cubicInOut} from 'svelte/easing'
 	import {goto} from '$app/navigation'
@@ -206,7 +206,7 @@
 							     on:click={e => performAction(e, ddAction)}
 							     bind:this={refs[i]}>
 								{#if ddAction.faProps}
-									<Fa {...ddAction.faProps}
+									<Icon {...ddAction.faProps}
 									    class='inline-block mr-1'
 									    fw/>
 								{/if}

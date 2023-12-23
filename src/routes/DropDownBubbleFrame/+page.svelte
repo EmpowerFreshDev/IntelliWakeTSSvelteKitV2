@@ -52,7 +52,7 @@
 			]}/>
 			<DropDown buttonTitle='DDZZ'
 			          ddActions={[
-				{title: 'One', action: () => console.info(1), faProps: {icon: faSun}},
+				{title: 'One', action: () => console.info(1), faProps: {data: faSun}},
 				{title: 'Two', action: () => console.info(2)},
 				{title: 'Three', action: () => console.info(3)},
 				{title: 'Four', action: () => console.info(4)},
