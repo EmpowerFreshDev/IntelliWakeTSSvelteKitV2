@@ -5,7 +5,7 @@
 	import {IsMobileOrTablet, ShowActivityOverlay, Switch, type TListGroupItem} from '$lib/index.js'
 	import {browser} from '$app/environment'
 	import {faAtom, faCloudSun, faCog, faMoon, faPercent, faSun, faUsers} from '@fortawesome/free-solid-svg-icons'
-	import Icon from "svelte-awesome"
+	import Fa from 'svelte-fa/src/fa.svelte'
 	import ActivityOverlay from '$lib/ActivityOverlay.svelte'
 	import MessageBoxes from '$lib/MessageBoxes.svelte'
 	import {navigating, page} from '$app/stores'
@@ -88,7 +88,7 @@
 			section: 'B Section',
 			title: 'Drop Down Frame',
 			sub_title: 'Sub Title DDF',
-			data: faCog,
+			icon: faCog,
 			bigIcon: rounded
 		},
 		{
@@ -108,15 +108,15 @@
 		},
 		{
 			title: 'Users',
-			data: faUsers
+			icon: faUsers
 		},
 		{
 			title: 'Blur',
-			data: faAtom
+			icon: faAtom
 		},
 		{
 			title: 'Fractions',
-			data: faPercent
+			icon: faPercent
 		}
 	], search) satisfies TListGroupItem[]
 
@@ -191,7 +191,7 @@
 					localStorage.theme = 'light'
 					window.location.reload()
 				}}>
-				<Icon data={faSun}
+				<Fa icon={faSun}
 				    swapOpacity/>
 			</button>
 			<button class:active={browser && localStorage.theme === 'dark'}
@@ -199,14 +199,14 @@
 					localStorage.theme = 'dark'
 					window.location.reload()
 				}}>
-				<Icon data={faMoon}/>
+				<Fa icon={faMoon}/>
 			</button>
 			<button class:active={browser && localStorage.theme === undefined}
 			        on:click={() => {
 					localStorage.removeItem('theme')
 					window.location.reload()
 				}}>
-				<Icon data={faCloudSun}/>
+				<Fa icon={faCloudSun}/>
 			</button>
 		</div>
 		<div class='text-center text-sm'>

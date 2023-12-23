@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {createEventDispatcher, tick} from 'svelte'
-	import Icon from "svelte-awesome"
+	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faTimes} from '@fortawesome/free-solid-svg-icons'
 	import ActivityOverlay from './ActivityOverlay.svelte'
 	import type {TEnhanceOptions} from './FormEnhance'
@@ -142,7 +142,7 @@
 					<button type='button'
 					        class='float-right btnLink text-white !py-0'
 					        on:click|stopPropagation={cancelAction}>
-						<Icon data={faTimes}
+						<Fa icon={faTimes}
 						    class='text-white'/>
 					</button>
 				</div>

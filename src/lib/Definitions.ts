@@ -11,9 +11,46 @@ import {
 } from '@solidbasisventures/intelliwaketsfoundation'
 import type {SvelteComponent} from 'svelte'
 import type {IconDefinition} from '@fortawesome/free-solid-svg-icons'
-import type {IconProps} from 'svelte-awesome/components/Icon.svelte'
 
-export interface IFAProps extends IconProps {
+export interface IFAProps {
+	icon: IconDefinition
+
+	size?:
+		| 'xs'
+		| 'sm'
+		| 'lg'
+		| '1x'
+		| '2x'
+		| '3x'
+		| '4x'
+		| '5x'
+		| '6x'
+		| '7x'
+		| '8x'
+		| '9x'
+		| '10x'
+	color?: string
+
+	fw?: boolean
+	pull?: 'left' | 'right'
+
+	scale?: number
+	translateX?: number
+	translateY?: number
+	rotate?: string
+	flip?: boolean
+
+	spin?: boolean
+	pulse?: boolean
+
+	// Duotone Icons
+	primaryColor?: string
+	secondaryColor?: string
+	primaryOpacity?: number
+	secondaryOpacity?: number
+	swapOpacity?: boolean
+
+	title?: string
 }
 
 export interface IDDAction {

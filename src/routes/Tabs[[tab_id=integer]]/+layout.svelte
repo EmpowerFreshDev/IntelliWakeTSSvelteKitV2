@@ -12,11 +12,11 @@
 	$: tabHrefs = [
 		{
 			key: 'One',
-			faProps: {data: faCircleCheck}
+			faProps: {icon: faCircleCheck}
 		},
 		{
 			key: 'Two',
-			faProps: {data: faCircleArrowRight}
+			faProps: {icon: faCircleArrowRight}
 
 		},
 		{

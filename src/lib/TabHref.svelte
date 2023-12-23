@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type {ITabHref} from './Definitions'
-	import Icon from "svelte-awesome"
+	import Fa from 'svelte-fa/src/fa.svelte'
 	import {page} from '$app/stores'
 	import {PathAnalyzer} from './PathAnalyzer'
 	import {browser} from '$app/environment'
@@ -187,7 +187,7 @@
 					href={item.href}
 				>
 					{#if !!item.faProps}
-						<Icon
+						<Fa
 							{...item.faProps}
 							class="inline-block mr-1"
 							fw
@@ -204,7 +204,7 @@
 					href={item.href}
 				>
 					{#if !!item.faProps}
-						<Icon {...item.faProps} class="inline-block mr-1" fw/>
+						<Fa {...item.faProps} class="inline-block mr-1" fw/>
 					{/if}
 					{item.title ?? item.key}
 				</a>

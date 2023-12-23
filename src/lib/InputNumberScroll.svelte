@@ -10,7 +10,7 @@
 	import {tick} from 'svelte'
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import {browser} from '$app/environment'
-	import Icon from "svelte-awesome"
+	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faBackspace} from '@fortawesome/free-solid-svg-icons'
 
 	export let value: number | null | undefined
@@ -82,7 +82,7 @@
 				<button type='button'
 				        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full'
 				        on:click={() => typeValue(null)}>
-					<Icon data={faBackspace}
+					<Fa icon={faBackspace}
 					    class='inline-block'/>
 				</button>
 			</div>

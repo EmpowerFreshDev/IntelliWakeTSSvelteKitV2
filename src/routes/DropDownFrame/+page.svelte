@@ -41,7 +41,7 @@
 			]}/>
 			<DropDown buttonTitle='DDZZ'
 			          ddActions={[
-				{headerGroup: 'A', title: 'One', action: () => console.info(1), faProps: {data: faSun}},
+				{headerGroup: 'A', title: 'One', action: () => console.info(1), faProps: {icon: faSun}},
 				{headerGroup: 'A', title: 'Two', action: () => console.info(2)},
 				{headerGroup: 'A', title: 'Three', action: () => console.info(3)},
 				{headerGroup: 'A', title: 'Four', action: () => console.info(4)},

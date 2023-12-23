@@ -3,7 +3,7 @@
 	import {ShowMessageBox} from './Definitions'
 	import {fade, fly} from 'svelte/transition'
 	import {DateCompare} from '@solidbasisventures/intelliwaketsfoundation'
-	import Icon from "svelte-awesome"
+	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faCircleInfo, faTimes} from '@fortawesome/free-solid-svg-icons'
 
 	setInterval(() => {
@@ -29,13 +29,13 @@
 	     on:click={() => hideMessageBox(messageBox)}
 	     on:keypress={() => hideMessageBox(messageBox)}>
 		<div class='bg-blue-300 text-blue-600 flex justify-center items-center'>
-			<Icon data={faCircleInfo} class='inline-block'/>
+			<Fa icon={faCircleInfo} class='inline-block'/>
 		</div>
 		<div class='py-1 px-2'>
 			{messageBox.message}
 		</div>
 		<div class='text-center pt-1'>
-			<Icon data={faTimes} class='inline-block'/>
+			<Fa icon={faTimes} class='inline-block'/>
 		</div>
 	</div>
 {/each}
