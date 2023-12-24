@@ -1,12 +1,11 @@
 <script lang='ts'>
-	import type {PathAnalyzer} from '$lib/PathAnalyzer.js'
-	import {faAngleDown} from '@fortawesome/free-solid-svg-icons'
+	import type {PathAnalyzer} from '$lib/PathAnalyzer'
 	import type {TFindIsActive} from '@solidbasisventures/intelliwaketsfoundation'
 	import {ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import type {TListGroupItem} from './Definitions.js'
+	import Icon from '$lib/Icon.svelte'
+	import type {TListGroupItem} from './Definitions'
 	import DisplayHTML from './DisplayHTML.svelte'
-	import {KEY_STRING_ENTER, KEY_STRING_SPACE} from '$lib/Functions.js'
+	import {KEY_STRING_ENTER, KEY_STRING_SPACE} from '$lib/Functions'
 
 	export let listItems: TListGroupItem[] = []
 	export let emptyListMessage: string | null = null
@@ -210,10 +209,16 @@
 						     on:keydown|stopPropagation={() => collapseToggle(listItem.value)}
 						     on:click|stopPropagation={() => collapseToggle(listItem.value)}>
 							{#if (listItem.subs ?? []).length}
-								<Fa rotate={listItem.collapsed ? "270" : "0"}
-								    class='inline'
-								    icon={faAngleDown}
-								    fw/>
+								<svg xmlns='http://www.w3.org/2000/svg'
+								     class='inline'
+								     style='rotate: {listItem.collapsed ? "180" : "0"}deg; vertical-align: 0.125em;'
+								     height='16'
+								     width='14'
+								     viewBox='0 0 512 512'>
+									<path
+										fill='currentColor'
+										d='M224 365.3l22.6-22.6 160-160L429.3 160 384 114.7l-22.6 22.6L224 274.7 86.6 137.4 64 114.7 18.7 160l22.6 22.6 160 160L224 365.3z'/>
+								</svg>
 							{/if}
 						</div>
 					{/if}
@@ -228,16 +233,16 @@
 								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
 								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
 								{#if !!listItem.faProps}
-									<Fa fw
-									    class={`mr-2 inline-block ${!listItem.bigIcon ? '' : 'ml-2'}`}
-									    scale={!listItem.bigIcon ? 1 : 2}
-									    {...listItem.faProps}/>
+									<Icon fw
+									      class={`mr-2 inline-block ${!listItem.bigIcon ? '' : 'ml-2'}`}
+									      scale={!listItem.bigIcon ? 1 : 2}
+									      {...listItem.faProps}/>
 								{/if}
 								{#if !!listItem.icon}
-									<Fa fw
-									    icon={listItem.icon}
-									    scale={!listItem.bigIcon ? 1 : 2}
-									    class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}/>
+									<Icon fw
+									      icon={listItem.icon}
+									      scale={!listItem.bigIcon ? 1 : 2}
+									      class={`mr-2 inline-block top-1/2 -translate-y-1/2 absolute ${!listItem.bigIcon ? '' : 'left-1.5'}`}/>
 								{/if}
 							</div>
 							<div class='overflow-hidden'
@@ -279,7 +284,7 @@
 								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
 								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
 								{#if !!listItem.faProps}
-									<Fa
+									<Icon
 										fw
 										{...listItem.faProps}
 										scale={!listItem.bigIcon ? 1 : 2}
@@ -287,7 +292,7 @@
 									/>
 								{/if}
 								{#if !!listItem.icon}
-									<Fa
+									<Icon
 										fw
 										icon={listItem.icon}
 										scale={!listItem.bigIcon ? 1 : 2}

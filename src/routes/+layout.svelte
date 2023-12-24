@@ -2,10 +2,10 @@
 	import '../tailwind.pcss'
 	import {onMount} from 'svelte'
 	import MasterDetailLayout from '$lib/MasterDetailLayout.svelte'
-	import {IsMobileOrTablet, ShowActivityOverlay, Switch, type TListGroupItem} from '$lib/index.js'
+	import {IsMobileOrTablet, ShowActivityOverlay, Switch, type TListGroupItem} from '$lib/index'
 	import {browser} from '$app/environment'
 	import {faAtom, faCloudSun, faCog, faMoon, faPercent, faSun, faUsers} from '@fortawesome/free-solid-svg-icons'
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from '$lib/Icon.svelte'
 	import ActivityOverlay from '$lib/ActivityOverlay.svelte'
 	import MessageBoxes from '$lib/MessageBoxes.svelte'
 	import {navigating, page} from '$app/stores'
@@ -191,7 +191,7 @@
 					localStorage.theme = 'light'
 					window.location.reload()
 				}}>
-				<Fa icon={faSun}
+				<Icon icon={faSun}
 				    swapOpacity/>
 			</button>
 			<button class:active={browser && localStorage.theme === 'dark'}
@@ -199,14 +199,14 @@
 					localStorage.theme = 'dark'
 					window.location.reload()
 				}}>
-				<Fa icon={faMoon}/>
+				<Icon icon={faMoon}/>
 			</button>
 			<button class:active={browser && localStorage.theme === undefined}
 			        on:click={() => {
 					localStorage.removeItem('theme')
 					window.location.reload()
 				}}>
-				<Fa icon={faCloudSun}/>
+				<Icon icon={faCloudSun}/>
 			</button>
 		</div>
 		<div class='text-center text-sm'>

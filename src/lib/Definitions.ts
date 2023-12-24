@@ -10,7 +10,7 @@ import {
 	ToArray
 } from '@solidbasisventures/intelliwaketsfoundation'
 import type {SvelteComponent} from 'svelte'
-import type {IconDefinition} from '@fortawesome/free-solid-svg-icons'
+import type {IconDefinition} from '@fortawesome/fontawesome-common-types'
 
 export interface IFAProps {
 	icon: IconDefinition

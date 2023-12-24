@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import Icon from '$lib/Icon.svelte'
 	import {faCircle, faCircleXmark} from '@fortawesome/free-solid-svg-icons'
 	import {DisplayColorStyle} from './DisplayColorStyle'
 
@@ -15,12 +15,12 @@
 </script>
 
 {#if (hasColor || allowInvisible) && !forceNoColorSymbol}
-	<Fa class='drop-shadow'
+	<Icon class='drop-shadow'
 	    icon={faCircle}
 	    {scale}
 	    style={!hasColor ? 'color: transparent' : DisplayColorStyle(hue, saturation, lightness, {prefix: 'color: '})}/>
 {:else if showNoColorSymbol || forceNoColorSymbol}
-	<Fa icon={faCircleXmark}
+	<Icon icon={faCircleXmark}
 	    {scale}
 		style='color: grey'/>
 {/if}

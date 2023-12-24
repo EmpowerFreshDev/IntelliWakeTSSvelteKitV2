@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import type {ITabItem} from './Definitions'
-	import Fa from 'svelte-fa/src/fa.svelte'
 	import {DeepEqual, SortCompare} from '@solidbasisventures/intelliwaketsfoundation'
+	import Icon from '$lib/Icon.svelte'
 
 	export let tabItems: ITabItem[] = []
 	export let currentKey: string | undefined = tabItems.find(tabItem => !tabItem.hidden)?.key ?? undefined
@@ -39,9 +39,9 @@
 			        class:!hover:text-primary-main={currentKey === item.key}
 			        on:click={() => currentKey = item.key}>
 				{#if !!item.faProps}
-					<Fa {...item.faProps}
-					    class='inline-block mr-1'
-					    fw/>
+					<Icon {...item.faProps}
+					      class='inline-block mr-1'
+					      fw/>
 				{/if}
 				{item.title ?? item.key}
 			</button>

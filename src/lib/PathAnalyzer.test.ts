@@ -1,5 +1,5 @@
 import {expect, it} from 'vitest'
-import {PathAnalyzer} from './PathAnalyzer.js'
+import {PathAnalyzer} from './PathAnalyzer'
 
 const page: any = {
 	params: {

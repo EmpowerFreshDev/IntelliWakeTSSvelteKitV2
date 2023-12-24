@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import About from '$lib/About.svelte'
-	import {abouts} from './AboutData.js'
+	import {abouts} from './AboutData'
 </script>
 
 <div class='p-4 mx-auto max-w-[35rem] overflow-y-auto'>

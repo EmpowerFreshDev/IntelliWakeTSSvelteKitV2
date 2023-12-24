@@ -2,7 +2,7 @@
 	import {CleanNumbers, CleanSubtractNumbers, PickProperty} from '@solidbasisventures/intelliwaketsfoundation'
 	import {slide} from 'svelte/transition'
 	import {onMount, tick} from 'svelte'
-	import type {TChatBubblePosition, TDropDownControlDrop, TDropDownControlPosition} from './Definitions.js'
+	import type {TChatBubblePosition, TDropDownControlDrop, TDropDownControlPosition} from './Definitions'
 	import ChatBubble from '$lib/ChatBubble.svelte'
 
 	export let show = false

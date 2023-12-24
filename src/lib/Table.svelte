@@ -15,9 +15,9 @@
 	import Search from './Search.svelte'
 	import DropDown from './DropDown.svelte'
 	import {CopyRefToClipboard} from './Functions'
-	import Fa from 'svelte-fa/src/fa.svelte'
 	import {faCopy} from '@fortawesome/free-solid-svg-icons'
 	import {browser} from '$app/environment'
+	import Icon from '$lib/Icon.svelte'
 
 	// eslint-disable-next-line no-undef
 	type T = $$Generic<Record<string, any>>
@@ -182,7 +182,7 @@
 			{#if copyButton}
 				<button class='btnLink'
 				        on:click={copyTable}>
-					<Fa icon={faCopy}/>
+					<Icon icon={faCopy}/>
 				</button>
 			{/if}
 		</div>

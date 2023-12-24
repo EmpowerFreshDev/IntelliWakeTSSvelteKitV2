@@ -10,8 +10,7 @@
 	import {tick} from 'svelte'
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import {browser} from '$app/environment'
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faBackspace} from '@fortawesome/free-solid-svg-icons'
+	import Icon from '$lib/Icon.svelte'
 
 	export let value: number | null | undefined
 	export let lowerRange = 0
@@ -82,8 +81,15 @@
 				<button type='button'
 				        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full'
 				        on:click={() => typeValue(null)}>
-					<Fa icon={faBackspace}
-					    class='inline-block'/>
+					<svg xmlns='http://www.w3.org/2000/svg'
+					     class='inline-block'
+					     height='16'
+					     width='18'
+					     viewBox='0 0 576 512'>
+						<path
+							fill='currentColor'
+							d='M576 128c0-35.3-28.7-64-64-64H205.3c-17 0-33.3 6.7-45.3 18.7L9.4 233.4c-6 6-9.4 14.1-9.4 22.6s3.4 16.6 9.4 22.6L160 429.3c12 12 28.3 18.7 45.3 18.7H512c35.3 0 64-28.7 64-64V128zM271 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z'/>
+					</svg>
 				</button>
 			</div>
 		{:else}

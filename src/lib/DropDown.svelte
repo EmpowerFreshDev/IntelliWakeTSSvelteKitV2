@@ -1,9 +1,9 @@
 <script lang='ts'>
 	import DropDownControl from '$lib/DropDownControl.svelte'
 	import {tick} from 'svelte'
-	import type {IDDAction, TDropDownControlPosition} from './Definitions.js'
-	import Fa from 'svelte-fa/src/fa.svelte'
+	import type {IDDAction, TDropDownControlPosition} from './Definitions'
 	import {goto} from '$app/navigation'
+	import Icon from '$lib/Icon.svelte'
 
 	export let show = false
 	export let position: TDropDownControlPosition = null
@@ -261,7 +261,7 @@
 						class:group-hover:!text-primary-main={!isDisabled}
 						class:group-hover:dark:bg-slate-700={!isDisabled}>
 						{#if ddAction.faProps}
-							<Fa {...ddAction.faProps}
+							<Icon {...ddAction.faProps}
 							    class='inline-block mr-1'/>
 						{/if}
 						{ddAction.title ?? ''}
@@ -277,7 +277,7 @@
 						     class:group-hover:!text-primary-main={!isDisabled}
 						     class:group-hover:dark:bg-slate-700={!isDisabled}>
 							{#if ddAction.alternateFAProps}
-								<Fa {...ddAction.alternateFAProps}
+								<Icon {...ddAction.alternateFAProps}
 								    class='inline-block mx-1'/>
 							{/if}
 							{ddAction.alternateTitle ?? ''}

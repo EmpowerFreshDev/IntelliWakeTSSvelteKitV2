@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
-	import {autoFocus} from '$lib/index.js'
+	import {autoFocus} from '$lib/index'
 	import Modal from '$lib/Modal.svelte'
 	import ModalFormAction from '$lib/ModalFormAction.svelte'
 	import ActivityOverlay from '$lib/ActivityOverlay.svelte'

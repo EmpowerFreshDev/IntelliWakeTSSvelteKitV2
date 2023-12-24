@@ -4,7 +4,7 @@
 	import {onMount, tick} from 'svelte'
 	import {ShowMessageBox} from '$lib/Definitions'
 	import DisplayHTML from '$lib/DisplayHTML.svelte'
-	import {type ActionArray, useActions} from '$lib/useActions.js'
+	import {type ActionArray, useActions} from '$lib/useActions'
 
 	// eslint-disable-next-line no-undef
 	type T = $$Generic<{

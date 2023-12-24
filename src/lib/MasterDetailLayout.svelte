@@ -4,9 +4,9 @@
     import {quintOut} from 'svelte/easing'
     import {fly} from 'svelte/transition'
     import {browser} from '$app/environment'
-    import type {TListGroupItem} from "$lib/Definitions.js";
+    import type {TListGroupItem} from "$lib/Definitions";
     import type {TFindIsActive} from "@solidbasisventures/intelliwaketsfoundation";
-    import {PathAnalyzer} from "$lib/PathAnalyzer.js";
+    import {PathAnalyzer} from "$lib/PathAnalyzer";
 
     export let pageRoute: string
     export let listItems: TListGroupItem[] | null = null

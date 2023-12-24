@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {selectOnFocus} from './Functions'
-	import {type ActionArray, useActions} from '$lib/useActions.js'
+	import {type ActionArray, useActions} from '$lib/useActions'
 	import {createEventDispatcher} from 'svelte'
 
 	export let id: string | undefined = undefined

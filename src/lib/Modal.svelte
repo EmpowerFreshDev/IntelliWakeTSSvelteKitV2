@@ -8,8 +8,6 @@
 
 <script lang='ts'>
 	import {createEventDispatcher, tick} from 'svelte'
-	import Fa from 'svelte-fa/src/fa.svelte'
-	import {faTimes} from '@fortawesome/free-solid-svg-icons'
 	import ActivityOverlay from './ActivityOverlay.svelte'
 
 	/**  A value equal to the 'noShowValue' or 'false' will have the modal hidden, any other value will show it */
@@ -75,6 +73,7 @@
 	let isShowing = false
 	let x = 0
 	let y = 0
+
 	async function changeIsShowing(isShow: unknown, isNoShowValue: unknown) {
 		await tick()
 		if (!isShowing) {
@@ -96,6 +95,7 @@
 			}
 		}
 	}
+
 	$: changeIsShowing(show, noShowValue)
 
 	let isMouseDown = false
@@ -125,7 +125,8 @@
                on:NotProcessing={() => disable = false}
                on:mouseup={doMouseUp}
                on:mousemove={doMouseMove}/> -->
-<svelte:window on:mouseup={doMouseUp} on:mousemove={doMouseMove}/>
+<svelte:window on:mouseup={doMouseUp}
+               on:mousemove={doMouseMove}/>
 
 <dialog class='bg-white drop-shadow-xl shadow-xl rounded-lg w-full p-0 max-w-full
 			   dark:bg-slate-600 dark:text-white overflow-visible'
@@ -154,8 +155,14 @@
 					<slot name='header'/>
 					<button class='float-right btnLink text-white !py-0'
 					        on:click|stopPropagation={cancelAction}>
-						<Fa icon={faTimes}
-						    class='text-white'/>
+						<svg xmlns='http://www.w3.org/2000/svg'
+						     height='16'
+						     width='12'
+						     viewBox='0 0 384 512'>
+							<path
+								fill='white'
+								d='M192 244.7L45.9 98.6 34.6 109.9 180.7 256 34.6 402.1l11.3 11.3L192 267.3 338.1 413.4l11.3-11.3L203.3 256 349.4 109.9 338.1 98.6 192 244.7z'/>
+						</svg>
 					</button>
 				</div>
 			{/if}
@@ -220,11 +227,11 @@
 	@keyframes fade-in {
 		from {
 			opacity: 0;
-			scale:   0.9;
+			scale: 0.9;
 		}
 		to {
 			opacity: 1;
-			scale:   1;
+			scale: 1;
 		}
 	}
 </style>

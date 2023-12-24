@@ -1,9 +1,9 @@
 <script lang='ts'>
-	import type {ISpinItem} from '$lib/Definitions.js'
+	import type {ISpinItem} from '$lib/Definitions'
 	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
 	import {browser} from '$app/environment'
 	import {onMount} from 'svelte'
-	import {type ActionArray, useActions} from '$lib/useActions.js'
+	import {type ActionArray, useActions} from '$lib/useActions'
 
 	type T = $$Generic
 

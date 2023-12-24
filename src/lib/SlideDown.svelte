@@ -1,11 +1,11 @@
 <script lang='ts'>
 	import type {IDDAction} from './Definitions'
 	import {tick} from 'svelte'
-	import Fa from 'svelte-fa/src/fa.svelte'
 	import {slide} from 'svelte/transition'
 	import {cubicInOut} from 'svelte/easing'
 	import {goto} from '$app/navigation'
-	import {type ActionArray, useActions} from '$lib/useActions.js'
+	import {type ActionArray, useActions} from '$lib/useActions'
+	import Icon from '$lib/Icon.svelte'
 
 	export let ddActions: IDDAction[] = []
 	export let use: ActionArray = []
@@ -206,7 +206,7 @@
 							     on:click={e => performAction(e, ddAction)}
 							     bind:this={refs[i]}>
 								{#if ddAction.faProps}
-									<Fa {...ddAction.faProps}
+									<Icon {...ddAction.faProps}
 									    class='inline-block mr-1'
 									    fw/>
 								{/if}

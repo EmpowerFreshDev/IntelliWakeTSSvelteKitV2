@@ -1,14 +1,14 @@
 <script lang='ts'>
 	import SlideDown from '$lib/SlideDown.svelte'
 	import Switch from '$lib/Switch.svelte'
-	import type {IDDAction, TListGroupItem} from '$lib/index.js'
-	import {ShowActivityOverlay, ShowMessageBox} from '$lib/Definitions.js'
+	import type {IDDAction, TListGroupItem} from '$lib/index'
+	import {ShowActivityOverlay, ShowMessageBox} from '$lib/Definitions'
 	import ListGroupItems from '$lib/ListGroupItems.svelte'
-	import {SampleSysuserData} from '../SampleSysuserData.js'
+	import {SampleSysuserData} from '../SampleSysuserData'
 	import DisplayColor from '$lib/DisplayColor.svelte'
 	import CheckBox from '$lib/CheckBox.svelte'
 	import {page} from '$app/stores'
-	import {setSearchParam} from '$lib/index.js'
+	import {setSearchParam} from '$lib/index'
 	import {browser} from '$app/environment'
 
 	let showActivityOverlay = false

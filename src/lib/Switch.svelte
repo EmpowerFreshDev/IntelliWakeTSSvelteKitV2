@@ -1,6 +1,6 @@
 <script lang='ts'>
     import {createEventDispatcher, tick} from 'svelte'
-    import {type ActionArray, useActions} from './useActions.js'
+    import {type ActionArray, useActions} from './useActions'
 
     export let id: string | undefined = undefined
     export let use: ActionArray = []

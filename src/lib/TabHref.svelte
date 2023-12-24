@@ -1,12 +1,12 @@
-<script lang="ts">
+<script lang='ts'>
 	import type {ITabHref} from './Definitions'
-	import Fa from 'svelte-fa/src/fa.svelte'
 	import {page} from '$app/stores'
 	import {PathAnalyzer} from './PathAnalyzer'
 	import {browser} from '$app/environment'
 	import {afterNavigate, goto} from '$app/navigation'
 	import {CoalesceFalsey, ReplaceAll} from '@solidbasisventures/intelliwaketsfoundation'
 	import {tick} from 'svelte'
+	import Icon from '$lib/Icon.svelte'
 
 	export let tabHrefs: ITabHref[] = []
 	export let basePath: string | undefined = undefined
@@ -162,7 +162,7 @@
 
 {#key basePath}
 	<div
-		class="grid mx-auto"
+		class='grid mx-auto'
 		class:!flex={rounded}
 		class:!flex-nowrap={rounded}
 		class:my-2={rounded}
@@ -173,9 +173,9 @@
 		{#each visibleItems as item}
 			{#if !rounded}
 				<a
-					class="text-center border-transparent border-b-4 text-black shadow-none drop-shadow-none
+					class='text-center border-transparent border-b-4 text-black shadow-none drop-shadow-none
 								 rounded-none focus:ring-0 m-2 min-w-[3em] text-ellipsis whitespace-nowrap
-								 overflow-hidden hover:bg-transparent hover:border-b-primary-main"
+								 overflow-hidden hover:bg-transparent hover:border-b-primary-main'
 					class:!text-primary-main={item.isOpen}
 					class:!border-b-primary-main={item.isOpen}
 					class:hover:bg-transparent={item.isOpen}
@@ -187,9 +187,9 @@
 					href={item.href}
 				>
 					{#if !!item.faProps}
-						<Fa
+						<Icon
 							{...item.faProps}
-							class="inline-block mr-1"
+							class='inline-block mr-1'
 							fw
 						/>
 					{/if}
@@ -197,14 +197,16 @@
 				</a>
 			{:else}
 				<a
-					class="rounded-md text-center px-2.5 text-gray-700 mr-2 last:mr-0 transition-all leading-7"
+					class='rounded-md text-center px-2.5 text-gray-700 mr-2 last:mr-0 transition-all leading-7'
 					class:bg-gray-200={item.isOpen}
 					class:text-gray-900={item.isOpen}
 					class:font-semibold={item.isOpen}
 					href={item.href}
 				>
 					{#if !!item.faProps}
-						<Fa {...item.faProps} class="inline-block mr-1" fw/>
+						<Icon {...item.faProps}
+						      class='inline-block mr-1'
+						      fw/>
 					{/if}
 					{item.title ?? item.key}
 				</a>

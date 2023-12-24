@@ -1,4 +1,4 @@
-import type {LayoutServerLoad} from './$types.js'
+import type {LayoutServerLoad} from './$types'
 
 export const load = (async () => {
     console.info('--------- Root Reload')
