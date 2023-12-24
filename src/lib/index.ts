@@ -9,6 +9,7 @@ import CheckBox from './CheckBox.svelte'
 import DisplayColor from './DisplayColor.svelte'
 import DropDown from './DropDown.svelte'
 import DropDownControl from './DropDownControl.svelte'
+import Icon from './Icon.svelte'
 import InputNumberScroll from './InputNumberScroll.svelte'
 import ListGroupItems from './ListGroupItems.svelte'
 import DisplayHTML from './DisplayHTML.svelte'
@@ -51,6 +52,7 @@ export {CheckBox}
 export {DisplayColor}
 export {DropDown}
 export {DropDownControl}
+export {Icon}
 export {InputNumberScroll}
 export {ListGroupItems}
 export {DisplayHTML}
