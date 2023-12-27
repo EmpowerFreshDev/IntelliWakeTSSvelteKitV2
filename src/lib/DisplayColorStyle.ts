@@ -1,4 +1,4 @@
-import {isNullUndefined} from '@solidbasisventures/intelliwaketsfoundation'
+import {CleanNumber, isNullUndefined} from '@solidbasisventures/intelliwaketsfoundation'
 
 /**
  * Options for specifying display color style.
@@ -32,9 +32,9 @@ export type TDisplayColorStyleOptions = {
  */
 export const DisplayColorStyle = (hue: number | null | undefined, saturation: number | null | undefined, lightness: number | null | undefined,
                                   options?: TDisplayColorStyleOptions): string | undefined => {
-	if (isNullUndefined(hue) == null || saturation == null || lightness == null) {
+	if (isNullUndefined(hue) || isNullUndefined(saturation) || isNullUndefined(lightness)) {
 		return undefined
 	}
 
-	return `${options?.prefix ?? ''} hsla(${hue}, ${saturation * (options?.saturationPercent ?? 1)}%, ${lightness * (options?.lightnessPercent ?? 1)}%, ${options?.alpha ?? 1}) ${options?.suffix ?? ''}`
+	return `${options?.prefix ?? ''} hsla(${hue}, ${CleanNumber(saturation, 0) * (options?.saturationPercent ?? 1)}%, ${CleanNumber(lightness, 0) * (options?.lightnessPercent ?? 1)}%, ${options?.alpha ?? 1}) ${options?.suffix ?? ''}`
 }
