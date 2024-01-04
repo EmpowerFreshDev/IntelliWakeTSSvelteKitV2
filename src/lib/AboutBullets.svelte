@@ -4,7 +4,10 @@
 
 	export let bullets: TAboutBullets[]
 
-	$: structuredBullets = ToArray(bullets).reduce<{ stringBullets: TRawAboutBulletStrings[], objectBullets: TRawAboutBulletObject[] }>((result, bullet) => (typeof bullet === 'string' || Array.isArray(bullet)) ?
+	$: structuredBullets = ToArray(bullets).reduce<{
+		stringBullets: TRawAboutBulletStrings[],
+		objectBullets: TRawAboutBulletObject[]
+	}>((result, bullet) => (typeof bullet === 'string' || Array.isArray(bullet)) ?
 			{...result, stringBullets: [...result.stringBullets, bullet]} :
 			{...result, objectBullets: [...result.objectBullets, bullet]},
 		{stringBullets: [], objectBullets: []})

@@ -7,7 +7,7 @@
 </script>
 
 <div class='p-4 mx-auto max-w-[40rem] overflow-y-auto'>
-	{#each abouts as about}
+	{#each abouts.filter(about => !about.hidden || (typeof about.hidden === 'function' && !about.hidden())) as about}
 		<h2 class='text-center'>v{about.version} - {about.title}</h2>
 		{#if about.description}
 			<div class='text-slate-400'>
@@ -15,7 +15,7 @@
 			</div>
 		{/if}
 		<div class='mx-2'>
-			{#each about.minors as minor}
+			{#each about.minors.filter(minor => !minor.hidden || (typeof minor.hidden === 'function' && !minor.hidden())) as minor}
 				<div class='border rounded overflow-hidden my-2 bg-white'>
 					<div class='bg-slate-200 px-3 font-bold text-primary-main'>
 						{about.version}.{minor.minor} - {minor.title}

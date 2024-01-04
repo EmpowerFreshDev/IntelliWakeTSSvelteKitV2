@@ -8,11 +8,13 @@ export type TAbout = {
 	version: number
 	title: string
 	description?: string
+	hidden?: boolean | (() => boolean)
 	minors: {
 		minor: number
 		title: string
 		date: string
 		description?: string
 		bullets: TAboutBullets[]
+		hidden?: boolean | (() => boolean)
 	}[]
 }
