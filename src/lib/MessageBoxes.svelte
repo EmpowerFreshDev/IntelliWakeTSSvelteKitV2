@@ -3,8 +3,6 @@
 	import {ShowMessageBox} from './Definitions'
 	import {fade, fly} from 'svelte/transition'
 	import {DateCompare} from '@solidbasisventures/intelliwaketsfoundation'
-	import Icon from '$lib/Icon.svelte'
-	import {faCircleInfo, faTimes} from '@fortawesome/free-solid-svg-icons'
 
 	setInterval(() => {
 		const toClears = $ShowMessageBox.filter(smb => !!smb.dismissAt && DateCompare(smb.dismissAt, 'IsBefore', 'now', 'seconds'))
