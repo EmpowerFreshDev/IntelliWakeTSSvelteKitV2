@@ -15,7 +15,7 @@
 	export let collapsedValues: string[] = []
 	export let collapsedSections: string[] = []
 	export let rememberKey: string | null = null
-	export let pathAnalyzer: PathAnalyzer | null = null
+	export let pathAnalyzer: PathAnalyzer | null | undefined = undefined
 	export let wrapText = false
 	export let ellipses = false
 	export let noLinkReplace = false
@@ -26,37 +26,20 @@
 			(ToPascalCase((modalItem.title ?? '').toString()) + (modalItem.value ? `:${modalItem.value}` : ''))
 	}
 
-	interface IGroupItemPath extends TListGroupItem {
+	type TGroupItemPath = TListGroupItem & {
 		pathFromItem?: string
 		isOpen: boolean
 	}
 
-	$: useSubsExist = !!subsExist || listItems?.some(item => !!item.parent_value && (active === null || item.hidden !== active))
+	$: useSubsExist = !!subsExist || !!listItems?.some(item => !!item.parent_value && (active === null || item.hidden !== active))
 
-	$: subItems = (listItems ?? [])
-		.filter(item => !!item && shouldShowTopItem(item, topValue, active, listItems))
-		.map<IGroupItemPath>(listItem => ({
-			...listItem,
-			pathFromItem: !pathAnalyzer ? undefined : pathAnalyzer.open(pathFromItem(listItem)),
-			isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItem)),
-			collapsed: collapsedValues?.some(val => val === listItem.value),
-			subs: !useSubsExist ? [] : (listItems ?? [])
-				.filter(item => item?.parent_value === listItem?.value && (active === null || item?.hidden !== active))
-				.map<IGroupItemPath>(listItemSub => ({
-					...listItemSub,
-					pathFromItem: pathAnalyzer?.open(pathFromItem(listItemSub)),
-					isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItemSub)),
-					collapsed: !!collapsedValues?.some(val => val === listItemSub.value)
-				}))
-		})) satisfies IGroupItemPath[]
-
-	const shouldShowTopItem = (item: TListGroupItem, useTopValue: string | null, useActive: TFindIsActive,
-	                           useListItems: TListGroupItem[]): boolean => {
+	function shouldShowTopItem(item: TListGroupItem, useTopValue: string | null, useActive: TFindIsActive,
+	                           useListItems: TListGroupItem[]): boolean {
 		const isTopValue = (item.parent_value ?? null) === useTopValue
 		const isShown = useActive === null || useActive === !item.hidden
 		const hasVisibleChild = useListItems.some(listItem => {
-			const hasChild = listItem.parent_value && listItem.parent_value === item.value
-			const isChildShown = useActive === null || useActive === !listItem.hidden
+			const hasChild = !!listItem?.parent_value && (listItem.parent_value === item.value)
+			const isChildShown = useActive === null || useActive === !listItem?.hidden
 
 			return hasChild && isChildShown
 		})
@@ -64,10 +47,27 @@
 		return isTopValue && (isShown || hasVisibleChild)
 	}
 
-	const collapseToggle = (value: string | null | undefined) => {
+	$: subItems = (listItems ?? [])
+		.filter(item => !!item && shouldShowTopItem(item, topValue, active, listItems))
+		.map<TGroupItemPath>(listItem => ({
+			...listItem,
+			pathFromItem: pathAnalyzer?.open(pathFromItem(listItem)),
+			isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItem)),
+			collapsed: !!collapsedValues?.some(val => val === listItem.value),
+			subs: !useSubsExist ? [] : (listItems ?? [])
+				.filter(item => (item?.parent_value === listItem?.value) && (active === null || item?.hidden !== active))
+				.map<TGroupItemPath>(listItemSub => ({
+					...listItemSub,
+					pathFromItem: pathAnalyzer?.open(pathFromItem(listItemSub)),
+					isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItemSub)),
+					collapsed: !!collapsedValues?.some(val => val === listItemSub.value)
+				}))
+		})) satisfies TGroupItemPath[]
+
+	function collapseToggle(value: string | null | undefined) {
 		if (value) {
-			if ((collapsedValues ?? []).includes(value)) {
-				collapsedValues = collapsedValues.filter(val => val !== value)
+			if ((collapsedValues ?? []).some(val => val === value)) {
+				collapsedValues = collapsedValues?.filter(val => val !== value) ?? []
 			} else {
 				collapsedValues = [...collapsedValues, value]
 			}
@@ -79,7 +79,7 @@
 	}
 
 	function sectionClick(section: string) {
-		if ((collapsedSections ?? []).includes(section)) {
+		if ((collapsedSections ?? []).some(sect => sect === section)) {
 			collapsedSections = collapsedSections.filter(cS => cS !== section)
 		} else {
 			collapsedSections = [...(collapsedSections ?? []), section]
@@ -123,7 +123,7 @@
 				</li>
 			{/if}
 
-			{#if !listItem?.section || !(collapsedSections ?? []).includes(listItem.section)}
+			{#if !listItem?.section || !(collapsedSections ?? []).some(sect => sect === listItem.section)}
 				<li class={`w-full select-none listGroupItem ${listItem.itemClass ?? ''}`}
 				    class:overflow-x-hidden={wrapText || ellipses}
 				    class:cursor-pointer={!listItem.disabled}
@@ -271,7 +271,7 @@
 						</div>
 					{/if}
 				</li>
-				{#if !listItem.collapsed && (listItem.subs ?? []).length > 0}
+				{#if !listItem.collapsed && !!(listItem.subs ?? []).length}
 					<svelte:self listItems={listItems}
 					             topValue={listItem.value}
 					             {pathAnalyzer}

@@ -12,9 +12,9 @@
 
     $: isHTML = IncludesHTML((valueLink ?? '').toString())
 </script>
+
 {#if valueLink}
     {#if isHTML}
-        <!--    eslint-disable-next-line svelte/no-at-html-tags-->
         {@html valueLink}
     {:else}
         {valueLink}

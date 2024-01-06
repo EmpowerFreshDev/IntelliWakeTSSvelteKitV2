@@ -9,7 +9,7 @@
 		href: `Sysuser${sysuser.id}`,
 		hidden: !sysuser.is_active,
 		strikeThrough: !sysuser.is_active,
-		parent_value: sysuser.manager_sysuser_id?.toString() ?? null
+		parent_value: sysuser.manager_sysuser_id?.toString() ?? undefined
 	}))
 
 	let active: boolean | null = true
