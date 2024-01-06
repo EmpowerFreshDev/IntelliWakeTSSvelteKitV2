@@ -9,7 +9,6 @@ import {
 	type TDateAny,
 	ToArray
 } from '@solidbasisventures/intelliwaketsfoundation'
-import type {SvelteComponent} from 'svelte'
 import type {IconDefinition} from '@fortawesome/fontawesome-common-types'
 
 export interface IFAProps {
@@ -166,7 +165,7 @@ export const MasterDetailSubItemBuild = (item: TListGroupItem,
 export interface ITabHref {
 	faProps?: IFAProps
 	key: string
-	title?: string | typeof SvelteComponent
+	title?: string //| typeof SvelteComponent
 	href?: string
 	dataSvelteKitPreloadData?: 'tap' | 'hover'
 	isOpen?: boolean
@@ -182,11 +181,11 @@ export interface ITabItem {
 	hidden?: boolean
 	faProps?: IFAProps
 	key: string
-	title?: string | typeof SvelteComponent
+	title?: string //| typeof SvelteComponent
 	/** undefined = don't show, null = show with spinner, number (0, 1, etc.) = show */
 	badgeValue?: number | null
 	badgeColor?: string
-	pane?: typeof SvelteComponent
+	//pane?: typeof SvelteComponent
 }
 
 // Using unknown...may break things

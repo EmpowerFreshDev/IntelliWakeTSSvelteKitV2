@@ -1,9 +1,11 @@
 <script lang='ts'>
 	import {SampleSysuserData} from '../SampleSysuserData'
-	import {type TListGroupItem} from '$lib/Definitions'
+	// import {type TListGroupItem} from '$lib/Definitions'
 	import ListGroupItems from '$lib/ListGroupItems.svelte'
 
-	$: listItems = SampleSysuserData.map<TListGroupItem>((sysuser) => ({
+	$: listItems = []
+
+	$: listItems2 = SampleSysuserData.map((sysuser) => ({
 		value: sysuser.id.toString(),
 		title: sysuser.name,
 		href: `Sysuser${sysuser.id}`,
@@ -14,7 +16,7 @@
 
 	let active: boolean | null = true
 
-	console.log(listItems, active)
+	$: console.log(listItems, listItems2, active, SampleSysuserData)
 </script>
 
 <div class='absolute inset-0 p-8 bg-slate-800'>
