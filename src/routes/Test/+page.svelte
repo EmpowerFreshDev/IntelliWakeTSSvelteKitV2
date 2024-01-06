@@ -1,9 +1,9 @@
 <script lang='ts'>
 	import {SampleSysuserData} from '../SampleSysuserData'
-	// import {type TListGroupItem} from '$lib/Definitions'
+	import {type TListGroupItem} from '$lib/Definitions'
 	import ListGroupItems from '$lib/ListGroupItems.svelte'
 
-	$: listItems = []
+	$: listItems = [] satisfies TListGroupItem[]
 
 	$: listItems2 = SampleSysuserData.map((sysuser) => ({
 		value: sysuser.id.toString(),
@@ -24,7 +24,8 @@
 		<button on:click={() => (active = true)}>True</button>
 		<button on:click={() => (active = false)}>False</button>
 		<button on:click={() => (active = null)}>Null</button>
-		<ListGroupItems {listItems}/>
+		<ListGroupItems {listItems}
+		                {active}/>
 
 	</div>
 </div>
