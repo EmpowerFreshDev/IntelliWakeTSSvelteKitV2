@@ -1,8 +1,9 @@
 <script lang='ts'>
 	import MultiSelect from '$lib/MultiSelect.svelte'
 	import {enhance} from '$app/forms'
-	import {DownloadString, FormEnhance} from '$lib'
+	import {DownloadString} from '$lib/Functions'
 	import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
+	import {FormEnhance} from '$lib/FormEnhance'
 
 	type TPoss = {
 		name: string
@@ -17,7 +18,7 @@
 		{name: '<span style="color: red;">Kerstyn</span>'}
 	]
 
-	let longPossibles = [...possibles, ...(ArrayRange(200).map(number => ({name: `Name ${number + 1}`})))]
+	let longPossibles = [...possibles, ...(ArrayRange(200).map(numb => ({name: `Name ${numb + 1}`})))]
 
 	let selected = possibles.slice(3)
 
@@ -159,7 +160,8 @@
 		Created: {created.map(s => s.name).join('; ')}
 	</div>
 	<div>
-		<button type='button' on:click={() => DownloadString('test.txt', 'Hello world!')}>
+		<button type='button'
+		        on:click={() => DownloadString('test.txt', 'Hello world!')}>
 			Download test.txt
 		</button>
 	</div>

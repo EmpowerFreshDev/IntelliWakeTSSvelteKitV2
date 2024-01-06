@@ -89,16 +89,6 @@
 		}
 	}
 
-	async function toggleDropdown() {
-		if (!disable) {
-			show = !show
-			if (elInput) {
-				await tick()
-				elInput.focus()
-			}
-		}
-	}
-
 	async function doCreate() {
 		if (!disable) {
 			if (searchValue && create) {

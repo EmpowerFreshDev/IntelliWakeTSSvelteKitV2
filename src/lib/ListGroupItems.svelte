@@ -1,7 +1,6 @@
 <script lang='ts'>
 	import type {PathAnalyzer} from '$lib/PathAnalyzer'
-	import type {TFindIsActive} from '@solidbasisventures/intelliwaketsfoundation'
-	import {ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
+	import {type TFindIsActive, ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
 	import Icon from '$lib/Icon.svelte'
 	import type {TListGroupItem} from './Definitions'
 	import DisplayHTML from './DisplayHTML.svelte'
@@ -32,24 +31,24 @@
 		isOpen: boolean
 	}
 
-	$: useSubsExist = !!subsExist || listItems.some(item => !!item.parent_value && (active === null || item.hidden !== active))
+	$: useSubsExist = !!subsExist || listItems?.some(item => !!item.parent_value && (active === null || item.hidden !== active))
 
 	$: subItems = (listItems ?? [])
-		.filter(item => shouldShowTopItem(item, topValue, active, listItems))
+		.filter(item => !!item && shouldShowTopItem(item, topValue, active, listItems))
 		.map<IGroupItemPath>(listItem => ({
 			...listItem,
 			pathFromItem: !pathAnalyzer ? undefined : pathAnalyzer.open(pathFromItem(listItem)),
-			isOpen: !!pathAnalyzer && pathAnalyzer.isOpen(pathFromItem(listItem)),
-			collapsed: collapsedValues.includes(listItem.value ?? ''),
+			isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItem)),
+			collapsed: collapsedValues?.some(val => val === listItem.value),
 			subs: !useSubsExist ? [] : (listItems ?? [])
-				.filter(item => item.parent_value === listItem.value && (active === null || item.hidden !== active))
+				.filter(item => item?.parent_value === listItem?.value && (active === null || item?.hidden !== active))
 				.map<IGroupItemPath>(listItemSub => ({
 					...listItemSub,
-					pathFromItem: !pathAnalyzer ? undefined : pathAnalyzer.open(pathFromItem(listItemSub)),
-					isOpen: !!pathAnalyzer && pathAnalyzer.isOpen(pathFromItem(listItemSub)),
-					collapsed: collapsedValues.includes(listItemSub.value ?? '')
+					pathFromItem: pathAnalyzer?.open(pathFromItem(listItemSub)),
+					isOpen: !!pathAnalyzer?.isOpen(pathFromItem(listItemSub)),
+					collapsed: !!collapsedValues?.some(val => val === listItemSub.value)
 				}))
-		}))
+		})) satisfies IGroupItemPath[]
 
 	const shouldShowTopItem = (item: TListGroupItem, useTopValue: string | null, useActive: TFindIsActive,
 	                           useListItems: TListGroupItem[]): boolean => {
@@ -65,55 +64,6 @@
 		return isTopValue && (isShown || hasVisibleChild)
 	}
 
-	/*let rememberTimeout = setTimeout(() => {
-	}, 100)
-	let rememberRestoreAttempted = false
-
-	const rememberReturn = (items: IGroupItemPath[]) => {
-		clearTimeout(rememberTimeout)
-
-		if (rememberKey && !rememberRestoreAttempted && !!items.length) {
-			rememberRestoreAttempted = true
-			const rememberValue = window.localStorage.getItem(`MDRememberPath-${mdPath}-${rememberKey}`)
-
-			if (rememberValue && rememberValue !== openPathString && items.some(item => item.pathFromItem === rememberValue)) {
-				setTimeout(() => {
-					$StoreTransitionToRight = null
-					Router.addFrom(mdPath, rememberValue)
-				}, 250)
-			}
-		}
-	}
-	$: rememberReturn(useListItems)
-
-	onDestroy(() => {
-		clearTimeout(rememberTimeout)
-	}) */
-
-	/*const selectRoute = (modalItem?: IGroupItemPath | null) => {
-		$StoreTransitionToRight = null
-		if (!modalItem?.disabled) {
-			if (!modalItem) {
-				if (rememberKey) {
-					window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
-				}
-				Router.back(mdPath)
-			} else {
-				if (modalItem.isOpen) {
-					if (rememberKey) {
-						window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
-					}
-					Router.back(mdPath)
-				} else {
-					if (rememberKey) {
-						window.localStorage.setItem(`MDRememberPath-${mdPath}-${rememberKey}`, modalItem.pathFromItem)
-					}
-					Router.addFrom(mdPath, modalItem.pathFromItem)
-				}
-			}
-		}
-	} */
-
 	const collapseToggle = (value: string | null | undefined) => {
 		if (value) {
 			if ((collapsedValues ?? []).includes(value)) {
@@ -123,13 +73,6 @@
 			}
 		}
 	}
-
-	/* const doRouterBack = (e: CustomEvent) => {
-		$StoreTransitionToRight = null
-		if (rememberKey && !!window.localStorage.getItem(`MDRememberPath-${mdPath}-${rememberKey}`) && e.detail.includes(`${mdPath}/~`)) {
-			window.localStorage.removeItem(`MDRememberPath-${mdPath}-${rememberKey}`)
-		}
-	} */
 
 	function getKey(listItem: TListGroupItem) {
 		return listItem.key ?? `${listItem.value ?? 'v'}:${listItem.title ?? listItem.paneName ?? 't'}:${listItem.sub_title ?? 'st'}:${listItem.badgeValue ?? 'bv'}:${listItem.rightText ?? 'rt'}}`
@@ -156,7 +99,7 @@
     class:px-2={rounded}
     class:ml-4={!!indentLevel}
     class:max-sm:text-xl={true}>
-	{#if !subItems.length && (!!emptyListMessage || $$slots.empty)}
+	{#if !subItems?.length && (!!emptyListMessage || !!$$slots?.empty)}
 		<li class='block w-full select-none text-slate-500 italic p-1 text-sm'>
 			<DisplayHTML noLinkReplace
 			             value={emptyListMessage}/>
@@ -164,7 +107,7 @@
 		</li>
 	{:else}
 		{#each subItems as listItem, idx (getKey(listItem))}
-			{#if listItem.section && listItem.section !== subItems[idx - 1]?.section}
+			{#if listItem?.section && listItem.section !== subItems[idx - 1]?.section}
 				<li class='block w-full select-none bg-primary-main text-white opacity-80 hover:opacity-70 font-bold p-1 cursor-pointer'
 				    class:mb-2={rounded}
 				    class:overflow-x-hidden={wrapText || ellipses}
@@ -174,13 +117,13 @@
 				    role='menuitem'
 				    tabindex={0}
 				    on:keydown={e => doKeyExecute(e, () => sectionClick(listItem.section ?? ""))}
-				    on:click={() => sectionClick(listItem.section ?? "")}>
+				    on:click={() => sectionClick(listItem?.section ?? "")}>
 					<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
 					             value={listItem.section}/>
 				</li>
 			{/if}
 
-			{#if !listItem.section || !(collapsedSections ?? []).includes(listItem.section)}
+			{#if !listItem?.section || !(collapsedSections ?? []).includes(listItem.section)}
 				<li class={`w-full select-none listGroupItem ${listItem.itemClass ?? ''}`}
 				    class:overflow-x-hidden={wrapText || ellipses}
 				    class:cursor-pointer={!listItem.disabled}

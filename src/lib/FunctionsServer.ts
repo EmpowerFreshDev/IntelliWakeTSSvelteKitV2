@@ -35,7 +35,7 @@ export async function RequestFormData(request: Request): Promise<FormData> {
  */
 export async function RequestObject<T = any>(request: Request): Promise<T> {
 	try {
-		return ObjectFromFormData(await request.formData())
+		return ObjectFromFormData<any>(await request.formData())
 	} catch (err) {
 		return await request.json()
 	}

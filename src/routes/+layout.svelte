@@ -2,7 +2,6 @@
 	import '../tailwind.pcss'
 	import {onMount} from 'svelte'
 	import MasterDetailLayout from '$lib/MasterDetailLayout.svelte'
-	import {IsMobileOrTablet, ShowActivityOverlay, Switch, type TListGroupItem} from '$lib/index'
 	import {browser} from '$app/environment'
 	import {faAtom, faCloudSun, faCog, faMoon, faPercent, faSun, faUsers} from '@fortawesome/free-solid-svg-icons'
 	import Icon from '$lib/Icon.svelte'
@@ -12,6 +11,9 @@
 	import DropDown from '$lib/DropDown.svelte'
 	import {SearchRows} from '@solidbasisventures/intelliwaketsfoundation'
 	import Search from '$lib/Search.svelte'
+	import {ShowActivityOverlay, type TListGroupItem} from '$lib/Definitions'
+	import Switch from '$lib/Switch.svelte'
+	import {IsMobileOrTablet} from '$lib/Functions'
 
 	let rounded = false
 
@@ -147,10 +149,10 @@
 <svelte:head>
 	<script>
 		if (document) {
-			if (localStorage.theme === "dark" || (localStorage.theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-				document.documentElement.classList.add("dark");
+			if (localStorage.theme === 'dark' || (localStorage.theme !== 'light' && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+				document.documentElement.classList.add('dark');
 			} else {
-				document.documentElement.classList.remove("dark");
+				document.documentElement.classList.remove('dark');
 			}
 		}
 	</script>
@@ -192,7 +194,7 @@
 					window.location.reload()
 				}}>
 				<Icon icon={faSun}
-				    swapOpacity/>
+				      swapOpacity/>
 			</button>
 			<button class:active={browser && localStorage.theme === 'dark'}
 			        on:click={() => {

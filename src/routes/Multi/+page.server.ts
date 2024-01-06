@@ -1,6 +1,6 @@
 import type {Actions} from '@sveltejs/kit'
 import {fail} from '@sveltejs/kit'
-import {RequestObject} from '$lib'
+import {RequestObject} from '$lib/FunctionsServer'
 import {ESTTodayDateTimeLabel} from '@solidbasisventures/intelliwaketsfoundation'
 
 export const actions = {

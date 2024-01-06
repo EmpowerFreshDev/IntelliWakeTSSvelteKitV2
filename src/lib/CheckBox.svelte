@@ -2,9 +2,6 @@
 	/** Whether or not the input is checked */
 	export let checked = false
 
-	/** The opposite of checked */
-	export let unChecked = true
-
 	/** Allows for styling border */
 	export let inputClass = ''
 
@@ -31,10 +28,6 @@
 
 
 	let namedInput: HTMLInputElement
-
-
-	$: unChecked = !checked
-
 
 	function handleClick() {
 		checked = !checked
