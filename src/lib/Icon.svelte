@@ -85,61 +85,10 @@
 
 	$: i = (icon && icon.icon) || [0, 0, '', [], '']
 
-	$: transform = getTransform(scale, translateX, translateY, rotate, flip, 512)
+	$: transform = getTransform(scale, translateX, translateY, CleanNumber(rotate), flip, 512)
 </script>
 
-<style>
-	:global(.svelte-fa-base) {
-		height: 1em;
-		overflow: visible;
-		transform-origin: center;
-		vertical-align: -.125em;
-	}
 
-	:global(.svelte-fa-fw) {
-		text-align: center;
-		width: 1.25em;
-	}
-
-	.svelte-fa-pull-left {
-		float: left;
-	}
-
-	.svelte-fa-pull-right {
-		float: right;
-	}
-
-	.svelte-fa-size-lg {
-		font-size: 1.33333em;
-		line-height: .75em;
-		vertical-align: -.225em;
-	}
-
-	.svelte-fa-size-sm {
-		font-size: .875em;
-	}
-
-	.svelte-fa-size-xs {
-		font-size: .75em;
-	}
-
-	.spin {
-		animation: spin 2s 0s infinite linear;
-	}
-
-	.pulse {
-		animation: spin 1s infinite steps(8);
-	}
-
-	@keyframes spin {
-		0% {
-			transform: rotate(0deg);
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
-</style>
 
 {#if i[4]}
 	<svg

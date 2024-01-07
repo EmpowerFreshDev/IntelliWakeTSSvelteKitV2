@@ -6,9 +6,6 @@ import {ESTTodayDateTimeLabel} from '@solidbasisventures/intelliwaketsfoundation
 export const actions = {
 	send: async ({request}) => {
 		try {
-			// const formData = await RequestFormData(request)
-			// const data = ObjectFromFormData(formData)
-
 			const data = await RequestObject(request)
 
 			console.info('Multi', data)

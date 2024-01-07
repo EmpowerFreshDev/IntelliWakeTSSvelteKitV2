@@ -2,7 +2,7 @@ import type {Actions} from '@sveltejs/kit'
 import {ESTTodayDateTimeLabel, ObjectFromFormData} from '@solidbasisventures/intelliwaketsfoundation'
 
 export const actions = {
-	send: async ({request, cookies, locals}) => {
+	send: async ({request}) => {
 		try {
 			const data = ObjectFromFormData(await request.formData())
 
