@@ -179,8 +179,7 @@
 			{/if}
 		</fieldset>
 		{#if !!cancelButton || !!okButton}
-			<fieldset class='grid grid-cols-[auto_auto] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
-			          disabled={disable}>
+			<div class='grid grid-cols-[min-content_auto_auto_min-content] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'>
 				<div>
 					{#if !!cancelButton}
 						<button type='button'
@@ -189,10 +188,14 @@
 							{cancelButton}
 						</button>
 					{/if}
+				</div>
+				<div>
 					<slot name='leftFooter'/>
 				</div>
 				<div class='text-right'>
 					<slot name='rightFooter'/>
+				</div>
+				<div class='text-right'>
 					{#if !!okButton}
 						<button type={okType}
 						        class='shadow-none'
@@ -203,7 +206,7 @@
 						</button>
 					{/if}
 				</div>
-			</fieldset>
+			</div>
 		{/if}
 	</div>
 </dialog>
