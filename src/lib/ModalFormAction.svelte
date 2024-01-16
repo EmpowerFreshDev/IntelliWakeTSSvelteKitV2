@@ -188,7 +188,7 @@
 					{#if !!okButton}
 						<button class='shadow-none'
 						        type='submit'
-						        class:text-nowrap={!okButtonWrap}
+						        class:whitespace-nowrap={!okButtonWrap}
 						        disabled={okDisabled}>
 							{okButton}
 						</button>

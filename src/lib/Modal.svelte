@@ -186,7 +186,7 @@
 					{#if !!cancelButton}
 						<button type='button'
 						        class='btnClean bg-transparent hover:bg-transparent shadow-none text-slate-500 hover:text-slate-700 dark:text-slate-300 pl-0'
-						        class:text-nowrap={!okButtonWrap}
+						        class:whitespace-nowrap={!okButtonWrap}
 						        on:click|stopPropagation={cancelAction}>
 							{cancelButton}
 						</button>
@@ -202,7 +202,7 @@
 					{#if !!okButton}
 						<button type={okType}
 						        class='shadow-none'
-						        class:text-nowrap={!okButtonWrap}
+						        class:whitespace-nowrap={!okButtonWrap}
 						        bind:this={okButtonElement}
 						        on:click|stopPropagation={okAction}
 						        disabled={okDisabled}>
