@@ -180,7 +180,8 @@
 			{/if}
 		</fieldset>
 		{#if !!cancelButton || !!okButton}
-			<div class='grid grid-cols-[min-content_auto_auto_min-content] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'>
+			<fieldset class='grid grid-cols-[min-content_auto_auto_min-content] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
+			          disabled={disable}>
 				<div class='pr-2'>
 					{#if !!cancelButton}
 						<button type='button'
@@ -209,7 +210,7 @@
 						</button>
 					{/if}
 				</div>
-			</div>
+			</fieldset>
 		{/if}
 	</div>
 </dialog>

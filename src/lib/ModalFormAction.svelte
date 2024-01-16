@@ -17,6 +17,7 @@
 	export let overflowVisible = false
 	export let disable = false
 	export let marginForStickyHeader = false
+	export let okButtonWrap = false
 
 	const dispatch = createEventDispatcher()
 
@@ -110,7 +111,8 @@
                on:NotProcessing={() => disable = false}
                on:mouseup={doMouseUp}
                on:mousemove={doMouseMove}/> -->
-<svelte:window on:mouseup={doMouseUp} on:mousemove={doMouseMove}/>
+<svelte:window on:mouseup={doMouseUp}
+               on:mousemove={doMouseMove}/>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <dialog class='bg-white drop-shadow-xl shadow-xl rounded-lg w-full p-0 max-w-full
@@ -158,15 +160,16 @@
 		          disabled={disable}
 		          class:overflow-y-auto={!overflowVisible}
 		          class:overflow-y-visible={overflowVisible}>
-			<ActivityOverlay show={disable} size='2em'/>
+			<ActivityOverlay show={disable}
+			                 size='2em'/>
 			{#if $$slots.body}
 				<slot name='body'/>
 			{/if}
 		</fieldset>
-		<fieldset class='grid grid-cols-[auto_auto] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
-		          disabled={disable}>
-			{#if !!cancelButton || !!okButton}
-				<div>
+		{#if !!cancelButton || !!okButton}
+			<fieldset class='grid grid-cols-[min-content_auto_auto_min-content] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
+			          disabled={disable}>
+				<div class='pr-2'>
 					{#if !!cancelButton}
 						<button type='button'
 						        class='btnClean bg-transparent hover:bg-transparent shadow-none text-slate-500 hover:text-slate-700 dark:text-slate-300 pl-0'
@@ -174,19 +177,25 @@
 							{cancelButton}
 						</button>
 					{/if}
+				</div>
+				<div>
 					<slot name='leftFooter'/>
 				</div>
 				<div class='text-right'>
 					<slot name='rightFooter'/>
+				</div>
+				<div class='text-right pl-2'>
 					{#if !!okButton}
 						<button class='shadow-none'
+						        type='submit'
+						        class:text-nowrap={!okButtonWrap}
 						        disabled={okDisabled}>
 							{okButton}
 						</button>
 					{/if}
 				</div>
-			{/if}
-		</fieldset>
+			</fieldset>
+		{/if}
 	</form>
 </dialog>
 
