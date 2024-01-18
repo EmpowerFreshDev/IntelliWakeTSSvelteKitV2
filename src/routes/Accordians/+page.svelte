@@ -21,6 +21,10 @@
 		class='w-fit'/>
 	</div>
 	<div>
+		<input type='text'
+		       bind:value={value}/>
+	</div>
+	<div>
 		<AccordianSelect {items}
 		                 bind:value
 		class='w-fit'/>
