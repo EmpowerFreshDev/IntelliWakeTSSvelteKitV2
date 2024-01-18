@@ -25,6 +25,7 @@
 	export let id = RandomString(6)
 
 	let scroller: HTMLDivElement
+	let wasShowing = false
 
 	function scrollToItem(itemID: T | null | undefined, animated: boolean) {
 		if (browser && itemID) {
@@ -58,7 +59,12 @@
 	}
 
 	$: if (show) {
+		wasShowing = true
 		scrollToItem(value, !disabled && !readonly)
+	} else {
+		setTimeout(() => {
+			wasShowing = false
+		}, 250)
 	}
 
 	$: if (!isNullUndefined(value)) {
@@ -87,8 +93,9 @@
 	{#each items as item (item.id)}
 		{@const isSelected = item.id == value}
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<div class='text-ellipsis whitespace-nowrap overflow-hidden px-1 cursor-pointer transition-all'
+		<div class='text-ellipsis whitespace-nowrap overflow-hidden px-1 cursor-pointer'
 		     id='accordianSelect_{id}_{item.id}'
+		     class:transition-all={show || wasShowing}
 		     class:hover:bg-slate-100={show}
 		     class:dark:hover:bg-slate-500={show}
 		     role='listitem'
