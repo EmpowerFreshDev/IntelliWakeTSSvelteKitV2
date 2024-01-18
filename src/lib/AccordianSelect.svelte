@@ -10,7 +10,7 @@
 	export let items: ISpinItem<T>[]
 	let clazz = ''
 	export {clazz as class}
-	export let centered = true
+	export let centered = false
 	export let height = '1.25em'
 	export let maxHeight = '10em'
 	export let value: T | null | undefined = undefined
