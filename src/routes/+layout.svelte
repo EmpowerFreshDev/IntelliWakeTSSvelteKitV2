@@ -49,6 +49,10 @@
 		},
 		{
 			section: 'A Section',
+			title: 'Accordians'
+		},
+		{
+			section: 'A Section',
 			title: 'Spinner'
 		},
 		{

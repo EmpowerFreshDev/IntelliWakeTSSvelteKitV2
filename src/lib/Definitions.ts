@@ -75,7 +75,7 @@ export interface IDDAction {
 	hrefReplace?: boolean
 }
 
-export interface ISpinItem<T> {
+export interface ISpinItem<T = number> {
 	hidden?: boolean
 	divider?: boolean
 	disabled?: boolean

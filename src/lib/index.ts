@@ -2,6 +2,7 @@
 // Reexport your entry components here
 import About from './About.svelte'
 import AboutBullets from './AboutBullets.svelte'
+import AccordianSelect from './AccordianSelect.svelte'
 import ActivityOverlay from './ActivityOverlay.svelte'
 import BlockNav from './BlockNav.svelte'
 import ChatBubble from './ChatBubble.svelte'
@@ -45,6 +46,7 @@ export * from './useActions'
 
 export {About}
 export {AboutBullets}
+export {AccordianSelect}
 export {ActivityOverlay}
 export {BlockNav}
 export {ChatBubble}
