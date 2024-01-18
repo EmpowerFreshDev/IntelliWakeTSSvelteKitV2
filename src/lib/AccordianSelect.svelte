@@ -65,6 +65,10 @@
 		show = false
 	}
 
+	$: if (isNullUndefined(value)) {
+		show = true
+	}
+
 	onMount(async () => {
 		scrollToItem(value, false)
 	})
