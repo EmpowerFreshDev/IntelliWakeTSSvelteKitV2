@@ -26,6 +26,7 @@
 	</div>
 	<div>
 		<AccordianSelect {items}
+		                 required={false}
 		                 bind:value
 		class='w-fit'/>
 	</div>
