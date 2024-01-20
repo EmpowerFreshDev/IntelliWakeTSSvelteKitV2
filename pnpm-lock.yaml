@@ -10,7 +10,7 @@ dependencies:
     version: 6.5.1
   '@solidbasisventures/intelliwaketsfoundation':
     specifier: ^5.11.8
-    version: 5.11.11
+    version: 5.11.12
   '@sveltejs/kit':
     specifier: ^2.4.1
     version: 2.4.1(@sveltejs/vite-plugin-svelte@3.0.1)(svelte@4.2.9)(vite@5.0.10)
@@ -641,8 +641,8 @@ packages:
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
     dev: true
 
-  /@solidbasisventures/intelliwaketsfoundation@5.11.11:
-    resolution: {integrity: sha512-5E6osolB1RaffMlkClXmxbdZP4OAq7MRbjOcdCXRE27GVF9ZPGb4w4TmiV5+NqkveoSjQGcg1EWZMd7XT8p3dA==}
+  /@solidbasisventures/intelliwaketsfoundation@5.11.12:
+    resolution: {integrity: sha512-l6SjQm9yAjy7CRx/NU2iIkmczbSzRosng4cMQYewvw5tDtCEs0TEAagoBsrMGTs2qsgqd5UumNdHuaCY9RIWQg==}
     dev: false
 
   /@sveltejs/adapter-auto@3.1.0(@sveltejs/kit@2.4.1):
