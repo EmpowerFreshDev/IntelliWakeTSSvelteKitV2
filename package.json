@@ -15,7 +15,7 @@
 		"test": "vitest",
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
-		"Install-IntelliWake": "pnpm install && pnpm add @solidbasisventures/intelliwaketsfoundation@latest",
+		"Install-IntelliWake": "pnpm install && pnpm add @solidbasisventures/intelliwaketsfoundation",
 		"Version-Minor-Advance": "pnpm version minor"
 	},
 	"exports": {
@@ -31,7 +31,7 @@
 	],
 	"peerDependencies": {
 		"@fortawesome/free-solid-svg-icons": "^6.5.1",
-		"@solidbasisventures/intelliwaketsfoundation": "^5.11.8",
+		"@solidbasisventures/intelliwaketsfoundation": "^5.11.12",
 		"@sveltejs/kit": "^2.4.1",
 		"svelte": "^4.2.9"
 	},

@@ -9,7 +9,7 @@ dependencies:
     specifier: ^6.5.1
     version: 6.5.1
   '@solidbasisventures/intelliwaketsfoundation':
-    specifier: ^5.11.8
+    specifier: ^5.11.12
     version: 5.11.12
   '@sveltejs/kit':
     specifier: ^2.4.1
