@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type {ISpinItem} from '$lib/Definitions'
-	import {CleanSubtractNumbers, RandomString} from '@solidbasisventures/intelliwaketsfoundation'
+	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
 	import {browser} from '$app/environment'
 	import {onDestroy, onMount, tick} from 'svelte'
 	import {type ActionArray, useActions} from '$lib/useActions'
@@ -27,6 +27,7 @@
 	export let id = RandomString(6)
 
 	let scroller: HTMLDivElement
+	let inputElement: HTMLInputElement
 	let wasShowing = false
 	let isMoving = false
 
@@ -78,6 +79,12 @@
 				tick().then(() => show = false)
 			} else {
 				value = itemID
+				tick().then(() => {
+					if (inputElement) {
+						inputElement.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
+						inputElement.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
+					}
+				})
 			}
 		} else {
 			show = !disabled && !readonly
@@ -136,6 +143,12 @@
 						} else {
 							value = items.at(highlightedIndex + 1)?.id
 						}
+						tick().then(() => {
+							if (inputElement) {
+								inputElement.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
+								inputElement.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
+							}
+						})
 					}
 					e.preventDefault()
 					break
@@ -148,6 +161,12 @@
 						} else {
 							value = items.at(highlightedIndex - 1)?.id
 						}
+						tick().then(() => {
+							if (inputElement) {
+								inputElement.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
+								inputElement.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
+							}
+						})
 					}
 					e.preventDefault()
 					break
@@ -193,6 +212,7 @@
 
 {#if name}
 	<input type='hidden'
+	       bind:this={inputElement}
 	       {name}
 	       {value}
 	       {required}
