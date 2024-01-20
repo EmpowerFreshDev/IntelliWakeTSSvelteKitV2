@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type {ISpinItem} from '$lib/Definitions'
-	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
+	import {CleanSubtractNumbers, RandomString} from '@solidbasisventures/intelliwaketsfoundation'
 	import {browser} from '$app/environment'
 	import {onDestroy, onMount, tick} from 'svelte'
 	import {type ActionArray, useActions} from '$lib/useActions'
@@ -28,19 +28,31 @@
 
 	let scroller: HTMLDivElement
 	let wasShowing = false
+	let isMoving = false
 
 	let observer: ResizeObserver
 
+	let finalScroll = setTimeout(() => {
+	}, 10)
+
 	function scrollToItem(itemID: T | null | undefined) {
+		clearTimeout(finalScroll)
 		if (browser && show && itemID) {
 			const selectedBounding = document.getElementById(`accordianSelect_${id}_${itemID}`)?.getBoundingClientRect()
 			if (selectedBounding) {
-				const scrollerBounding = scroller.getBoundingClientRect()
+				// const scrollerBounding = scroller.getBoundingClientRect()
 				scroller.scrollTo({
-					top: selectedBounding.top - scrollerBounding.y - 1,
+					top: selectedBounding.top, //, scrollerBounding?.top, 1),
 					left: 0,
 					behavior: 'instant'
 				})
+				finalScroll = setTimeout(() => {
+					scroller.scrollTo({
+						top: selectedBounding.top, //, scrollerBounding?.top, 1),
+						left: 0,
+						behavior: 'instant'
+					})
+				}, 100)
 			}
 		}
 	}
@@ -56,6 +68,7 @@
 	})
 
 	onDestroy(() => {
+		clearTimeout(finalScroll)
 		observer.disconnect()
 	})
 
@@ -71,6 +84,23 @@
 		}
 	}
 
+	function doShow() {
+		if (!show) {
+			show = !disabled && !readonly
+		}
+	}
+
+	function doClose() {
+		if (show) {
+			if (isMoving) {
+				setTimeout(() =>
+					tick().then(() => isMoving = false), 250)
+			} else {
+				show = false
+			}
+		}
+	}
+
 	$: if (show) {
 		wasShowing = true
 	} else {
@@ -79,17 +109,49 @@
 		}, 500)
 	}
 
-	$: if (value) {
-		show = false
-	}
+	$: value && doClose()
 
 	$: if (!value && required) {
 		show = !disabled && !readonly
 	}
 
-	function doShow() {
-		if (!show) {
-			show = !disabled && !readonly
+	const keyDown = (e: KeyboardEvent) => {
+		if (show) {
+			e.stopPropagation()
+
+			switch (e.key) {
+				case 'Escape':
+				case 'Enter':
+					show = !disabled && !readonly
+					e.preventDefault()
+					break
+				case 'ArrowDown':
+					if (items.length) {
+						const highlightedIndex = items.findIndex((item) => item.id == value && !item.disabled)
+						isMoving = true
+						if (highlightedIndex === -1) {
+							value = items.at(items.length - 1)?.id
+						} else if (highlightedIndex >= items.length - 1) {
+							value = items.at(0)?.id
+						} else {
+							value = items.at(highlightedIndex + 1)?.id
+						}
+					}
+					e.preventDefault()
+					break
+				case 'ArrowUp':
+					if (items.length) {
+						const highlightedIndex = items.findIndex((item) => item.id == value && !item.disabled)
+						isMoving = true
+						if (highlightedIndex <= 0) {
+							value = items.at(items.length - 1)?.id
+						} else {
+							value = items.at(highlightedIndex - 1)?.id
+						}
+					}
+					e.preventDefault()
+					break
+			}
 		}
 	}
 
@@ -104,6 +166,7 @@
      style='max-height: {maxHeight}; min-height: {minHeight}'
      bind:this={scroller}
      on:focus={doShow}
+     on:keydown={keyDown}
      on:blur={() => show && tick().then(() => {
 		 if (!required || value) show = false
      })}
