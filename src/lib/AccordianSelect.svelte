@@ -2,7 +2,7 @@
 	import type {ISpinItem} from '$lib/Definitions'
 	import {isNullUndefined, RandomString} from '@solidbasisventures/intelliwaketsfoundation'
 	import {browser} from '$app/environment'
-	import {onMount} from 'svelte'
+	import {onDestroy, onMount, tick} from 'svelte'
 	import {type ActionArray, useActions} from '$lib/useActions'
 
 	type T = $$Generic
@@ -27,19 +27,35 @@
 	let scroller: HTMLDivElement
 	let wasShowing = false
 
+	let observer: ResizeObserver
+
 	function scrollToItem(itemID: T | null | undefined, animated: boolean) {
-		if (browser && itemID) {
+		if (browser && show && itemID) {
 			const selectedBounding = document.getElementById(`accordianSelect_${id}_${itemID}`)?.getBoundingClientRect()
 			if (selectedBounding) {
-				const top = selectedBounding.top
+				const scrollerBounding = scroller.getBoundingClientRect()
 				scroller.scrollTo({
-					top,
+					top: selectedBounding.top - scrollerBounding.y - 1,
 					left: 0,
 					behavior: animated ? 'smooth' : 'instant'
 				})
 			}
 		}
 	}
+
+	onMount(() => {
+		observer = new ResizeObserver(() => {
+			if (value) {
+				scrollToItem(value, false)
+			}
+		})
+		observer.observe(scroller)
+		scrollToItem(value, false)
+	})
+
+	onDestroy(() => {
+		observer.disconnect()
+	})
 
 	function setItem(itemID: T) {
 		if (!disabled && !readonly) {
@@ -75,10 +91,6 @@
 		show = true
 	}
 
-	onMount(async () => {
-		scrollToItem(value, false)
-	})
-
 </script>
 
 <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
@@ -87,20 +99,24 @@
      use:useActions={use}
      class:overflow-hidden={!show}
      class:overflow-y-scroll={show}
-     style='max-height: {maxHeight}; min-height: {height};'
+     style='max-height: {maxHeight}; '
      bind:this={scroller}
+     on:blur={() => {
+		 if (value) show = false
+     }}
      tabindex={0}>
 	{#each items as item (item.id)}
 		{@const isSelected = item.id == value}
 		<!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-		<div class='text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer'
+		<div class='text-ellipsis whitespace-nowrap overflow-hidden cursor-pointer -mx-2 px-2'
 		     id='accordianSelect_{id}_{item.id}'
 		     class:transition-all={show || wasShowing}
-		     class:hover:bg-slate-100={show}
-		     class:dark:hover:bg-slate-500={show}
+		     class:hover:bg-slate-100={show && !isSelected}
+		     class:dark:hover:bg-slate-500={show && !isSelected}
 		     role='listitem'
 		     class:text-center={centered}
-		     class:font-bold={isSelected && show}
+		     class:bg-primary-main={isSelected && show}
+		     class:text-white={isSelected && show}
 		     style={`height: ${(show || isSelected) ? height : "0px"};`}
 		     on:keydown|preventDefault
 		     on:click={() => setItem(item.id)}>
