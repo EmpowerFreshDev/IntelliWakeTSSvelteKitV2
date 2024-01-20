@@ -120,7 +120,7 @@
 		     class:text-center={centered}
 		     class:bg-primary-main={isSelected && show}
 		     class:text-white={isSelected && show}
-		     style={`height: ${(show || isSelected) ? height : "0px"};`}
+		     style={`height: ${show ? `calc(${height} + 0.25em)` : isSelected ? height : "0px"};`}
 		     on:keydown|preventDefault
 		     on:click={() => setItem(item.id)}>
 			{item.title}
