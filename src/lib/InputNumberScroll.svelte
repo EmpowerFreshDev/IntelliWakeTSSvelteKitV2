@@ -101,10 +101,10 @@
 					</button>
 				</div>
 			{:else}
-				<div class='grid grid-cols-[repeat(auto-fill,minmax(3em,1fr))] p-2 gap-1'>
+				<div class='grid grid-cols-[repeat(auto-fill,minmax(2.25em,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(3em,1fr))] p-2 gap-1'>
 					{#if !valueExistsInQuickArray && !!value}
 						<button type='button'
-						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full'
+						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
 						        on:click={() => setValue(null)}>
 							<DisplayFraction value={value}
 							                 {maxDigitsDisplay}/>
@@ -113,7 +113,7 @@
 					{#each quickArray as numberValue (numberValue)}
 						{@const isSelected = numberValue === CleanNumberNull(value)}
 						<button type='button'
-						        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full'
+						        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
 						        class:!text-white={isSelected}
 						        class:!bg-secondary-main={isSelected}
 						        on:click={() => setValue(numberValue)}>
@@ -124,7 +124,7 @@
 				</div>
 			{/if}
 			{#if allowManualEntryMode}
-				<div class='text-center my-2'>
+				<div class='text-center my-2 max-lg:text-sm'>
 					<button type='button'
 					        class='btnLink'
 					        on:click={() => manualEntryMode = !manualEntryMode}>
