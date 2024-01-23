@@ -18,17 +18,17 @@
 	let inputElement: HTMLInputElement
 
 	$: useOptions = options
-		.map(option =typeof option === 'string' ? {
+		.map(option => typeof option === 'string' ? {
 			key: option as T,
 			name: option
 		} : option)
-		.filter(option =!option.hidden)
+		.filter(option => !option.hidden)
 
 	function keydown(e: KeyboardEvent) {
 		switch (e.key) {
 			case 'ArrowLeft': {
-				let idx = useOptions.findIndex(option =option.key == value)
-				while (idx 0) {
+				let idx = useOptions.findIndex(option => option.key == value)
+				while (idx > 0) {
 					const prev = useOptions.at(idx - 1)
 					if (!prev) break
 					if (!prev.disabled) {
@@ -41,7 +41,7 @@
 			}
 				break
 			case 'ArrowRight': {
-				let idx = useOptions.findIndex(option =option.key == value)
+				let idx = useOptions.findIndex(option => option.key == value)
 				while (idx < useOptions.length - 1) {
 					const next = useOptions.at(idx + 1)
 					if (!next) break
@@ -72,10 +72,10 @@
 		        class:active={isActive}
 		        disabled={readonly || option.disabled}
 		        tabindex={-1}
-		        on:click={() ={
+		        on:click={() => {
 					if (!readonly && !option.disabled) {
 							value = option.key
-							tick().then(() ={
+							tick().then(() => {
 							if (inputElement) {
 								inputElement.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
 								inputElement.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
