@@ -5,6 +5,7 @@ import AboutBullets from './AboutBullets.svelte'
 import AccordianSelect from './AccordianSelect.svelte'
 import ActivityOverlay from './ActivityOverlay.svelte'
 import BlockNav from './BlockNav.svelte'
+import ButtonGroup from './ButtonGroup.svelte'
 import ChatBubble from './ChatBubble.svelte'
 import CheckBox from './CheckBox.svelte'
 import DisplayColor from './DisplayColor.svelte'
@@ -49,6 +50,7 @@ export {AboutBullets}
 export {AccordianSelect}
 export {ActivityOverlay}
 export {BlockNav}
+export {ButtonGroup}
 export {ChatBubble}
 export {CheckBox}
 export {DisplayColor}

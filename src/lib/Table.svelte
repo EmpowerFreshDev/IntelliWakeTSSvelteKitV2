@@ -18,6 +18,7 @@
 	import {faCopy} from '@fortawesome/free-solid-svg-icons'
 	import {browser} from '$app/environment'
 	import Icon from '$lib/Icon.svelte'
+	import ButtonGroup from '$lib/ButtonGroup.svelte'
 
 	// eslint-disable-next-line no-undef
 	type T = $$Generic<Record<string, any>>
@@ -152,19 +153,13 @@
 		<Search bind:value={search}/>
 		<div class='inline-block'>
 			{#if pagesRange}
-				<div class='buttonGroup mx-auto w-fit'>
-					{#each pagesRange as pageRange}
-						<button class:active={pageRange === page}
-						        disabled={!pageRange}
-						        on:click={() => {
-                            if (pageRange) {
-                                page = pageRange
-                                }
-                        }}>
-							{!pageRange ? '...' : ToDigits(pageRange)}
-						</button>
-					{/each}
-				</div>
+				<ButtonGroup class='mx-auto w-fit'
+				             bind:value={page}
+				             options={pagesRange.map(pageRange => ({
+				key: pageRange,
+				name: !pageRange ? '...' : ToDigits(pageRange),
+				disabled: !pageRange
+				}))}/>
 			{/if}
 		</div>
 		<div class='text-right'>

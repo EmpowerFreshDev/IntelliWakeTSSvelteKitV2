@@ -144,26 +144,34 @@
 	}
 
 	.buttonGroup {
-		@apply flex flex-row overflow-hidden rounded;
+		@apply flex flex-row overflow-hidden rounded m-0.5;
 
-		> button {
-			@apply py-0 flex-1 border-primary-main text-primary-main rounded-none shadow-none bg-transparent dark:bg-slate-500 hover:bg-primary-hover hover:text-white;
-			border-top-width: 1px;
-			border-bottom-width: 1px;
-			border-left-width: 1px;
+		> button, button:focus {
+			@apply py-0 flex-1 border border-primary-main text-primary-main rounded-none shadow-none;
+		}
+
+		> button[disabled] {
+			@apply hover:bg-white !text-slate-500;
 		}
 
 		> button:first-child {
 			@apply rounded-l;
 		}
 
+		> button:not(:first-child) {
+			@apply -ml-[0.5px];
+		}
+
 		> button:last-child {
 			@apply rounded-r;
-			border-right-width: 1px;
+		}
+
+		> button:not(.active) {
+			@apply bg-white text-primary-main hover:bg-slate-100 hover:text-primary-main;
 		}
 
 		> button.active {
-			@apply bg-primary-main text-white;
+			@apply bg-primary-main hover:bg-primary-main text-white;
 		}
 	}
 
