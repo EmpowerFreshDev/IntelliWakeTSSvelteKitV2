@@ -147,11 +147,11 @@
 		@apply flex flex-row overflow-hidden rounded m-0.5;
 
 		> button, button:focus {
-			@apply py-0 flex-1 border border-primary-main text-primary-main rounded-none shadow-none;
+			@apply py-0 flex-1 border border-primary-main text-primary-main rounded-none shadow-none focus:ring-0;
 		}
 
 		> button[disabled] {
-			@apply hover:bg-white !text-slate-500;
+			@apply hover:bg-white !text-slate-500 dark:!text-slate-200;
 		}
 
 		> button:first-child {
@@ -167,7 +167,7 @@
 		}
 
 		> button:not(.active) {
-			@apply bg-white text-primary-main hover:bg-slate-100 hover:text-primary-main;
+			@apply bg-white text-primary-main hover:bg-slate-100 hover:text-primary-main dark:bg-slate-400 dark:text-white;
 		}
 
 		> button.active {
