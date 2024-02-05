@@ -24,7 +24,7 @@ export type TEnhanceOptions<FORM extends Record<string, never> = Record<string, 
     validateFormData?: (formData: FormData, action: URL) => boolean | string | undefined | null | void
     validateObject?: (object: FORM | any, action?: URL) => boolean | string | undefined | null | void
     showActivityOverlay?: boolean
-    invalidate?: string | string[] | 'All' | null
+    invalidate?: string | string[] | 'All' | 'app:All' | null
     reset?: boolean
     displayResult?: boolean
     message?: string
@@ -91,7 +91,7 @@ export function FormEnhance<FORM extends Record<keyof FORM, FORM[keyof FORM]>, R
         }
 
         if (options?.invalidate) {
-            if (options.invalidate === 'All') {
+            if (options.invalidate === 'All' || options.invalidate === 'app:All') {
                 if (options.verbose) console.info('Invalidating All')
                 await invalidateAll()
             } else {
