@@ -262,7 +262,8 @@
 						class:group-hover:dark:bg-slate-700={!isDisabled}>
 						{#if ddAction.faProps}
 							<Icon {...ddAction.faProps}
-							    class='inline-block mr-1'/>
+							      class='inline-block mr-1'
+							      fw/>
 						{/if}
 						{ddAction.title ?? ''}
 					</div>
@@ -278,7 +279,8 @@
 						     class:group-hover:dark:bg-slate-700={!isDisabled}>
 							{#if ddAction.alternateFAProps}
 								<Icon {...ddAction.alternateFAProps}
-								    class='inline-block mx-1'/>
+								      class='inline-block mx-1'
+								      fw/>
 							{/if}
 							{ddAction.alternateTitle ?? ''}
 						</div>
