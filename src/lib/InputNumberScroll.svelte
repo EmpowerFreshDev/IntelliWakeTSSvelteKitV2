@@ -8,7 +8,7 @@
 		IsOn,
 		LeastNumber
 	} from '@solidbasisventures/intelliwaketsfoundation'
-	import {tick} from 'svelte'
+	import {createEventDispatcher, tick} from 'svelte'
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import {browser} from '$app/environment'
 	import Icon from '$lib/Icon.svelte'
@@ -28,6 +28,8 @@
 
 	let inputEL: HTMLInputElement
 
+	const dispatch = createEventDispatcher()
+
 	$: viewMaxDigits = GreaterNumber(maxDigitsDisplay, LeastNumber(CountDecimalDigits(increment), 2))
 
 	let typedValue = CleanNumber(value, 0)
@@ -45,7 +47,11 @@
 			typedValue = CleanNumber(value, 0)
 			tick()
 				.then(() => {
-					inputEL?.dispatchEvent(new Event('change', {bubbles: true}))
+					if (inputEL) {
+						inputEL?.dispatchEvent(new Event('change', {bubbles: true}))
+					} else {
+						dispatch('change', value)
+					}
 				})
 		}
 	}
