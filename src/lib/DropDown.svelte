@@ -20,6 +20,7 @@
 	export let openingDown = true
 	export let disabled = false
 	export let hidden = false
+	export let hideEmptyDDActions = false
 
 	const refs: HTMLElement[] = []
 
@@ -177,7 +178,7 @@
                  {bodyClass}
                  {sameSize}
                  {zIndex}
-                 {hidden}
+                 hidden={hidden || (hideEmptyDDActions && !visibleDDActions.length)}
                  bind:openingDown
                  toggleClass={controlClass}
                  on:keydown={keyDownMenu}
