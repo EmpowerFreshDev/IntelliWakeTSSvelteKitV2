@@ -11,6 +11,7 @@
     export let form: string | undefined = undefined
     export let value: unknown | undefined = undefined
     export let hidden = false
+    export let displayCheckInverse = false
 
     const dispatch = createEventDispatcher()
 
@@ -45,6 +46,8 @@
 
     $: check(checked)
 
+    $: displayChecked = displayCheckInverse ? !checked : checked
+
 </script>
 
 <div bind:this={inputControl}
@@ -66,14 +69,14 @@
             {/if}
             <div class='group-focus:ring-1 dark:ring-white w-7 h-4 flex items-center bg-gray-300 rounded-full group-focus:ring-primary-main mx-1 px-0.5 transition-all'
                  class:opacity-60={disabled || readonly}
-                 class:!bg-primary-main={checked}>
+                 class:!bg-primary-main={displayChecked}>
                 <div class='bg-white w-3 h-3 rounded-full shadow-md transform transition-all'
-                     class:translate-x-3={checked}></div>
+                     class:translate-x-3={displayChecked}></div>
             </div>
         </div>
     </div>
     <div class="hidden print:inline-block">
-        {#if checked}
+        {#if displayChecked}
             &checkmark;
         {:else}
             &Square;
