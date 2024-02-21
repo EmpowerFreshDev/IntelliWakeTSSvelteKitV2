@@ -33,6 +33,14 @@
 			...ddAction,
 			active: (keystrokeSelectIndex === null) ? ddAction.active : (idx === keystrokeSelectIndex)
 		}))
+		.reduce<IDDAction[]>((results, ddAction) => {
+			if (ddAction.divider) {
+				if (!results.length) return results
+				if (results.at(results.length - 1)?.divider) return results
+			}
+
+			return [...results, ddAction]
+		}, [])
 
 	function setKeystrokeSelectIndex(idx: number | null) {
 		keystrokeSelectIndex = idx

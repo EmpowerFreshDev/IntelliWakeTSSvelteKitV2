@@ -211,7 +211,7 @@
 		}
 	})
 
-	$: useControlClass = `${!fullBlock ? 'inline-block' : ''} ${controlClass ?? ''}`.trim()
+	$: useControlClass = `${hidden ? 'hidden' : !fullBlock ? 'inline-block' : ''} ${controlClass ?? ''}`.trim()
 	$: useToggleClass = `${!fullBlock ? 'inline-block' : ''} ${toggleClass ?? ''}`.trim()
 
 	$: verbose && console.info('Show', show)
@@ -229,7 +229,6 @@
 	 bind:this={parentDivElement}
      role="button"
      tabindex={-1}
-     {hidden}
      on:blur
      on:keydown
      on:keypress
