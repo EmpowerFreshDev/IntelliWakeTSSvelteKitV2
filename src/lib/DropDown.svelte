@@ -19,6 +19,7 @@
 	export let zIndex = 40
 	export let openingDown = true
 	export let disabled = false
+	export let hidden = false
 
 	const refs: HTMLElement[] = []
 
@@ -166,6 +167,7 @@
 	$: show, scrollToActive()
 
 	$: indentsExist = ddActions.some((ddAction) => ddAction.active && ddAction.indented)
+
 </script>
 
 <DropDownControl bind:show
@@ -175,6 +177,7 @@
                  {bodyClass}
                  {sameSize}
                  {zIndex}
+                 {hidden}
                  bind:openingDown
                  toggleClass={controlClass}
                  on:keydown={keyDownMenu}

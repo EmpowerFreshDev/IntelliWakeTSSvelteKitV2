@@ -25,6 +25,7 @@
 	export let disabled = false
 	export let index = 0
 	export let parentDivElement: HTMLDivElement | null = null
+	export let hidden = false
 
 	let pointerPosition: TChatBubblePosition = 'Top'
 
@@ -228,6 +229,7 @@
 	 bind:this={parentDivElement}
      role="button"
      tabindex={-1}
+     {hidden}
      on:blur
      on:keydown
      on:keypress
