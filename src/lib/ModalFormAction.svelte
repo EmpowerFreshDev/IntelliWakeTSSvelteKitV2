@@ -18,6 +18,11 @@
 	export let disable = false
 	export let marginForStickyHeader = false
 	export let okButtonWrap = false
+	let clazz = ''
+	export {clazz as class}
+	export let classHeader = ''
+	export let classButton = ''
+	export let borderFooter = true
 
 	const dispatch = createEventDispatcher()
 
@@ -115,8 +120,8 @@
                on:mousemove={doMouseMove}/>
 
 <!-- svelte-ignore a11y-click-events-have-key-events -->
-<dialog class='bg-white drop-shadow-xl shadow-xl rounded-lg w-full p-0 max-w-full
-			   dark:bg-slate-600 dark:text-white overflow-visible'
+<dialog class='bg-white drop-shadow-xl shadow-xl rounded-lg overflow-hidden w-full p-0 max-w-full
+			   dark:bg-slate-600 dark:text-white {clazz}'
         class:overflow-y-visible={overflowVisible}
         class:overflow-hidden={!overflowVisible}
         style:transform='translate({x}px,{y}px) scale({isShowing ? 1 : 0.9})'
@@ -133,7 +138,7 @@
 	      class:overflow-hidden={!overflowVisible}
 	      on:click|stopPropagation={() => {}}>
 		<h4 class='bg-primary-main dark:bg-primary-face text-white py-2 px-4 select-none mb-0
-		           rounded-t-lg'
+		           rounded-t-lg {classHeader}'
 		    class:cursor-grab={isMouseDown}
 		    on:mousedown={doMouseDown}>
 			{#if $$slots.header}
@@ -167,12 +172,13 @@
 			{/if}
 		</fieldset>
 		{#if !!cancelButton || !!okButton}
-			<fieldset class='grid grid-cols-[min-content_auto_auto_min-content] border-t border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
+			<fieldset class='grid grid-cols-[min-content_auto_auto_min-content] border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
+			          class:border-t={borderFooter}
 			          disabled={disable}>
 				<div class='pr-2'>
 					{#if !!cancelButton}
 						<button type='button'
-						        class='btnClean bg-transparent hover:bg-transparent shadow-none text-slate-500 hover:text-slate-700 dark:text-slate-300 pl-0'
+						        class='btnClean bg-transparent hover:bg-transparent shadow-none text-slate-500 hover:text-slate-700 dark:text-slate-300 pl-0 pt-1'
 						        on:click|stopPropagation={cancelAction}>
 							{cancelButton}
 						</button>
@@ -186,7 +192,7 @@
 				</div>
 				<div class='text-right pl-2'>
 					{#if !!okButton}
-						<button class='shadow-none'
+						<button class='shadow-none {classButton}'
 						        type='submit'
 						        class:whitespace-nowrap={!okButtonWrap}
 						        disabled={okDisabled}>

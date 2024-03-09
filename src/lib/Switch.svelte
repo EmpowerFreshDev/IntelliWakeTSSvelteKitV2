@@ -12,6 +12,8 @@
     export let value: unknown | undefined = undefined
     export let hidden = false
     export let displayCheckInverse = false
+    let clazz = ''
+    export {clazz as class}
 
     const dispatch = createEventDispatcher()
 
@@ -54,7 +56,7 @@
      {id}
      {hidden}
      use:useActions={use}
-     class='cursor-pointer mt-1 select-none focus:ring-0 focus:outline-none group'
+     class='cursor-pointer mt-1 select-none focus:ring-0 focus:outline-none group {clazz ?? ""}'
      role='button'
      on:click={() => check(!checked)}
      on:keydown={e => e.key === ' ' ? check(!checked) : undefined}

@@ -8,7 +8,7 @@
 	export let id = ''
 	export let style = ''
 
-	export let icon: IconDefinition
+	export let icon: IconDefinition | null | undefined = undefined
 
 	export let size = ''
 	export let color = ''
@@ -74,7 +74,7 @@
 		number, // height
 		string[], // ligatures
 		string, // unicode
-		string | string[] // svgPathData
+			string | string[] // svgPathData
 	]
 	let transform: string
 	let svgElement: SVGElement
@@ -141,7 +141,7 @@
 	}
 </style>
 
-{#if i[4]}
+{#if !!icon && i[4]}
 	<svg
 		id={id || undefined}
 		bind:this={svgElement}

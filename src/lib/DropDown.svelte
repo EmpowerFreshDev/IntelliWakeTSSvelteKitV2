@@ -179,126 +179,128 @@
 
 </script>
 
-<DropDownControl bind:show
-                 bind:position
-                 {fullBlock}
-                 {controlClass}
-                 {bodyClass}
-                 {sameSize}
-                 {zIndex}
-                 hidden={hidden || (hideEmptyDDActions && !visibleDDActions.length)}
-                 bind:openingDown
-                 toggleClass={controlClass}
-                 on:keydown={keyDownMenu}
-                 bind:disabled>
-	<button
-		{disabled}
-		type='button'
-		slot='toggle'
-		class:inline-block={!fullBlock}
-		class:w-full={fullBlock}
-		class:text-left={fullBlock}
-		class:noOutline={true}
-		class={buttonClass ?? ''}
-		class:btnClean={inputControl}
-		class:inputControl
-		aria-expanded={show}
-		aria-haspopup='true'
-		on:keydown={keyDownButton}
-		tabindex={0}>
-		<slot name='button'/>
-		{buttonTitle ?? ''}
-		{#if !noCaret}
-			<svg
-				class='-mr-1 h-5 w-5 mt-0.5 inline-block float-right'
-				xmlns='http://www.w3.org/2000/svg'
-				viewBox='0 0 20 20'
-				fill='currentColor'
-				aria-hidden='true'
-				style={openingDown ? 'rotate: 0deg;' : 'rotate: 180deg;'}
-			>
-				<path
-					fill-rule='evenodd'
-					d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
-					clip-rule='evenodd'
-				/>
-			</svg>
-		{/if}
-	</button>
-	<svelte:fragment slot='body'>
-		<slot name='actions'/>
-		{#each visibleDDActions as ddAction, i (ddAction)}
-			{@const isDisabled = ddAction.disabled || (!ddAction.action && !ddAction.href)}
-			{#if !!ddAction.header}
-				<div
-					role='menuitem'
-					tabindex='-1'
-					class='px-2 py-2 whitespace-nowrap font-bold rounded-none'
+{#if !!visibleDDActions?.length || !!$$slots.actions}
+	<DropDownControl bind:show
+	                 bind:position
+	                 {fullBlock}
+	                 {controlClass}
+	                 {bodyClass}
+	                 {sameSize}
+	                 {zIndex}
+	                 hidden={hidden || (hideEmptyDDActions && !visibleDDActions.length)}
+	                 bind:openingDown
+	                 toggleClass={controlClass}
+	                 on:keydown={keyDownMenu}
+	                 bind:disabled>
+		<button
+			{disabled}
+			type='button'
+			slot='toggle'
+			class:inline-block={!fullBlock}
+			class:w-full={fullBlock}
+			class:text-left={fullBlock}
+			class:noOutline={true}
+			class={buttonClass ?? ''}
+			class:btnClean={inputControl}
+			class:inputControl
+			aria-expanded={show}
+			aria-haspopup='true'
+			on:keydown={keyDownButton}
+			tabindex={0}>
+			<slot name='button'/>
+			{buttonTitle ?? ''}
+			{#if !noCaret}
+				<svg
+					class='-mr-1 h-5 w-5 mt-0.5 inline-block float-right'
+					xmlns='http://www.w3.org/2000/svg'
+					viewBox='0 0 20 20'
+					fill='currentColor'
+					aria-hidden='true'
+					style={openingDown ? 'rotate: 0deg;' : 'rotate: 180deg;'}
 				>
-					{ddAction.title}
-				</div>
-			{:else if !!ddAction.divider}
-				<hr/>
-			{:else}
-				{#if !!ddAction.dividerGroup && i > 0 && visibleDDActions[i - 1].dividerGroup !== ddAction.dividerGroup}
-					<hr/>
-				{/if}
-				{#if !!ddAction.headerGroup && (i === 0 || visibleDDActions[i - 1].headerGroup !== ddAction.headerGroup)}
+					<path
+						fill-rule='evenodd'
+						d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z'
+						clip-rule='evenodd'
+					/>
+				</svg>
+			{/if}
+		</button>
+		<svelte:fragment slot='body'>
+			<slot name='actions'/>
+			{#each visibleDDActions as ddAction, i (ddAction)}
+				{@const isDisabled = ddAction.disabled || (!ddAction.action && !ddAction.href)}
+				{#if !!ddAction.header}
 					<div
 						role='menuitem'
 						tabindex='-1'
 						class='px-2 py-2 whitespace-nowrap font-bold rounded-none'
 					>
-						{ddAction.headerGroup}
+						{ddAction.title}
 					</div>
-				{/if}
-				<div
-					role='menuitem'
-					class='group rounded-none overflow-hidden grid grid-cols-[1fr,auto]'
-					class:pl-6={ddAction.indented}
-					class:font-bold={indentsExist && !ddAction.indented}
-					class:text-slate-300={isDisabled}
-					class:cursor-pointer={!isDisabled}
-					class:text-white={ddAction.active}
-					class:bg-primary-main={ddAction.active}
-					bind:this={refs[i]}>
-					<div
-						tabindex={-1}
-						role='button'
-						class='px-4 py-2 overflow-hidden text-ellipsis whitespace-nowrap'
-						on:click={() => performAction(ddAction)}
-						on:keypress={() => performAction(ddAction)}
-						class:group-hover:bg-primary-main={ddAction.active}
-						class:group-hover:!bg-slate-100={!isDisabled}
-						class:group-hover:!text-primary-main={!isDisabled}
-						class:group-hover:dark:bg-slate-700={!isDisabled}>
-						{#if ddAction.faProps}
-							<Icon {...ddAction.faProps}
-							      class='inline-block mr-1'
-							      fw/>
-						{/if}
-						{ddAction.title ?? ''}
-					</div>
-					{#if ddAction.alternateAction}
-						<div on:click|stopPropagation={() => performAlternateAction(ddAction)}
-						     on:keypress|stopPropagation={() => performAlternateAction(ddAction)}
-						     tabindex={-1}
-						     role='button'
-						     class='px-4 py-2'
-						     class:group-hover:bg-primary-main={ddAction.active}
-						     class:group-hover:!bg-slate-100={!isDisabled}
-						     class:group-hover:!text-primary-main={!isDisabled}
-						     class:group-hover:dark:bg-slate-700={!isDisabled}>
-							{#if ddAction.alternateFAProps}
-								<Icon {...ddAction.alternateFAProps}
-								      class='inline-block mx-1'
-								      fw/>
-							{/if}
-							{ddAction.alternateTitle ?? ''}
+				{:else if !!ddAction.divider}
+					<hr/>
+				{:else}
+					{#if !!ddAction.dividerGroup && i > 0 && visibleDDActions[i - 1].dividerGroup !== ddAction.dividerGroup}
+						<hr/>
+					{/if}
+					{#if !!ddAction.headerGroup && (i === 0 || visibleDDActions[i - 1].headerGroup !== ddAction.headerGroup)}
+						<div
+							role='menuitem'
+							tabindex='-1'
+							class='px-2 py-2 whitespace-nowrap font-bold rounded-none'
+						>
+							{ddAction.headerGroup}
 						</div>
 					{/if}
-				</div>
-			{/if}
-		{/each}
-	</svelte:fragment>
-</DropDownControl>
+					<div
+						role='menuitem'
+						class='group rounded-none overflow-hidden grid grid-cols-[1fr,auto]'
+						class:pl-6={ddAction.indented}
+						class:font-bold={indentsExist && !ddAction.indented}
+						class:text-slate-300={isDisabled}
+						class:cursor-pointer={!isDisabled}
+						class:text-white={ddAction.active}
+						class:bg-primary-main={ddAction.active}
+						bind:this={refs[i]}>
+						<div
+							tabindex={-1}
+							role='button'
+							class='px-4 py-2 overflow-hidden text-ellipsis whitespace-nowrap'
+							on:click={() => performAction(ddAction)}
+							on:keypress={() => performAction(ddAction)}
+							class:group-hover:bg-primary-main={ddAction.active}
+							class:group-hover:!bg-slate-100={!isDisabled}
+							class:group-hover:!text-primary-main={!isDisabled}
+							class:group-hover:dark:bg-slate-700={!isDisabled}>
+							{#if ddAction.faProps}
+								<Icon {...ddAction.faProps}
+								      class='inline-block mr-1'
+								      fw/>
+							{/if}
+							{ddAction.title ?? ''}
+						</div>
+						{#if ddAction.alternateAction}
+							<div on:click|stopPropagation={() => performAlternateAction(ddAction)}
+							     on:keypress|stopPropagation={() => performAlternateAction(ddAction)}
+							     tabindex={-1}
+							     role='button'
+							     class='px-4 py-2'
+							     class:group-hover:bg-primary-main={ddAction.active}
+							     class:group-hover:!bg-slate-100={!isDisabled}
+							     class:group-hover:!text-primary-main={!isDisabled}
+							     class:group-hover:dark:bg-slate-700={!isDisabled}>
+								{#if ddAction.alternateFAProps}
+									<Icon {...ddAction.alternateFAProps}
+									      class='inline-block mx-1'
+									      fw/>
+								{/if}
+								{ddAction.alternateTitle ?? ''}
+							</div>
+						{/if}
+					</div>
+				{/if}
+			{/each}
+		</svelte:fragment>
+	</DropDownControl>
+{/if}

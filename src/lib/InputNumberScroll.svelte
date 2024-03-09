@@ -6,7 +6,9 @@
 		CountDecimalDigits,
 		GreaterNumber,
 		IsOn,
-		LeastNumber
+		LeastNumber,
+		ToDigitsMax,
+		ToPercent
 	} from '@solidbasisventures/intelliwaketsfoundation'
 	import {createEventDispatcher, tick} from 'svelte'
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
@@ -25,6 +27,14 @@
 	export let saveManualEntryMode: string | null = null
 	export let readonly = false
 	export let manualEntryMode = browser && allowManualEntryMode && saveManualEntryMode && IsOn(window.localStorage.getItem(saveManualEntryMode))
+	/**
+	 * Maximum number of digits allowed for manual entry.
+	 *
+	 * @type {number | null}
+	 */
+	export let maxManualEntryDigits: number | null = null
+	export let displayPercent = false
+	export let center = false
 
 	let inputEL: HTMLInputElement
 
@@ -37,9 +47,9 @@
 
 	$: if (!!saveManualEntryMode && allowManualEntryMode && browser) (manualEntryMode ? window.localStorage.setItem(saveManualEntryMode, 'true') : window.localStorage.removeItem(saveManualEntryMode))
 
-	function setValue(numb: number | null) {
+	function setValue(numb: number | null, doNotNull: boolean) {
 		if (!readonly) {
-			if (value == CleanNumberNull(numb, viewMaxDigits)) {
+			if (!doNotNull && value == CleanNumberNull(numb, viewMaxDigits)) {
 				value = offValue
 			} else {
 				value = CleanNumberNull(numb, viewMaxDigits)
@@ -60,9 +70,9 @@
 		if (!readonly) {
 			const valueString = CleanNumber(value, 0).toString()
 			if (numb === null) {
-				setValue(CleanNumberNull(valueString.substring(0, valueString.length - 1)))
+				setValue(CleanNumberNull(valueString.substring(0, valueString.length - 1)), false)
 			} else {
-				setValue(CleanNumberNull(`${valueString}${numb}`))
+				setValue(CleanNumberNull(!maxManualEntryDigits ? `${valueString}${numb}` : `${valueString}${numb}`.slice(maxManualEntryDigits * -1)), true)
 			}
 		}
 	}
@@ -75,18 +85,20 @@
 <div class='grid grid-rows-1 overflow-y-auto'>
 	{#if readonly}
 		<h1 class='text-center p-4'>
-			<DisplayFraction value={value}
-			                 {maxDigitsDisplay}/>
+			{#if displayPercent}
+				{ToPercent(value, 0)}
+			{:else}
+				<DisplayFraction value={value}
+				                 {maxDigitsDisplay}/>
+			{/if}
 		</h1>
 	{:else}
 		<div>
-			{#if manualEntryMode}
+			{#if manualEntryMode && allowManualEntryMode}
 				<div class='grid grid-cols-3 p-2 gap-1 mx-auto max-w-[15em]'>
-					<input type='number'
-					       bind:value={typedValue}
-					       {readonly}
-					       step={1}
-					       class='col-span-3 !bg-white !border-secondary-main !text-secondary-main text-[2rem] !rounded-full !text-center'/>
+					<div class='col-span-3 bg-white border-2 border-secondary-main text-secondary-main text-[2rem] rounded-full text-center'>
+						{ToDigitsMax(typedValue, maxDigitsDisplay)}
+					</div>
 					{#each ArrayRange(9, 1) as numberValue (numberValue)}
 						<button type='button'
 						        class='btnClean aspect-square bg-secondary-main text-white border-white border-2 !shadow-none !drop-shadow-none !rounded-full'
@@ -107,13 +119,22 @@
 					</button>
 				</div>
 			{:else}
-				<div class='grid grid-cols-[repeat(auto-fill,minmax(2.25em,1fr))] lg:grid-cols-[repeat(auto-fill,minmax(3em,1fr))] p-2 gap-1'>
+				<div class='p-2 gap-1 flex flex-row flex-wrap'
+				     class:justify-center={center}
+				     class:[&_button]:w-[2.25em]={quickArray.length > 10}
+				     class:lg:[&_button]:w-[3em]={quickArray.length > 10}
+				     class:[&_button]:w-[3em]={quickArray.length <= 10}
+				     class:lg:[&_button]:w-[4em]={quickArray.length <= 10}>
 					{#if !valueExistsInQuickArray && !!value}
 						<button type='button'
 						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
-						        on:click={() => setValue(null)}>
-							<DisplayFraction value={value}
-							                 {maxDigitsDisplay}/>
+						        on:click={() => setValue(null, false)}>
+							{#if displayPercent}
+								{ToPercent(value, 0)}
+							{:else}
+								<DisplayFraction value={value}
+								                 {maxDigitsDisplay}/>
+							{/if}
 						</button>
 					{/if}
 					{#each quickArray as numberValue (numberValue)}
@@ -122,9 +143,13 @@
 						        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
 						        class:!text-white={isSelected}
 						        class:!bg-secondary-main={isSelected}
-						        on:click={() => setValue(numberValue)}>
-							<DisplayFraction value={numberValue}
-							                 {maxDigitsDisplay}/>
+						        on:click={() => setValue(numberValue, false)}>
+							{#if displayPercent}
+								{ToPercent(numberValue, 0)}
+							{:else}
+								<DisplayFraction value={numberValue}
+								                 {maxDigitsDisplay}/>
+							{/if}
 						</button>
 					{/each}
 				</div>
