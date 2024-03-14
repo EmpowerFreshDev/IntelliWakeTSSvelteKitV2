@@ -35,6 +35,9 @@
 	export let maxManualEntryDigits: number | null = null
 	export let displayPercent = false
 	export let center = false
+	export let buttonClassOff = ''
+	export let buttonClassOn = ''
+	export let displayQualifier = ''
 
 	let inputEL: HTMLInputElement
 
@@ -86,10 +89,10 @@
 	{#if readonly}
 		<h1 class='text-center p-4'>
 			{#if displayPercent}
-				{ToPercent(value, 0)}
+				{ToPercent(value, 0)} {displayQualifier}
 			{:else}
 				<DisplayFraction value={value}
-				                 {maxDigitsDisplay}/>
+				                 {maxDigitsDisplay}/> {displayQualifier}
 			{/if}
 		</h1>
 	{:else}
@@ -127,7 +130,7 @@
 				     class:lg:[&_button]:w-[4em]={quickArray.length <= 10}>
 					{#if !valueExistsInQuickArray && !!value}
 						<button type='button'
-						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
+						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
 						        on:click={() => setValue(null, false)}>
 							{#if displayPercent}
 								{ToPercent(value, 0)}
@@ -140,9 +143,11 @@
 					{#each quickArray as numberValue (numberValue)}
 						{@const isSelected = numberValue === CleanNumberNull(value)}
 						<button type='button'
-						        class='btnClean aspect-square bg-white text-secondary-main border-secondary-main border-2 !shadow-none !drop-shadow-none !rounded-full max-lg:text-sm'
-						        class:!text-white={isSelected}
-						        class:!bg-secondary-main={isSelected}
+						        class='btnClean aspect-square border-secondary-main border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {isSelected ? buttonClassOn : buttonClassOff}'
+						        class:bg-white={!isSelected}
+						        class:text-secondary-main={!isSelected}
+						        class:text-white={isSelected}
+						        class:bg-secondary-main={isSelected}
 						        on:click={() => setValue(numberValue, false)}>
 							{#if displayPercent}
 								{ToPercent(numberValue, 0)}

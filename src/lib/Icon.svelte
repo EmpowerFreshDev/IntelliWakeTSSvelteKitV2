@@ -10,6 +10,8 @@
 
 	export let icon: IconDefinition | null | undefined = undefined
 
+	export let title: string | undefined = undefined
+
 	export let size = ''
 	export let color = ''
 
@@ -160,6 +162,9 @@
 		role='img'
 		xmlns='http://www.w3.org/2000/svg'
 	>
+		{#if title}
+			<title>{title}</title>
+		{/if}
 		<g
 			transform='translate({i[0] / 2} {i[1] / 2})'
 			transform-origin='{i[0] / 4} 0'
