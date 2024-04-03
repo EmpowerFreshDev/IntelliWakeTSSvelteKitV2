@@ -23,6 +23,7 @@ import ModalFormAction from './ModalFormAction.svelte'
 import MultiSelect from './MultiSelect.svelte'
 import Popover from './Popover.svelte'
 import Search from './Search.svelte'
+import SelectTimezone from './SelectTimezone.svelte'
 import SlideDown from './SlideDown.svelte'
 import Switch from './Switch.svelte'
 import SwitchOld from './SwitchOld.svelte'
@@ -68,6 +69,7 @@ export {ModalFormAction}
 export {MultiSelect}
 export {Popover}
 export {Search}
+export {SelectTimezone}
 export {SlideDown}
 export {Switch}
 export {SwitchOld}

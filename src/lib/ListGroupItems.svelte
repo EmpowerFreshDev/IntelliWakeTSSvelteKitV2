@@ -98,7 +98,8 @@
 <ul class='listGroup'
     class:px-2={rounded}
     class:ml-4={!!indentLevel}
-    class:max-sm:text-xl={true}>
+    class:max-sm:text-xl={true}
+		class:pb-4={rounded}>
 	{#if !subItems?.length && (!!emptyListMessage || !!$$slots?.empty)}
 		<li class='block w-full select-none text-slate-500 italic p-1 text-sm'>
 			<DisplayHTML noLinkReplace
@@ -108,11 +109,13 @@
 	{:else}
 		{#each subItems as listItem, idx (getKey(listItem))}
 			{#if listItem?.section && listItem.section !== subItems[idx - 1]?.section}
-				<li class='block w-full select-none bg-primary-main text-white opacity-80 hover:opacity-70 font-bold p-1 cursor-pointer'
-				    class:mb-2={rounded}
+				<li class='block w-full select-none opacity-80 hover:opacity-70 font-bold p-1 cursor-pointer'
+				    class:mt-4={rounded}
 				    class:overflow-x-hidden={wrapText || ellipses}
 				    class:whitespace-nowrap={!wrapText}
 				    class:mt-1={idx > 0}
+				    class:bg-primary-main={!rounded}
+				    class:text-white={!rounded}
 				    title={listItem.hover_title}
 				    role='menuitem'
 				    tabindex={0}
@@ -124,7 +127,10 @@
 			{/if}
 
 			{#if !listItem?.section || !(collapsedSections ?? []).some(sect => sect === listItem.section)}
-				<li class={`w-full select-none listGroupItem ${listItem.itemClass ?? ''}`}
+				{@const closedRounded = rounded && !listItem.disabled && !listItem.isOpen}
+				{@const openRounded = rounded && !listItem.disabled && listItem.isOpen}
+
+				<li class={`w-full select-none ${listItem.itemClass ?? ''}`}
 				    class:overflow-x-hidden={wrapText || ellipses}
 				    class:cursor-pointer={!listItem.disabled}
 				    class:border-b={!useSubsExist}
@@ -136,10 +142,25 @@
 				    class:line-through={!!listItem.strikeThrough}
 				    class:selected={listItem.isOpen}
 				    class:disabled={listItem.disabled}
+
+				    class:text-white={!rounded && !listItem.disabled && listItem.isOpen}
+				    class:hover:text-white={!rounded && !listItem.disabled}
+				    class:bg-primary-main={!rounded && !listItem.disabled && listItem.isOpen}
+				    class:hover:bg-primary-main={!rounded && !listItem.disabled && !listItem.isOpen}
+				    class:hover:bg-primary-hover={!rounded && !listItem.disabled && listItem.isOpen}
+
+				    class:text-black={openRounded}
+				    class:hover:text-black={closedRounded}
+				    class:bg-gray-300={openRounded}
+				    class:hover:bg-gray-300={closedRounded}
+				    class:hover:bg-gray-400={openRounded}
+				    class:transition-all={rounded}
+
+				    class:roundedListGroupItem={rounded}
 				    class:p-0={rounded}
 				    class:border-none={rounded}
-				    class:rounded-md={rounded}
-				    class:hover:bg-grey-300={rounded}
+				    class:rounded-lg={rounded}
+
 				    title={listItem.hover_title}
 				    role='menuitem'
 				    tabindex={listItem.pathFromItem && !listItem.linkClick ? -1 : 0}
@@ -174,7 +195,8 @@
 							<div
 								class='inline-block relative'
 								class:w-7={(!!listItem.faProps || !!listItem.icon) && !listItem.bigIcon}
-								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}>
+								class:w-10={(!!listItem.faProps || !!listItem.icon) && listItem.bigIcon}
+							  class:row-span-2={listItem.bigIcon}>
 								{#if !!listItem.faProps}
 									<Icon fw
 									      class={`mr-2 inline-block ${!listItem.bigIcon ? '' : 'ml-2'}`}
@@ -194,7 +216,7 @@
 							     title={!ellipses ? undefined : listItem.title}>
 								<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
 								             value={listItem.title}/>
-								{#if listItem.sub_title}
+								{#if listItem.sub_title && !rounded}
 									<div class='text-sm font-thin'>
 										<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
 										             value={listItem.sub_title}/>
@@ -203,11 +225,18 @@
 							</div>
 							<div class='inline-block'>
 								{#if listItem.badgeValue !== undefined && listItem.badgeValue !== null}
-									<div class='inline-block px-1 rounded-full ml-2 text-sm py-0 mt-1 min-w-[1em] leading-tight {listItem.badgeClass ?? ""}'
-									     class:bg-primary-main={!listItem.isOpen}
-									     class:text-white={!listItem.isOpen}
-									     class:bg-white={listItem.isOpen}
-									     class:text-black={listItem.isOpen}
+									<div class='px-1 rounded-full ml-2 text-sm py-0 min-w-[1em] leading-tight {listItem.badgeClass ?? ""}'
+									     class:bg-primary-main={!listItem.isOpen && !rounded}
+									     class:text-white={!listItem.isOpen && !rounded}
+									     class:bg-white={listItem.isOpen && !rounded}
+									     class:text-black={listItem.isOpen && !rounded}
+									     class:inline-block={!rounded}
+									     class:mt-1={!rounded}
+									     class:my-0.5={rounded}
+									     class:px-2={rounded}
+									     class:h-5={rounded}
+									     class:leading-4={rounded}
+									     class:py-0.5={rounded}
 									     style={listItem.isOpen ? listItem.badgeColor ? `color: ${listItem.badgeColor}` : undefined : listItem.badgeColor ? `background-color: ${listItem.badgeColor}` : undefined}>
 										{listItem.badgeValue}
 									</div>
@@ -215,6 +244,16 @@
 								{#if listItem.rightText !== undefined && listItem.rightText !== null}
 									<div class='inline-block float-right px-1 ml-2 py-0 mt-0.5 min-w-[1em] leading-tight'>
 										{listItem.rightText}
+									</div>
+								{/if}
+							</div>
+
+							<!-- row 2 -->
+							<div class:col-span-3={!listItem.bigIcon} class:col-span-2={listItem.bigIcon}>
+								{#if listItem.sub_title && rounded}
+									<div class='text-sm font-light text-gray-700 text-justify mt-0.5'>
+										<DisplayHTML noLinkReplace={listItem.noLinkReplace ?? noLinkReplace}
+										             value={listItem.sub_title}/>
 									</div>
 								{/if}
 							</div>
