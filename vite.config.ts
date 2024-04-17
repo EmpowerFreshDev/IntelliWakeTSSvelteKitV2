@@ -11,12 +11,14 @@ export default defineConfig({
 		port: 5183,
 		https: true,
 		host: '0.0.0.0',
-		strictPort: false
+		strictPort: false,
+		proxy: {}
 	},
 	preview: {
 		port: 5282,
 		https: true,
 		host: '0.0.0.0',
-		strictPort: false
+		strictPort: false,
+		proxy: {}
 	}
 });
