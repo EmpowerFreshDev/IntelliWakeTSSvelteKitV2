@@ -3,8 +3,10 @@
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import Switch from '$lib/Switch.svelte'
 	import ButtonGroup from '$lib/ButtonGroup.svelte'
+	import {CleanNumberNull} from '@solidbasisventures/intelliwaketsfoundation'
 
 	let value = 1.25
+	let valueHighlight = 30
 
 	let readonly = false
 </script>
@@ -21,8 +23,11 @@
 		        on:click={() => value++}>
 			+1
 		</button>
+		<input type='number'
+		       bind:value={valueHighlight}/>
 	</div>
 	<InputNumberScroll bind:value
+	                   valueHighlight={CleanNumberNull(valueHighlight) === null ? undefined : valueHighlight}
 	                   lowerRange={0}
 	                   upperRange={20}
 	                   increment={1/3}

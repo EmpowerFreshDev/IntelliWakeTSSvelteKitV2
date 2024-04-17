@@ -5,8 +5,10 @@
 		CleanNumberNull,
 		CountDecimalDigits,
 		GreaterNumber,
+		isNullUndefined,
 		IsOn,
 		LeastNumber,
+		ToDigits,
 		ToDigitsMax,
 		ToPercent
 	} from '@solidbasisventures/intelliwaketsfoundation'
@@ -17,6 +19,7 @@
 	import {faBackspace} from '@fortawesome/free-solid-svg-icons'
 
 	export let value: number | null | undefined
+	export let valueHighlight: number | undefined = undefined
 	export let lowerRange = 0
 	export let increment = 1
 	export let upperRange = 50
@@ -82,12 +85,14 @@
 
 	$: quickArray = ArrayRange(upperRange + increment, increment, lowerRange).map(ar => CleanNumberNull(ar, GreaterNumber(maxDigitsDisplay, 2)))
 	$: valueExistsInQuickArray = quickArray.some(qa => qa == CleanNumberNull(value, GreaterNumber(maxDigitsDisplay, 2)))
+	$: valueHighlightExistsInQuickArray = valueHighlight !== undefined && quickArray.some(qa => qa == CleanNumberNull(valueHighlight, GreaterNumber(maxDigitsDisplay, 2)))
 
 </script>
 
 <div class='grid grid-rows-1 overflow-y-auto'>
 	{#if readonly}
-		<h1 class='text-center p-4'>
+		<h1 class='text-center p-4'
+		    class:text-primary-main={value == valueHighlight}>
 			{#if displayPercent}
 				{ToPercent(value, 0)} {displayQualifier}
 			{:else}
@@ -102,6 +107,14 @@
 					<div class='col-span-3 bg-white border-2 border-secondary-main text-secondary-main text-[2rem] rounded-full text-center'>
 						{ToDigitsMax(typedValue, maxDigitsDisplay)}
 					</div>
+					{#if valueHighlight !== undefined}
+						<button type='button'
+						        class='btnClean col-span-3 border-primary-main text-primary-main text-[1.5rem] font-bold border-2 !shadow-none !drop-shadow-none !rounded-full'
+						        class:opacity-25={valueHighlight == value}
+						        on:click={() => setValue(valueHighlight ?? 0, true)}>
+							{ToDigits(valueHighlight)}
+						</button>
+					{/if}
 					{#each ArrayRange(9, 1) as numberValue (numberValue)}
 						<button type='button'
 						        class='btnClean aspect-square bg-secondary-main text-white border-white border-2 !shadow-none !drop-shadow-none !rounded-full'
@@ -110,7 +123,7 @@
 						</button>
 					{/each}
 					<button type='button'
-					        class='btnClean aspect-[2] bg-secondary-main text-white border-white border-2 !shadow-none !drop-shadow-none !rounded-full col-span-2'
+					        class='btnClean col-span-2 aspect-[2] bg-secondary-main text-white border-white border-2 !shadow-none !drop-shadow-none !rounded-full'
 					        on:click={() => typeValue(0)}>
 						0
 					</button>
@@ -128,9 +141,29 @@
 				     class:lg:[&_button]:w-[3em]={quickArray.length > 10}
 				     class:[&_button]:w-[3em]={quickArray.length <= 10}
 				     class:lg:[&_button]:w-[4em]={quickArray.length <= 10}>
-					{#if !valueExistsInQuickArray && !!value}
+					{#if !valueHighlightExistsInQuickArray && valueHighlight !== value && CleanNumberNull(valueHighlight) !== null}
 						<button type='button'
-						        class='btnClean aspect-square bg-secondary-main text-white border-secondary-main border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
+						        class='btnClean aspect-square border-2 border-primary-main shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
+						        class:bg-white={valueHighlight != value}
+						        class:text-primary-main={valueHighlight != value}
+						        class:text-white={valueHighlight == value}
+						        class:bg-primary-main={valueHighlight == value}
+						        on:click={() => setValue((valueHighlight == value ? null : valueHighlight) ?? null, false)}>
+							{#if displayPercent}
+								{ToPercent(valueHighlight, 0)}
+							{:else}
+								<DisplayFraction value={valueHighlight}
+								                 {maxDigitsDisplay}/>
+							{/if}
+						</button>
+					{/if}
+					{#if !valueExistsInQuickArray && !isNullUndefined(value)}
+						<button type='button'
+						        class='btnClean aspect-square text-white border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
+						        class:border-secondary-main={value != valueHighlight}
+						        class:bg-secondary-main={value != valueHighlight}
+						        class:border-primary-main={value == valueHighlight}
+						        class:bg-primary-main={value == valueHighlight}
 						        on:click={() => setValue(null, false)}>
 							{#if displayPercent}
 								{ToPercent(value, 0)}
@@ -143,11 +176,15 @@
 					{#each quickArray as numberValue (numberValue)}
 						{@const isSelected = numberValue === CleanNumberNull(value)}
 						<button type='button'
-						        class='btnClean aspect-square border-secondary-main border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {isSelected ? buttonClassOn : buttonClassOff}'
+						        class='btnClean aspect-square border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {isSelected ? buttonClassOn : buttonClassOff}'
+						        class:border-secondary-main={numberValue != valueHighlight}
+						        class:border-primary-main={numberValue == valueHighlight}
 						        class:bg-white={!isSelected}
-						        class:text-secondary-main={!isSelected}
+						        class:text-secondary-main={!isSelected && numberValue != valueHighlight}
+						        class:text-primary-main={!isSelected && numberValue == valueHighlight}
 						        class:text-white={isSelected}
-						        class:bg-secondary-main={isSelected}
+						        class:bg-secondary-main={isSelected && numberValue != valueHighlight}
+						        class:bg-primary-main={isSelected && numberValue == valueHighlight}
 						        on:click={() => setValue(numberValue, false)}>
 							{#if displayPercent}
 								{ToPercent(numberValue, 0)}
