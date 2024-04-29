@@ -13,7 +13,7 @@ importers:
         version: 6.5.1
       '@solidbasisventures/intelliwaketsfoundation':
         specifier: ^5.12.24
-        version: 5.12.24
+        version: 5.12.26
       '@sveltejs/kit':
         specifier: ^2.5.6
         version: 2.5.6(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.9))(svelte@4.2.15)(vite@5.2.9)
@@ -467,8 +467,8 @@ packages:
   '@sinclair/typebox@0.27.8':
     resolution: {integrity: sha512-+Fj43pSMwJs4KRrH/938Uf+uAELIgVBmQzg/q1YG10djyfA3TnrU8N8XzqCh/okZdszqBQTZf96idMfE5lnwTA==}
 
-  '@solidbasisventures/intelliwaketsfoundation@5.12.24':
-    resolution: {integrity: sha512-cr4aINMnxf/kwvAYehvn8a6TcC7ZYxYIMh5cCebAfON0SHqk46JrSVf/mFTCLvWuFbw2ugyeO+XkXwwgCr4KgQ==}
+  '@solidbasisventures/intelliwaketsfoundation@5.12.26':
+    resolution: {integrity: sha512-IDoE3MFV7PUmdSW6uSauWEITHJtpdOOt7z6ZwM9hjRJkoOleHcqTUR7ipGKBwQOI94fVUlK2o7NKp/f3/oGliQ==}
 
   '@sveltejs/adapter-auto@3.2.0':
     resolution: {integrity: sha512-She5nKT47kwHE18v9NMe6pbJcvULr82u0V3yZ0ej3n1laWKGgkgdEABE9/ak5iDPs93LqsBkuIo51kkwCLBjJA==}
@@ -2193,7 +2193,7 @@ snapshots:
 
   '@sinclair/typebox@0.27.8': {}
 
-  '@solidbasisventures/intelliwaketsfoundation@5.12.24': {}
+  '@solidbasisventures/intelliwaketsfoundation@5.12.26': {}
 
   '@sveltejs/adapter-auto@3.2.0(@sveltejs/kit@2.5.6(@sveltejs/vite-plugin-svelte@3.1.0(svelte@4.2.15)(vite@5.2.9))(svelte@4.2.15)(vite@5.2.9))':
     dependencies:
