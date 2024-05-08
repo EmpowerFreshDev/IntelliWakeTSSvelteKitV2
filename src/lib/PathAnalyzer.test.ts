@@ -316,3 +316,16 @@ it('Deconstructs to TAB path', () => {
 
 	expect(pathAnalyer.backPath).toBe('/Settings/Customers/Customer1/TabTest')
 })
+
+it('Deconstructs Query paths', () => {
+	const pathAnalyer = new PathAnalyzer({
+		params: {
+			crumbs: ''
+		},
+		url: {
+			pathname: '/Master/Detail?id=1'
+		}
+	} as any, 'Master')
+	expect(pathAnalyer.isOpen('Detail?id=1')).toBe(true)
+	// expect(pathAnalyer.isOpen('Page/Sub1/Another1')).toBe(false)
+})
