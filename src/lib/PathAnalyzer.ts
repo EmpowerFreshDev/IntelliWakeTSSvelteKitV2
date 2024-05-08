@@ -47,7 +47,7 @@ export class PathAnalyzer {
 			}
 		}
 
-		if (this.base)  {
+		if (this.base) {
 			while (returnComponents.length && [...returnComponents].slice(1).includes(this.base)) {
 				returnComponents.shift()
 			}
@@ -137,7 +137,7 @@ export class PathAnalyzer {
 		}
 
 		while (components[components.length - 1]?.toLowerCase().startsWith('tab')) {
-			components = components.slice(0, components.length -2)
+			components = components.slice(0, components.length - 2)
 		}
 
 		return BuildPath('/', ...components)
@@ -211,7 +211,8 @@ export class PathAnalyzer {
 	}
 
 	isOpen(path: string | null) {
-		return (path ?? '') === (this.activePageSlugs ?? '') || (!!path && ((this.activePageSlugs ?? '').startsWith(path + '/') || (this.activePageSlugs ?? '').endsWith(path)))
+		return (path ?? '') === (this.activePageSlugs ?? '') || (!!path && ((this.activePageSlugs ?? '').startsWith(path + '/') || (this.activePageSlugs ?? '').endsWith(path))) ||
+			(this.page.url.search && (path ?? '') === ((this.activePageSlugs ?? '') + this.page.url.search) || (!!path && (((this.activePageSlugs ?? '') + this.page.url.search).startsWith(path + '/') || ((this.activePageSlugs ?? '') + this.page.url.search).endsWith(path))))
 	}
 
 	open(path: string, closeIfOpen = true) {

@@ -323,7 +323,8 @@ it('Deconstructs Query paths', () => {
 			crumbs: ''
 		},
 		url: {
-			pathname: '/Master/Detail?id=1'
+			pathname: '/Master/Detail',
+			search: '?id=1'
 		}
 	} as any, 'Master')
 	expect(pathAnalyer.isOpen('Detail?id=1')).toBe(true)
