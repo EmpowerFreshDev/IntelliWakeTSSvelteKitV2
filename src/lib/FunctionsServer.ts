@@ -13,11 +13,11 @@ import {FormDataFromObject, ObjectFromFormData} from '@solidbasisventures/intell
  * @throws Will throw an error if the network request fails.
  */
 export async function RequestFormData(request: Request): Promise<FormData> {
-	// try {
+	try {
 		return await request.formData()
-	// } catch (err) {
-	// 	return FormDataFromObject(await request.json())
-	// }
+	} catch (err) {
+		return FormDataFromObject(await request.json())
+	}
 }
 
 /**
@@ -34,9 +34,9 @@ export async function RequestFormData(request: Request): Promise<FormData> {
  * @template T - The type of object to be returned. It defaults to any.
  */
 export async function RequestObject<T = any>(request: Request): Promise<T> {
-	// try {
+	try {
 		return ObjectFromFormData<any>(await request.formData())
-	// } catch (err) {
-	// 	return await request.json()
-	// }
+	} catch (err) {
+		return await request.json()
+	}
 }
