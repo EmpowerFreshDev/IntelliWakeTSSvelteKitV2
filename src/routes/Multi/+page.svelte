@@ -28,6 +28,20 @@
 	let selectedIDs: (number | string)[] = []
 
 	$: console.log(selectedIDs)
+
+	async function callSend() {
+		const formData = new FormData()
+		formData.append('test', '1')
+
+		return fetch('Multi?/send', {
+			method: 'POST',
+			headers: {
+				'x-sveltekit-action': 'true',
+				'content-type': 'application/x-www-form-urlencoded;charset=UTF-8' //: 'application/json;charset=UTF-8'
+			},
+			body: formData
+		})
+	}
 </script>
 
 <div>
@@ -35,6 +49,11 @@
 		<div class='w-[40em]'>
 			<input/>
 		</div>
+	</div>
+	<div>
+	<button on:click={callSend}>
+		Fetch Send
+	</button>
 	</div>
 	<form class='text-center mt-5 grid grid-rows-2'
 	      method='POST'
