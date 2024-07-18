@@ -42,7 +42,8 @@
 	let sort = (!rememberKey || !browser) ? null : window.localStorage.getItem(rememberKey + 'Sort') ?? defaultSort
 	$: !!rememberKey && browser && (!sort ? window.localStorage.removeItem(rememberKey + 'Sort') : window.localStorage.setItem(rememberKey + 'Sort', sort))
 
-	let internalSelectedIDs: number[] = (!rememberKey || !browser) ? [] : JSONParse<number[]>(window.localStorage.getItem(`${rememberKey}SelectedIDs`)) ?? []
+	let internalSelectedIDs: number[] = ((!rememberKey || !browser) ? selectedIDs : JSONParse<number[]>(window.localStorage.getItem(`${rememberKey}SelectedIDs`))) ?? []
+	$: internalSelectedIDs = ((!rememberKey || !browser) ? selectedIDs : JSONParse<number[]>(window.localStorage.getItem(`${rememberKey}SelectedIDs`))) ?? []
 	$: !!rememberKey && browser && window.localStorage.setItem(`${rememberKey}SelectedIDs`, JSON.stringify(internalSelectedIDs))
 
 	let rowsChecked = 0
