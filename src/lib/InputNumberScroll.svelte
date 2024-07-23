@@ -40,6 +40,8 @@
 	export let center = false
 	export let buttonClassOff = ''
 	export let buttonClassOn = ''
+	export let buttonClassHighlightOn = ''
+	export let buttonClassHighlightOff = ''
 	export let displayQualifier = ''
 
 	let inputEL: HTMLInputElement
@@ -109,7 +111,7 @@
 					</div>
 					{#if valueHighlight !== undefined}
 						<button type='button'
-						        class='btnClean col-span-3 border-primary-main text-primary-main text-[1.5rem] font-bold border-2 !shadow-none !drop-shadow-none !rounded-full'
+						        class='btnClean col-span-3 border-primary-main text-primary-main text-[1.5rem] font-bold border-2 !shadow-none !drop-shadow-none !rounded-full {valueHighlight == value ? buttonClassHighlightOn : buttonClassHighlightOff}'
 						        class:opacity-25={valueHighlight == value}
 						        on:click={() => setValue(valueHighlight ?? 0, true)}>
 							{ToDigits(valueHighlight)}
@@ -143,7 +145,7 @@
 				     class:lg:[&_button]:w-[4em]={quickArray.length <= 10}>
 					{#if !valueHighlightExistsInQuickArray && valueHighlight !== value && CleanNumberNull(valueHighlight) !== null}
 						<button type='button'
-						        class='btnClean aspect-square border-2 border-primary-main shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
+						        class='btnClean aspect-square border-2 border-primary-main shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}  {valueHighlight == value ? buttonClassHighlightOn : buttonClassHighlightOff}'
 						        class:bg-white={valueHighlight != value}
 						        class:text-primary-main={valueHighlight != value}
 						        class:text-white={valueHighlight == value}
@@ -159,7 +161,7 @@
 					{/if}
 					{#if !valueExistsInQuickArray && !isNullUndefined(value)}
 						<button type='button'
-						        class='btnClean aspect-square text-white border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}'
+						        class='btnClean aspect-square text-white border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {buttonClassOn}  {valueHighlight == value ? buttonClassHighlightOn : buttonClassHighlightOff}'
 						        class:border-secondary-main={value != valueHighlight}
 						        class:bg-secondary-main={value != valueHighlight}
 						        class:border-primary-main={value == valueHighlight}
@@ -176,7 +178,7 @@
 					{#each quickArray as numberValue (numberValue)}
 						{@const isSelected = numberValue === CleanNumberNull(value)}
 						<button type='button'
-						        class='btnClean aspect-square border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {isSelected ? buttonClassOn : buttonClassOff}'
+						        class='btnClean aspect-square border-2 shadow-none drop-shadow-none rounded-full max-lg:text-sm {isSelected ? buttonClassOn : buttonClassOff} {valueHighlight == numberValue ? isSelected ? buttonClassHighlightOn : buttonClassHighlightOff : ""}'
 						        class:border-secondary-main={numberValue != valueHighlight}
 						        class:border-primary-main={numberValue == valueHighlight}
 						        class:bg-white={!isSelected}

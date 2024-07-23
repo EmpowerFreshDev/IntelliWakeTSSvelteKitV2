@@ -32,6 +32,7 @@
 	                   upperRange={20}
 	                   increment={1/3}
 	                   saveManualEntryMode='TestMEM'
+	                   buttonClassHighlightOff='font-bold border-4'
 	                   {readonly}/>
 	<div>
 		<DisplayFraction {value}/>
