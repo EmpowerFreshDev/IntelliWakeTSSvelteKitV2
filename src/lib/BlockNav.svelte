@@ -10,14 +10,18 @@
 	export let id = RandomString(24)
 	export let forceNav = false
 
-	const setDirtyState = (isWhen: boolean, isID: string) => {
-		StoreDirtyTrack.update(prevState => ({
-			...prevState,
-			dirtyIDs: isWhen ? [...prevState.dirtyIDs.filter(dID => dID !== isID), isID] : prevState.dirtyIDs.filter(dID => dID !== isID)
-		}))
+	const setDirtyState = (isWhen: boolean, isID: string, pendingRequest: string | null) => {
+		if (!isWhen && !!pendingRequest) {
+			doLeave()
+		} else {
+			StoreDirtyTrack.update(prevState => ({
+				...prevState,
+				dirtyIDs: isWhen ? [...prevState.dirtyIDs.filter(dID => dID !== isID), isID] : prevState.dirtyIDs.filter(dID => dID !== isID)
+			}))
+		}
 	}
 
-	$: setDirtyState(when, id)
+	$: setDirtyState(when, id, $StoreDirtyTrack.pendingRequest)
 
 	beforeNavigate(({to, cancel}) => {
 		if (when && !forceNav) {
