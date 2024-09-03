@@ -31,6 +31,10 @@
 	export let classButton = ''
 	export let borderFooter = true
 
+	export let onOK: () => void = () => {}
+	export let onCancel: () => void = () => {}
+	export let onClose: () => void = () => {}
+
 	const dispatch = createEventDispatcher()
 
 	let okButtonElement: HTMLButtonElement
@@ -38,8 +42,10 @@
 	const okAction = async () => {
 		if (show !== noShowValue && !okDisabled && !disable) {
 			dispatch('ok')
+			onOK()
 			if (!noCloseOnOK) {
 				dispatch('close')
+				onClose()
 				await tick()
 				show = noShowValue
 			}
@@ -50,6 +56,8 @@
 		if (show !== noShowValue && !disable) {
 			dispatch('cancel')
 			dispatch('close')
+			onCancel()
+			onClose()
 			await tick()
 			show = noShowValue
 		}

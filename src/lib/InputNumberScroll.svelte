@@ -43,6 +43,7 @@
 	export let buttonClassHighlightOn = ''
 	export let buttonClassHighlightOff = ''
 	export let displayQualifier = ''
+	export let onChange: (val: number | null) => void = () => {}
 
 	let inputEL: HTMLInputElement
 
@@ -69,6 +70,7 @@
 						inputEL?.dispatchEvent(new Event('change', {bubbles: true}))
 					} else {
 						dispatch('change', value)
+						onChange(value)
 					}
 				})
 		}

@@ -23,6 +23,8 @@
 	export let classHeader = ''
 	export let classButton = ''
 	export let borderFooter = true
+	export let onCancel: () => void = () => {}
+	export let onClose: () => void = () => {}
 
 	const dispatch = createEventDispatcher()
 
@@ -31,6 +33,8 @@
 			await tick()
 			dispatch('cancel')
 			dispatch('close')
+			onCancel()
+			onClose()
 			show = noShowValue
 		}
 	}
@@ -47,6 +51,7 @@
 		onSuccess: async () => {
 			await tick()
 			dispatch('close')
+			onClose()
 			show = noShowValue
 		}
 	} : {
@@ -66,6 +71,7 @@
 
 			if (!noCloseOnOK) {
 				dispatch('close')
+				onClose()
 				show = noShowValue
 			}
 		}

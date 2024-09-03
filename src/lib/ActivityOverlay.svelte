@@ -7,6 +7,7 @@
 	export let size = '3em'
 	export let position: 'fixed' | 'absolute' = 'absolute'
 	export let zIndex = 30
+	export let onManualClose: () => void = () => {}
 
 	const dispatch = createEventDispatcher()
 
@@ -22,6 +23,7 @@
 		if (show && allowCancelAfterSeconds !== null && DateCompare(lastShow, 'IsBefore', DateParseTS('now', {seconds: allowCancelAfterSeconds * -1}))) {
 			show = false
 			dispatch('ManualClose')
+			onManualClose()
 		}
 	}
 </script>

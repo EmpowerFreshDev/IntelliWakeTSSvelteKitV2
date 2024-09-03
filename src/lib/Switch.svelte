@@ -15,6 +15,7 @@
 	export let displayCheckInverse = false
 	let clazz = ''
 	export {clazz as class}
+	export let onCheck: (val: boolean) => void = () => {}
 
 	const dispatch = createEventDispatcher()
 
@@ -41,6 +42,7 @@
 				checked = checkValue
 				await tick()
 				dispatch('check', checkValue)
+				onCheck(checkValue)
 				inputControl.dispatchEvent(new Event('change', {bubbles: true, cancelable: true}))
 				inputControl.dispatchEvent(new Event('input', {bubbles: true, cancelable: true}))
 			}

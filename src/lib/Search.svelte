@@ -10,6 +10,7 @@
 	export let placeholder = 'Search'
 	export let bordered = false
 	export let element: HTMLInputElement | undefined = undefined
+	export let onChange: (val: string) => void = () => {}
 
 	const dispatch = createEventDispatcher()
 
@@ -31,6 +32,7 @@
 			if (value !== nextValue) {
 				value = nextValue ?? ''
 				dispatch('change', value)
+				onChange(value)
 			}
 		}, delay)
 	}
