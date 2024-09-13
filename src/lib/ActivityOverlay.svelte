@@ -31,6 +31,8 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class='inset-0 items-center justify-center backdrop-blur-[1px]'
      class:flex={show}
+		 role="button"
+		 tabindex={0}
      style='position: {position}; z-index: {zIndex};'
      class:hidden={!show}
      class:pointer-events-none={!show}
