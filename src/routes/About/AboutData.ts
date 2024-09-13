@@ -1,10 +1,37 @@
 import type {TAbout} from '$lib/AboutData'
+import { DateOnly } from '@solidbasisventures/intelliwaketsfoundation';
 
 export const abouts: TAbout[] = [
 	{
-		version: 1,
-		title: 'Initial Deployment',
+		version: 2,
+		title: 'Next Deployment',
 		minors: [
+			{
+				minor: 3,
+				title: 'Yet Another Deployment',
+				date: DateOnly('now'),
+				hidden: () => false,
+				bullets: [
+					{
+						'Yet Another Deployment': [
+							'Yet another deployment'
+						]
+					}
+				]
+			},
+			{
+				minor: 2,
+				title: 'Another Deployment',
+				date: '1/4/2024',
+				hidden: () => false,
+				bullets: [
+					{
+						'Another Deployment': [
+							'Another Deployment'
+						]
+					}
+				]
+			},
 			{
 				minor: 1,
 				title: 'Initial',
@@ -19,6 +46,25 @@ export const abouts: TAbout[] = [
 						]
 					}
 				]
+			}
+		]
+	},
+	{
+		version: 1,
+		title: 'Initial Deployment',
+		minors: [
+			{
+				minor: 3,
+				title: 'Yet Another Deployment',
+				date: DateOnly('now'),
+				hidden: () => false,
+				bullets: [
+					{
+						'Yet Another Deployment': [
+							'Yet another deployment'
+						]
+					}
+				]
 			},
 			{
 				minor: 2,
@@ -29,6 +75,21 @@ export const abouts: TAbout[] = [
 					{
 						'Another Deployment': [
 							'Another Deployment'
+						]
+					}
+				]
+			},
+			{
+				minor: 1,
+				title: 'Initial',
+				date: '1/25/2023',
+				bullets: [
+					{
+						'Initial Deployment': [
+							'Initial Deployment',
+							[
+								'Initial Deployment'
+							]
 						]
 					}
 				]
@@ -62,7 +123,7 @@ export const abouts: TAbout[] = [
 		]
 	},
 	{
-		version: 2,
+		version: 0,
 		title: 'Far Future Deployment',
 		hidden: true,
 		minors: [
