@@ -192,7 +192,7 @@
 				<slot name='body'/>
 			{/if}
 		</fieldset>
-		{#if !!cancelButton || !!okButton}
+		{#if !!cancelButton || !!okButton || !!$$slots.leftFooter || !!$$slots.rightFooter}
 			<fieldset class='grid grid-cols-[min-content_auto_auto_min-content] border-t-slate-200 dark:border-t-slate-700 px-4 py-2'
 			          class:border-t={borderFooter}
 			          disabled={disable}>
