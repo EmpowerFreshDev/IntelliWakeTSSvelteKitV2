@@ -1,6 +1,6 @@
 <script lang='ts'>
-	import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
-	import {autoFocus} from '$lib/index'
+	import { ArrayRange } from '@solidbasisventures/intelliwaketsfoundation'
+	import { autoFocus } from '$lib/index'
 	import Modal from '$lib/Modal.svelte'
 	import ModalFormAction from '$lib/ModalFormAction.svelte'
 	import ActivityOverlay from '$lib/ActivityOverlay.svelte'
@@ -14,6 +14,8 @@
 	let showForm = false
 
 	let showDD: undefined | null
+
+	let stopOutsideClose = false
 </script>
 
 <div class='h-full p-4'>
@@ -31,6 +33,9 @@
 	</p>
 	<p class='text-blue-500 underline'>
 		<button on:click={() => showDD = null}>Open DD Modal</button>
+	</p>
+	<p class='text-blue-500 underline'>
+		<button on:click={() => stopOutsideClose = true}>Open Stop Outside Close Modal</button>
 	</p>
 	<p>
 		<DropDown>
@@ -50,32 +55,32 @@
 
 	</p>
 	<div class='w-64 aspect-square bg-amber-200 border border-blue-600 relative'>
-		<ActivityOverlay/>
+		<ActivityOverlay />
 		Here
 	</div>
 	<p>
-		<DisplayHTML value='Here is some html'/>
+		<DisplayHTML value='Here is some html' />
 	</p>
 	<p>
-		<DisplayHTML value='Here is some html<script lang=ts>console.info("Test")</script>'/>
+		<DisplayHTML value='Here is some html<script lang=ts>console.info("Test")</script>' />
 	</p>
 	<p>
-		<DisplayHTML value='Here is <b>some</b> html'/>
+		<DisplayHTML value='Here is <b>some</b> html' />
 	</p>
 	<p>
-		<DisplayHTML value='Here is <b>some</b> html<script>console.info("Test")</script>'/>
+		<DisplayHTML value='Here is <b>some</b> html<script>console.info("Test")</script>' />
 	</p>
 	<p>
-		<DisplayHTML value='Here is some html https://www.intelliwake.com'/>
+		<DisplayHTML value='Here is some html https://www.intelliwake.com' />
 	</p>
 	<p>
 		<DisplayHTML value='Here is some html https://www.intelliwake.com'
-		             anchorClasses='text-blue-500 underline'/>
+								 anchorClasses='text-blue-500 underline' />
 	</p>
 </div>
 
 <Modal bind:show={showModal}
-       marginForStickyHeader>
+			 marginForStickyHeader>
 	<span slot='header'>Test Modal</span>
 	<div slot='body'>
 		<div class='sticky top-0 bg-slate-600'>This is the header</div>
@@ -86,9 +91,9 @@
 </Modal>
 
 <Modal show={otherModal}
-       okButton={null}
-       marginForStickyHeader
-       on:close={() => otherModal = false}>
+			 okButton={null}
+			 marginForStickyHeader
+			 on:close={() => otherModal = false}>
 	<span slot='header'>Other Modal</span>
 	<div slot='body'>
 		{#if otherModal}
@@ -101,22 +106,22 @@
 </Modal>
 
 <ModalFormAction action='?/testAction'
-                 formEnhance={{invalidate: 'app:Test', verbose: true}}
-                 bind:show={showForm}>
+								 formEnhance={{invalidate: 'app:Test', verbose: true}}
+								 bind:show={showForm}>
 	<span slot='header'>Test Form</span>
 	<div slot='body'>
 		{#if showForm}
 			<input name='id'
-			       type='number'
-			       use:autoFocus
-			       value='100'/>
+						 type='number'
+						 use:autoFocus
+						 value='100' />
 		{/if}
 	</div>
 </ModalFormAction>
 
 <Modal bind:show={showDD}
-       noShowValue={undefined}
-       okButton={null}>
+			 noShowValue={undefined}
+			 okButton={null}>
 	<span slot='header'>DD Modal</span>
 	<div slot='body'>
 		<div>
@@ -146,6 +151,22 @@
 	</div>
 </Modal>
 
+<Modal bind:show={stopOutsideClose}
+			 okButton={false}
+			 cancelButton={false}
+			 noSystemCloseActions>
+	<span slot='header'>Stop Outside Close Modal</span>
+	<div slot='body'>
+		<p>Only way to close this is with the button below</p>
+	</div>
+	<div slot="rightFooter">
+		<button on:click={() => {
+			stopOutsideClose = false
+		}}>Custom Close
+		</button>
+	</div>
+</Modal>
+
 {#each ArrayRange(500) as ar}
-	<Modal show={false}/>
+	<Modal show={false} />
 {/each}
