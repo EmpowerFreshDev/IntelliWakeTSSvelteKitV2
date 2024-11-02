@@ -84,7 +84,7 @@
 	}
 
 	let divToggle: HTMLDivElement
-	$: dialogParent = divToggle?.closest('dialog') satisfies HTMLDialogElement | null | undefined
+	$: dialogParent = divToggle?.closest('.dialogFrame') satisfies HTMLDialogElement | null | undefined
 
 	let windowW: number
 	let windowH: number
@@ -127,7 +127,10 @@
 					if (drop === 'Down' || (drop === null && rect.y < (wH * 0.65))) {
 						pointerPosition = 'Top'
 						newStyle.push(`top: ${CleanNumbers(2, rect.y, rect.height, 3)}px`)
-						newStyle.push(`max-height: ${CleanSubtractNumbers(2, wH, (dialogRect?.y ?? 0), rect.y, rect.height, 3, 20)}px`)
+						const maxHeight = !dialogRect ?
+							CleanSubtractNumbers(2, wH, rect.y, rect.height, 3, 20) :
+							CleanSubtractNumbers(2, dialogRect.height, rect.y, rect.height, 3, 20)
+						newStyle.push(`max-height: ${maxHeight}px`)
 					} else {
 						pointerPosition = 'Bottom'
 						newStyle.push(`bottom: ${CleanNumbers(2, rect.y * -1, 3, wH)}px`)

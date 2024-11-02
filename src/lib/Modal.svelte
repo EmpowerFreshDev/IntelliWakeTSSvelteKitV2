@@ -160,7 +160,7 @@
 				on:close={cancelAction}
 >
 	<!-- svelte-ignore a11y-click-events-have-key-events -->
-	<div class='grid grid-rows-[auto_1fr_auto] max-h-[90vh]'
+	<div class='grid grid-rows-[auto_1fr_auto] max-h-[90vh] dialogFrame'
 			 class:overflow-y-visible={overflowVisible}
 			 class:overflow-hidden={!overflowVisible}
 			 on:mousedown|stopPropagation={dialogMouseDown}
