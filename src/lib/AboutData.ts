@@ -1,6 +1,12 @@
-export type TRawAboutBulletStrings = string | string[]
+export type TRawAboutBulletStrings = string | (string | null)[] | null
 
-export type TRawAboutBulletObject = Record<string, (TRawAboutBulletStrings | Record<string, (TRawAboutBulletStrings | Record<string, (TRawAboutBulletStrings)[]>)[]>)[]>
+export type TRawAboutBulletObject = Record<
+	string,
+	(
+		| TRawAboutBulletStrings
+		| Record<string, (TRawAboutBulletStrings | Record<string, TRawAboutBulletStrings[]>)[]>
+	)[]
+>
 
 export type TAboutBullets = TRawAboutBulletStrings | TRawAboutBulletObject
 

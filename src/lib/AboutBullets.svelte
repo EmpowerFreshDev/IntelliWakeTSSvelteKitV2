@@ -7,8 +7,8 @@
 	$: structuredBullets = ToArray(bullets).reduce<{
 		stringBullets: TRawAboutBulletStrings[],
 		objectBullets: TRawAboutBulletObject[]
-	}>((result, bullet) => (typeof bullet === 'string' || Array.isArray(bullet)) ?
-			{ ...result, stringBullets: [...result.stringBullets, bullet] } :
+	}>((result, bullet) => bullet === null ? result : (typeof bullet === 'string' || Array.isArray(bullet)) ?
+			{ ...result, stringBullets: [...result.stringBullets.filter(sb => sb !== null), bullet] } :
 			{ ...result, objectBullets: [...result.objectBullets, bullet] },
 		{ stringBullets: [], objectBullets: [] })
 </script>

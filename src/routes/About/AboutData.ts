@@ -1,5 +1,5 @@
-import type {TAbout} from '$lib/AboutData'
-import { DateOnly } from '@solidbasisventures/intelliwaketsfoundation';
+import type { TAbout } from '$lib/AboutData'
+import { DateOnly } from '@solidbasisventures/intelliwaketsfoundation'
 
 export const abouts: TAbout[] = [
 	{
@@ -13,9 +13,7 @@ export const abouts: TAbout[] = [
 				hidden: () => false,
 				bullets: [
 					{
-						'Yet Another Deployment': [
-							'Yet another deployment'
-						]
+						'Yet Another Deployment': ['Yet another deployment', null, 'And another']
 					}
 				]
 			},
@@ -26,9 +24,7 @@ export const abouts: TAbout[] = [
 				hidden: () => false,
 				bullets: [
 					{
-						'Another Deployment': [
-							'Another Deployment'
-						]
+						'Another Deployment': ['Another Deployment']
 					}
 				]
 			},
@@ -38,12 +34,7 @@ export const abouts: TAbout[] = [
 				date: '1/25/2023',
 				bullets: [
 					{
-						'Initial Deployment': [
-							'Initial Deployment',
-							[
-								'Initial Deployment'
-							]
-						]
+						'Initial Deployment': ['Initial Deployment', ['Initial Deployment']]
 					}
 				]
 			}
@@ -60,9 +51,7 @@ export const abouts: TAbout[] = [
 				hidden: () => false,
 				bullets: [
 					{
-						'Yet Another Deployment': [
-							'Yet another deployment'
-						]
+						'Yet Another Deployment': ['Yet another deployment']
 					}
 				]
 			},
@@ -73,9 +62,7 @@ export const abouts: TAbout[] = [
 				hidden: () => false,
 				bullets: [
 					{
-						'Another Deployment': [
-							'Another Deployment'
-						]
+						'Another Deployment': ['Another Deployment']
 					}
 				]
 			},
@@ -85,12 +72,7 @@ export const abouts: TAbout[] = [
 				date: '1/25/2023',
 				bullets: [
 					{
-						'Initial Deployment': [
-							'Initial Deployment',
-							[
-								'Initial Deployment'
-							]
-						]
+						'Initial Deployment': ['Initial Deployment', ['Initial Deployment']]
 					}
 				]
 			},
@@ -101,9 +83,7 @@ export const abouts: TAbout[] = [
 				hidden: true,
 				bullets: [
 					{
-						'Future Deployment': [
-							'Future Deployment'
-						]
+						'Future Deployment': ['Future Deployment']
 					}
 				]
 			},
@@ -114,9 +94,7 @@ export const abouts: TAbout[] = [
 				hidden: () => true,
 				bullets: [
 					{
-						'Future Deployment': [
-							'Future Deployment'
-						]
+						'Future Deployment': ['Future Deployment']
 					}
 				]
 			}
@@ -133,9 +111,7 @@ export const abouts: TAbout[] = [
 				date: '1/25/2099',
 				bullets: [
 					{
-						'Far Future Deployment': [
-							'Far Future Deployment'
-						]
+						'Far Future Deployment': ['Far Future Deployment']
 					}
 				]
 			}
