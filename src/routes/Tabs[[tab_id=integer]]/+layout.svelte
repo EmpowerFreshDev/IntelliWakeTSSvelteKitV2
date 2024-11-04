@@ -22,6 +22,14 @@
 		{
 			key: 'Three',
 			hidden: hideThree
+		},
+		{
+			key: 'Four',
+			hidden: hideThree
+		},
+		{
+			key: 'Five',
+			hidden: hideThree
 		}
 	] satisfies ITabHref[]
 

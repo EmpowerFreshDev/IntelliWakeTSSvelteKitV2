@@ -1,11 +1,11 @@
 <script lang='ts'>
-	import type {ITabHref} from './Definitions'
-	import {page} from '$app/stores'
-	import {PathAnalyzer} from './PathAnalyzer'
-	import {browser} from '$app/environment'
-	import {afterNavigate, goto} from '$app/navigation'
-	import {CoalesceFalsey, ReplaceAll} from '@solidbasisventures/intelliwaketsfoundation'
-	import {tick} from 'svelte'
+	import type { ITabHref } from './Definitions'
+	import { page } from '$app/stores'
+	import { PathAnalyzer } from './PathAnalyzer'
+	import { browser } from '$app/environment'
+	import { afterNavigate, goto } from '$app/navigation'
+	import { CoalesceFalsey, ReplaceAll } from '@solidbasisventures/intelliwaketsfoundation'
+	import { tick } from 'svelte'
 	import Icon from '$lib/Icon.svelte'
 
 	export let tabHrefs: ITabHref[] = []
@@ -87,7 +87,7 @@
 				item => getSlug(item)?.includes(pathAnalyzer?.activePageFull ?? '(NoNe)') ?? true)) {
 				const toItem = visibleItems.find(item => item.isInitial) ?? visibleItems.find(() => true)
 				if (toItem) {
-					goto(toItem.href, {replaceState: true})
+					goto(toItem.href, { replaceState: true })
 					return
 				}
 			}
@@ -142,7 +142,7 @@
 					if (consoleLogs) {
 						console.info('No ID newTab', newTab, pathAnalyzer?.open(newTab, false))
 					}
-					await goto(pathAnalyzer?.open(newTab, false), {replaceState: true})
+					await goto(pathAnalyzer?.open(newTab, false), { replaceState: true })
 				}
 			}
 		}
@@ -174,7 +174,7 @@
 			{#if !rounded}
 				<a
 					class='text-center border-transparent border-b-4 text-black shadow-none drop-shadow-none
-								 rounded-none focus:ring-0 m-2 min-w-[3em] text-ellipsis whitespace-nowrap
+								 rounded-none focus:ring-0 m-2 min-w-[2em] text-ellipsis whitespace-nowrap
 								 overflow-hidden hover:bg-transparent hover:border-b-primary-main'
 					class:!text-primary-main={item.isOpen}
 					class:!border-b-primary-main={item.isOpen}
@@ -192,8 +192,11 @@
 							class='inline-block mr-1'
 							fw
 						/>
+						<span class:hidden={visibleItems.length > 4}
+									class:md:inline={visibleItems.length > 4}>{item.title ?? item.key}</span>
+					{:else}
+						{item.title ?? item.key}
 					{/if}
-					{item.title ?? item.key}
 				</a>
 			{:else}
 				<a
@@ -204,11 +207,16 @@
 					href={item.href}
 				>
 					{#if !!item.faProps}
-						<Icon {...item.faProps}
-						      class='inline-block mr-1'
-						      fw/>
+						<Icon
+							{...item.faProps}
+							class='inline-block mr-1'
+							fw
+						/>
+						<span class:hidden={visibleItems.length > 4}
+									class:md:inline={visibleItems.length > 4}>{item.title ?? item.key}</span>
+					{:else}
+						{item.title ?? item.key}
 					{/if}
-					{item.title ?? item.key}
 				</a>
 			{/if}
 		{/each}
