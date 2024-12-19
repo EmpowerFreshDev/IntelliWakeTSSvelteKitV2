@@ -6,6 +6,7 @@
 	import ActivityOverlay from '$lib/ActivityOverlay.svelte'
 	import DisplayHTML from '$lib/DisplayHTML.svelte'
 	import DropDown from '$lib/DropDown.svelte'
+	import DropDownControl from '$lib/DropDownControl.svelte'
 
 	let showModal: boolean | null = null
 
@@ -39,7 +40,7 @@
 	</p>
 	<p>
 		<DropDown>
-			<span slot='button'>DD Control Fixed</span>
+			<span slot='button'>DD Control Fixed 1</span>
 			<div slot='actions'>
 				<div>Test</div>
 				<div>Test</div>
@@ -52,7 +53,24 @@
 				<div>Test</div>
 			</div>
 		</DropDown>
-
+		<DropDownControl
+			index={-1}
+			>
+			<div slot="toggle">
+				DDC
+			</div>
+			<div
+				class={`min-w-[14rem] max-h-64`}
+				slot="body">
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+			</div>
+		</DropDownControl>
 	</p>
 	<div class='w-64 aspect-square bg-amber-200 border border-blue-600 relative'>
 		<ActivityOverlay />
@@ -126,7 +144,7 @@
 	<div slot='body'>
 		<div>
 			<DropDown>
-				<span slot='button'>DD Control Fixed</span>
+				<span slot='button'>DD Control Fixed 2</span>
 				<div slot='actions'>
 					{#each ArrayRange(20) as arrayItem}
 						<div>This is the body {arrayItem}</div>
@@ -141,6 +159,24 @@
 					{/each}
 				</div>
 			</DropDown>
+			<DropDownControl
+				index={-1}
+			>
+				<div slot="toggle">
+					DDC
+				</div>
+				<div
+					class={`min-w-[14rem] max-h-64`}
+					slot="body">
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+					<p>This is the DDC body</p>
+				</div>
+			</DropDownControl>
 		</div>
 		{#each ArrayRange(2) as arrayItem}
 			<div>This is the body {arrayItem}</div>
