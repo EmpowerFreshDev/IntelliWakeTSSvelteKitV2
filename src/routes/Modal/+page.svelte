@@ -139,9 +139,26 @@
 
 <Modal bind:show={showDD}
 			 noShowValue={undefined}
-			 okButton={null}>
+			 okButton={null}
+width="50rem">
 	<span slot='header'>DD Modal</span>
 	<div slot='body'>
+		<DropDownControl>
+			<div slot="toggle">
+				DDC
+			</div>
+			<div
+				class={`min-w-[14rem] max-h-64`}
+				slot="body">
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+				<p>This is the DDC body</p>
+			</div>
+		</DropDownControl>
 		<div>
 			<DropDown>
 				<span slot='button'>DD Control Fixed 2</span>
@@ -159,24 +176,6 @@
 					{/each}
 				</div>
 			</DropDown>
-			<DropDownControl
-				index={-1}
-			>
-				<div slot="toggle">
-					DDC
-				</div>
-				<div
-					class={`min-w-[14rem] max-h-64`}
-					slot="body">
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-					<p>This is the DDC body</p>
-				</div>
-			</DropDownControl>
 		</div>
 		{#each ArrayRange(2) as arrayItem}
 			<div>This is the body {arrayItem}</div>

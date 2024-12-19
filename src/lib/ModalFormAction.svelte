@@ -136,7 +136,7 @@
         bind:this={dialogElement}
         on:close={cancelAction}>
 
-	<form class='grid grid-rows-[auto_1fr_auto] max-h-[90vh]'
+	<form class='grid grid-rows-[auto_1fr_auto] max-h-[90vh] dialogFrame'
 	      method='POST'
 	      {action}
 	      use:enhance={() => FormEnhance(useEnhance)}
