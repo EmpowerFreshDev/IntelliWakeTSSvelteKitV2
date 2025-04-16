@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {createEventDispatcher} from 'svelte'
-	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
+	import {RandomString} from '@empowerfresh/intelliwake'
 
 	export let checked = false
 	export let disabled = false

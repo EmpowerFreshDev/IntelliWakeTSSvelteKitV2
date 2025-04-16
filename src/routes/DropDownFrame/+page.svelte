@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import DropDownControl from "$lib/DropDownControl.svelte"
-	import {ArrayRange} from "@solidbasisventures/intelliwaketsfoundation";
+	import {ArrayRange} from "@empowerfresh/intelliwake";
 	import DropDown from "$lib/DropDown.svelte";
 	import {faSun} from "@fortawesome/free-solid-svg-icons";
 

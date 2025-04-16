@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type { ITabItem } from './Definitions'
-	import { DeepEqual, SortCompare } from '@solidbasisventures/intelliwaketsfoundation'
+	import { DeepEqual, SortCompare } from '@empowerfresh/intelliwake'
 	import Icon from '$lib/Icon.svelte'
 
 	export let tabItems: ITabItem[] = []

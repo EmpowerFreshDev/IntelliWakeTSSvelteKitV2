@@ -2,7 +2,7 @@
 	import MultiSelect from '$lib/MultiSelect.svelte'
 	import {enhance} from '$app/forms'
 	import {DownloadString} from '$lib/Functions'
-	import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
+	import {ArrayRange} from '@empowerfresh/intelliwake'
 	import {FormEnhance} from '$lib/FormEnhance'
 
 	type TPoss = {

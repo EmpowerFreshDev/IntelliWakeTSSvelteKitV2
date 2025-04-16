@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {scrollToBottom} from '$lib'
-	import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
+	import {ArrayRange} from '@empowerfresh/intelliwake'
 
 	let range = 100
 </script>

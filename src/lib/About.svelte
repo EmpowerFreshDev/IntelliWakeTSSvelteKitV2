@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import AboutBullets from './AboutBullets.svelte'
 	import type { TAbout } from './AboutData'
-	import { DateCompare, DateOnly, DateOnlyNull, type TAdjustment } from '@solidbasisventures/intelliwaketsfoundation'
+	import { DateCompare, DateOnly, DateOnlyNull, type TAdjustment } from '@empowerfresh/intelliwake'
 
 	export let abouts: TAbout[]
 

@@ -6,7 +6,7 @@
 		TimeZoneOlsonsAmericaCommon,
 		IANADescription,
 		type TDateAny
-	} from '@solidbasisventures/intelliwaketsfoundation'
+	} from '@empowerfresh/intelliwake'
 
 	export let value: string | null = null
 	export let id: string | undefined = undefined

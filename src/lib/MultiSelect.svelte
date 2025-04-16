@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import {DeepEqual, SearchRows} from '@solidbasisventures/intelliwaketsfoundation'
+	import {DeepEqual, SearchRows} from '@empowerfresh/intelliwake'
 	import DropDownControl from '$lib/DropDownControl.svelte'
 	import {onMount, tick} from 'svelte'
 	import {ShowMessageBox} from '$lib/Definitions'

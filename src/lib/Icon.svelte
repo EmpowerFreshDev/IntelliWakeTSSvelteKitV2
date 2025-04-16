@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import {onMount} from 'svelte'
-	import {CleanNumber} from '@solidbasisventures/intelliwaketsfoundation'
+	import {CleanNumber} from '@empowerfresh/intelliwake'
 	import type {IconDefinition} from '@fortawesome/fontawesome-common-types'
 
 	let clazz = ''

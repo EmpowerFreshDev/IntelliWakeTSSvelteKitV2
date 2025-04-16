@@ -1,4 +1,4 @@
-import {CleanNumber, isNullUndefined} from '@solidbasisventures/intelliwaketsfoundation'
+import {CleanNumber, isNullUndefined} from '@empowerfresh/intelliwake'
 
 /**
  * Options for specifying display color style.

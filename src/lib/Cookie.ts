@@ -2,7 +2,7 @@
 //   Cookie Manager
 // ----------------------------
 import {env} from '$env/dynamic/public'
-import {IsOn} from "@solidbasisventures/intelliwaketsfoundation";
+import {IsOn} from "@empowerfresh/intelliwake";
 
 export function CookieCreate(name: string, value: string | null, days: number) {
 	name = name.replace(/=/g, '')

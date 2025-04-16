@@ -1,5 +1,5 @@
 import type { TAbout } from '$lib/AboutData'
-import { DateOnly } from '@solidbasisventures/intelliwaketsfoundation'
+import { DateOnly } from '@empowerfresh/intelliwake'
 
 export const abouts: TAbout[] = [
 	{

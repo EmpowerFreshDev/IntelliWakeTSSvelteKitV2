@@ -1,7 +1,7 @@
 <script lang='ts'>
 	import MasterDetailLayout from '$lib/MasterDetailLayout.svelte'
 	import type {TListGroupItem} from '$lib'
-	import {SearchRows} from '@solidbasisventures/intelliwaketsfoundation'
+	import {SearchRows} from '@empowerfresh/intelliwake'
 	import Search from '$lib/Search.svelte'
 
 	let search = ''

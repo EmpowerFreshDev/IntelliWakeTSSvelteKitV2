@@ -4,7 +4,7 @@
 	import { PathAnalyzer } from './PathAnalyzer'
 	import { browser } from '$app/environment'
 	import { afterNavigate, goto } from '$app/navigation'
-	import { CoalesceFalsey, ReplaceAll } from '@solidbasisventures/intelliwaketsfoundation'
+	import { CoalesceFalsey, ReplaceAll } from '@empowerfresh/intelliwake'
 	import { tick } from 'svelte'
 	import Icon from '$lib/Icon.svelte'
 

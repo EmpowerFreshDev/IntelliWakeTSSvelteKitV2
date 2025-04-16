@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type {PathAnalyzer} from '$lib/PathAnalyzer'
-	import {type TFindIsActive, ToPascalCase} from '@solidbasisventures/intelliwaketsfoundation'
+	import {type TFindIsActive, ToPascalCase} from '@empowerfresh/intelliwake'
 	import Icon from '$lib/Icon.svelte'
 	import type {TListGroupItem} from './Definitions'
 	import DisplayHTML from './DisplayHTML.svelte'
