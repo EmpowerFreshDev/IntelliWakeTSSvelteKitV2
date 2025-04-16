@@ -5,7 +5,7 @@
 		isNullUndefined,
 		ToDigitsBlank,
 		ToDigitsMax
-	} from '@solidbasisventures/intelliwaketsfoundation'
+	} from '@empowerfresh/intelliwake'
 
 	export let value: number | null | undefined
 	export let onNullUndefined: 'Zero' | 'Dash' | 'Blank' = 'Dash'

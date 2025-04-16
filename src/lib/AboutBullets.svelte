@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type { TAboutBullets, TRawAboutBulletObject, TRawAboutBulletStrings } from './AboutData'
-	import { ToArray } from '@solidbasisventures/intelliwaketsfoundation'
+	import { ToArray } from '@empowerfresh/intelliwake'
 
 	export let bullets: TAboutBullets[]
 

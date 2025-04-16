@@ -3,7 +3,7 @@
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import Switch from '$lib/Switch.svelte'
 	import ButtonGroup from '$lib/ButtonGroup.svelte'
-	import {CleanNumberNull} from '@solidbasisventures/intelliwaketsfoundation'
+	import {CleanNumberNull} from '@empowerfresh/intelliwake'
 
 	let value = 1.25
 	let valueHighlight = 30

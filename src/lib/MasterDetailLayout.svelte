@@ -5,7 +5,7 @@
 	import {fly} from 'svelte/transition'
 	import {browser} from '$app/environment'
 	import type {TListGroupItem} from '$lib/Definitions'
-	import type {TFindIsActive} from '@solidbasisventures/intelliwaketsfoundation'
+	import type {TFindIsActive} from '@empowerfresh/intelliwake'
 	import {PathAnalyzer} from '$lib/PathAnalyzer'
 
 	export let pageRoute: string

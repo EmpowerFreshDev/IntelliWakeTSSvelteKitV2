@@ -1,5 +1,5 @@
 import type {Actions} from '@sveltejs/kit'
-import {ObjectFromFormData, Sleep} from '@solidbasisventures/intelliwaketsfoundation'
+import {ObjectFromFormData, Sleep} from '@empowerfresh/intelliwake'
 import type {PageServerLoad} from './$types'
 
 export const load = (async ({depends}) => {

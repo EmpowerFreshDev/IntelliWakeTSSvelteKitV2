@@ -11,7 +11,7 @@
 		SelectBetweenIDs,
 		SortColumns,
 		ToDigits
-	} from '@solidbasisventures/intelliwaketsfoundation'
+	} from '@empowerfresh/intelliwake'
 	import Search from './Search.svelte'
 	import DropDown from './DropDown.svelte'
 	import {CopyRefToClipboard} from './Functions'

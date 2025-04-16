@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
+	import {RandomString} from '@empowerfresh/intelliwake'
 	import Modal from './Modal.svelte'
 	import {onDestroy} from 'svelte'
 	import {StoreDirtyTrack} from './StoreDirtyTrack'

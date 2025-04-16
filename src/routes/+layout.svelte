@@ -9,7 +9,7 @@
 	import MessageBoxes from '$lib/MessageBoxes.svelte'
 	import {navigating, page} from '$app/stores'
 	import DropDown from '$lib/DropDown.svelte'
-	import {SearchRows} from '@solidbasisventures/intelliwaketsfoundation'
+	import {SearchRows} from '@empowerfresh/intelliwake'
 	import Search from '$lib/Search.svelte'
 	import {ShowActivityOverlay, type TListGroupItem} from '$lib/Definitions'
 	import Switch from '$lib/Switch.svelte'

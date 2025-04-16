@@ -1,5 +1,5 @@
 import type {Actions} from '@sveltejs/kit'
-import {ESTTodayDateTimeLabel, ObjectFromFormData} from '@solidbasisventures/intelliwaketsfoundation'
+import {ESTTodayDateTimeLabel, ObjectFromFormData} from '@empowerfresh/intelliwake'
 
 export const actions = {
 	test: async ({request}) => {

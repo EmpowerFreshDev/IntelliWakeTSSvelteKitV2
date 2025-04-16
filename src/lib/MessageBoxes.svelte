@@ -2,7 +2,7 @@
 	import type {IMessageBoxStore} from './Definitions'
 	import {ShowMessageBox} from './Definitions'
 	import {fade, fly} from 'svelte/transition'
-	import {DateCompare} from '@solidbasisventures/intelliwaketsfoundation'
+	import {DateCompare} from '@empowerfresh/intelliwake'
 
 	setInterval(() => {
 		const toClears = $ShowMessageBox.filter(smb => !!smb.dismissAt && DateCompare(smb.dismissAt, 'IsBefore', 'now', 'seconds'))

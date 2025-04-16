@@ -1,4 +1,4 @@
-import {FormDataFromObject, ObjectFromFormData} from '@solidbasisventures/intelliwaketsfoundation'
+import {FormDataFromObject, ObjectFromFormData} from '@empowerfresh/intelliwake'
 
 /**
  * This function retrieves form data from a given Request object.

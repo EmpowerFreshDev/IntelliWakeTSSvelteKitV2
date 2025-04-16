@@ -4,7 +4,7 @@ import {
 	isNullUndefined,
 	ReplaceAll,
 	YYYY_MM_DD_HH_mm_ss
-} from '@solidbasisventures/intelliwaketsfoundation'
+} from '@empowerfresh/intelliwake'
 import {env} from '$env/dynamic/public'
 import {tick} from 'svelte'
 import {goto} from '$app/navigation'

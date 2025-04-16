@@ -1,6 +1,6 @@
 <script>
 	import SpinControl from "$lib/SpinControl.svelte";
-	import {ArrayRange, ToDigits} from "@solidbasisventures/intelliwaketsfoundation";
+	import {ArrayRange, ToDigits} from "@empowerfresh/intelliwake";
 </script>
 
 <div class='grid grid-cols-3 p-12'>

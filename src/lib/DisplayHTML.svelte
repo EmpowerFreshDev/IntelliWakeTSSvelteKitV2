@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import {IncludesHTML, ReplaceLinks, TextToHTML} from '@solidbasisventures/intelliwaketsfoundation'
+    import {IncludesHTML, ReplaceLinks, TextToHTML} from '@empowerfresh/intelliwake'
 
     export let value: string | null | undefined
     export let anchorClasses = ''

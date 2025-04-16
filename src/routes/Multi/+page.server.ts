@@ -1,7 +1,7 @@
 import type {Actions} from '@sveltejs/kit'
 import {fail} from '@sveltejs/kit'
 import {RequestObject} from '$lib/FunctionsServer'
-import {ESTTodayDateTimeLabel} from '@solidbasisventures/intelliwaketsfoundation'
+import {ESTTodayDateTimeLabel} from '@empowerfresh/intelliwake'
 
 export const actions = {
 	send: async ({request}) => {

@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import { ArrayRange } from '@solidbasisventures/intelliwaketsfoundation'
+	import { ArrayRange } from '@empowerfresh/intelliwake'
 	import { autoFocus } from '$lib/index'
 	import Modal from '$lib/Modal.svelte'
 	import ModalFormAction from '$lib/ModalFormAction.svelte'

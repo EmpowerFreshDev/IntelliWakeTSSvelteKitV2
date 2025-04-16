@@ -8,7 +8,7 @@ import {
 	SortCompareNull,
 	type TDateAny,
 	ToArray
-} from '@solidbasisventures/intelliwaketsfoundation'
+} from '@empowerfresh/intelliwake'
 import type {IconDefinition} from '@fortawesome/fontawesome-common-types'
 
 export interface IFAProps {

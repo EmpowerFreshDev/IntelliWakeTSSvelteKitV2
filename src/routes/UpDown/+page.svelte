@@ -1,5 +1,5 @@
 <script lang='ts'>
-    import {ArrayRange} from '@solidbasisventures/intelliwaketsfoundation'
+    import {ArrayRange} from '@empowerfresh/intelliwake'
     import {nextPrevArrows, selectOnFocus, upDownArrows} from '$lib'
     import Search from "$lib/Search.svelte";
     import Switch from "$lib/Switch.svelte";

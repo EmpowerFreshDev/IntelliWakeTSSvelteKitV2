@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import {invalidate, invalidateAll} from '$app/navigation'
-import {CleanNumber, IsOn, ObjectFromFormData, ToArray} from '@solidbasisventures/intelliwaketsfoundation'
+import {CleanNumber, IsOn, ObjectFromFormData, ToArray} from '@empowerfresh/intelliwake'
 import {ShowActivityOverlay, ShowMessageBox} from './Definitions'
 import {tick} from 'svelte'
 // import type {SubmitFunction} from '$app/forms'

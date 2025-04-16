@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import Table from '$lib/Table.svelte'
-	import {ToDigits} from '@solidbasisventures/intelliwaketsfoundation'
+	import {ToDigits} from '@empowerfresh/intelliwake'
 
 	const tableData = [
 		{id: 1, name: 'Name One'},

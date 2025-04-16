@@ -1,5 +1,5 @@
 import type {Page} from '@sveltejs/kit'
-import {BuildPath, GreaterNumber, ToArray} from '@solidbasisventures/intelliwaketsfoundation'
+import {BuildPath, GreaterNumber, ToArray} from '@empowerfresh/intelliwake'
 
 export type TNavComponent = {
 	component: string

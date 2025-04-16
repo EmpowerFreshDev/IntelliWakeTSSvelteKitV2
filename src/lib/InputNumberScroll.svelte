@@ -11,7 +11,7 @@
 		ToDigits,
 		ToDigitsMax,
 		ToPercent
-	} from '@solidbasisventures/intelliwaketsfoundation'
+	} from '@empowerfresh/intelliwake'
 	import {createEventDispatcher, tick} from 'svelte'
 	import DisplayFraction from '$lib/DisplayFraction.svelte'
 	import {browser} from '$app/environment'

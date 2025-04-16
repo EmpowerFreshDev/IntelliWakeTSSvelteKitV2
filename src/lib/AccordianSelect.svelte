@@ -1,6 +1,6 @@
 <script lang='ts'>
 	import type {ISpinItem} from '$lib/Definitions'
-	import {RandomString} from '@solidbasisventures/intelliwaketsfoundation'
+	import {RandomString} from '@empowerfresh/intelliwake'
 	import {browser} from '$app/environment'
 	import {onDestroy, onMount, tick} from 'svelte'
 	import {type ActionArray, useActions} from '$lib/useActions'

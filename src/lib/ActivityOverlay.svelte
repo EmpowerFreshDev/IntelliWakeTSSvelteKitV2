@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import {DateCompare, DateParseTS} from '@solidbasisventures/intelliwaketsfoundation'
+	import {DateCompare, DateParseTS} from '@empowerfresh/intelliwake'
 	import {createEventDispatcher} from 'svelte'
 
 	export let show = true

@@ -1,5 +1,5 @@
 <script lang='ts'>
-	import {CleanNumbers, CleanSubtractNumbers, PickProperty} from '@solidbasisventures/intelliwaketsfoundation'
+	import {CleanNumbers, CleanSubtractNumbers, PickProperty} from '@empowerfresh/intelliwake'
 	import {slide} from 'svelte/transition'
 	import {onMount, tick} from 'svelte'
 	import type {TChatBubblePosition, TDropDownControlDrop, TDropDownControlPosition} from './Definitions'
