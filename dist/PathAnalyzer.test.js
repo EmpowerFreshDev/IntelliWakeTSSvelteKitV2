@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest';
 import { PathAnalyzer } from './PathAnalyzer';
-var page = {
+const page = {
     params: {
         crumbs: 'PageOne/Page/~/PageTwo'
     },
@@ -8,8 +8,8 @@ var page = {
         pathname: '/PageOne/Page/~/PageTwo/PageThree/Page/Sub1/Another1'
     }
 };
-it('Deconstructs PAGE paths', function () {
-    var pathAnalyer = new PathAnalyzer(page, 'Page');
+it('Deconstructs PAGE paths', () => {
+    const pathAnalyer = new PathAnalyzer(page, 'Page');
     expect(pathAnalyer.crumbs).toBe('PageOne/Page/~/PageTwo');
     expect(pathAnalyer.basePath).toBe('/PageOne/Page/~/PageTwo/PageThree/Page');
     expect(pathAnalyer.activePageFull).toBe('Page/Sub1/Another1');
@@ -26,8 +26,8 @@ it('Deconstructs PAGE paths', function () {
     expect(pathAnalyer.backPath).toBe('/PageOne/Page/~/PageTwo/PageThree/Page/Sub1');
     expect(pathAnalyer.apiPath('API')).toBe('/PageOne/Page/~/PageTwo/PageThree/Page/Sub1/Another1/API');
 });
-it('Deconstructs NON-PAGE paths', function () {
-    var pathAnalyer = new PathAnalyzer(page);
+it('Deconstructs NON-PAGE paths', () => {
+    const pathAnalyer = new PathAnalyzer(page);
     expect(pathAnalyer.crumbs).toBe('PageOne/Page/~/PageTwo');
     expect(pathAnalyer.basePath).toBe('/PageOne/Page/~/PageTwo/PageThree');
     expect(pathAnalyer.activePageFull).toBe('PageThree/Page/Sub1/Another1');
@@ -41,8 +41,8 @@ it('Deconstructs NON-PAGE paths', function () {
     expect(pathAnalyer.open('Sub2')).toBe('/PageOne/Page/~/PageTwo/PageThree/Sub2');
     expect(pathAnalyer.apiPath('API')).toBe('/PageOne/Page/~/PageTwo/PageThree/Page/Sub1/Another1/API');
 });
-it('Deconstructs HOME path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs HOME path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {},
         url: {
             pathname: '/'
@@ -61,8 +61,8 @@ it('Deconstructs HOME path', function () {
     expect(pathAnalyer.backPath).toBe('/');
     expect(pathAnalyer.apiPath('API')).toBe('/API');
 });
-it('Deconstructs DASHBOARD path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -86,8 +86,8 @@ it('Deconstructs DASHBOARD path', function () {
     expect(pathAnalyer.backPath).toBe('/');
     expect(pathAnalyer.apiPath('API')).toBe('/Dashboard/API');
 });
-it('Deconstructs DASHBOARD OPEN path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD OPEN path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -115,8 +115,8 @@ it('Deconstructs DASHBOARD OPEN path', function () {
     expect(pathAnalyer.backPath).toBe('/Dashboard');
     expect(pathAnalyer.apiPath('API')).toBe('/Dashboard/Sub1/API');
 });
-it('Deconstructs DASHBOARD OPEN path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD OPEN path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -143,8 +143,8 @@ it('Deconstructs DASHBOARD OPEN path', function () {
     expect(pathAnalyer.backPath).toBe('/Dashboard');
     expect(pathAnalyer.apiPath('API')).toBe('/Dashboard/Sub14/API');
 });
-it('Deconstructs DASHBOARD OPEN path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD OPEN path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -170,8 +170,8 @@ it('Deconstructs DASHBOARD OPEN path', function () {
     expect(pathAnalyer.open('Sub1')).toBe('/Dashboard/Sub1');
     expect(pathAnalyer.apiPath('API')).toBe('/Dashboard/Sub/API');
 });
-it('Deconstructs DASHBOARD OPEN path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD OPEN path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -201,8 +201,8 @@ it('Deconstructs DASHBOARD OPEN path', function () {
     expect(pathAnalyer.backPath).toBe('/Dashboard/Sub');
     expect(pathAnalyer.apiPath('API')).toBe('/Dashboard/Sub/1/API');
 });
-it('Deconstructs SUCCESSOR PREDECESSOR path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs SUCCESSOR PREDECESSOR path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: 'Pred/~/Succ'
         },
@@ -235,8 +235,8 @@ it('Deconstructs SUCCESSOR PREDECESSOR path', function () {
     expect(pathAnalyer.backPath).toBe('/Pred');
     expect(pathAnalyer.apiPath('API')).toBe('/Pred/~/Succ/Succ2/Dashboard/API');
 });
-it('Deconstructs DASHBOARD OPEN path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs DASHBOARD OPEN path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -267,8 +267,8 @@ it('Deconstructs DASHBOARD OPEN path', function () {
     expect(pathAnalyer.open('Customer/2')).toBe('/Settings/Customers/Customer/2');
     expect(pathAnalyer.apiPath('API')).toBe('/Settings/Customers/Customer/1/API');
 });
-it('Deconstructs ROOT path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs ROOT path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -291,8 +291,8 @@ it('Deconstructs ROOT path', function () {
     expect(pathAnalyer.open('About', false)).toBe('/About');
     expect(pathAnalyer.open('Test')).toBe('/Test');
 });
-it('Deconstructs to TAB path', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs to TAB path', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
@@ -302,8 +302,8 @@ it('Deconstructs to TAB path', function () {
     }, 'Customers');
     expect(pathAnalyer.backPath).toBe('/Settings/Customers/Customer1/TabTest');
 });
-it('Deconstructs Query paths', function () {
-    var pathAnalyer = new PathAnalyzer({
+it('Deconstructs Query paths', () => {
+    const pathAnalyer = new PathAnalyzer({
         params: {
             crumbs: ''
         },
