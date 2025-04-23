@@ -1,2 +1,2 @@
 import { writable } from 'svelte/store';
-export var StoreTransitionToRight = writable(true);
+export const StoreTransitionToRight = writable(true);

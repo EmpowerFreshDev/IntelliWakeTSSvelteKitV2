@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store';
-var initialDirtyTrack = {
+const initialDirtyTrack = {
     dirtyIDs: [],
     pendingRequest: null
 };
-export var StoreDirtyTrack = writable(initialDirtyTrack);
+export const StoreDirtyTrack = writable(initialDirtyTrack);
