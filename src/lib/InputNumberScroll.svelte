@@ -45,6 +45,9 @@
 	export let displayQualifier = ''
 	export let onChange: (val: number | null) => void = () => {}
 
+	export let inputSwitchToManual: string = 'Switch to Manual Entry'
+  	export let inputSwitchToQuick: string = 'Switch to Quick Entry'
+
 	let inputEL: HTMLInputElement
 
 	const dispatch = createEventDispatcher()
@@ -205,7 +208,7 @@
 					<button type='button'
 					        class='btnLink'
 					        on:click={() => manualEntryMode = !manualEntryMode}>
-						Switch to {manualEntryMode ? 'Quick Entry' : 'Manual Entry'}
+							{manualEntryMode ? inputSwitchToQuick : inputSwitchToManual}
 					</button>
 				</div>
 			{/if}
