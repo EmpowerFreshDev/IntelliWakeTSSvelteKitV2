@@ -1,4 +1,3 @@
-/** @type { import("eslint").Linter.FlatConfig } */
 module.exports = {
 	root: true,
 	extends: [
@@ -28,19 +27,25 @@ module.exports = {
 			}
 		}
 	],
-	'rules': {
-		"@typescript-eslint/no-empty-interface": "off",
+	globals: {
+		__version__: true
+	},
+	rules: {
+		'@typescript-eslint/no-empty-interface': 'off',
 		'@typescript-eslint/no-empty-function': 'off',
 		'@typescript-eslint/no-explicit-any': 'off',
-		'@typescript-eslint/no-unused_vars': 'off',
 		'@typescript-eslint/explicit-module-boundary-types': 'off',
-		'eqeqeq': 'off',
+		eqeqeq: 'off',
+		'no-extra-boolean-cast': 'off',
 		'require-await': 'off',
 		'no-async-promise-executor': 'off',
-		'svelte/no-at-html-tags': 'off'
-		// "@typescript-eslint/ban-types": "off",
-		// "@typescript-eslint/no-explicit-any": "off",
-		// "@typescript-eslint/explicit-module-boundary-types": "off",
-		// "require-await": "off"
+		'svelte/valid-compile': 'warn',
+		'@typescript-eslint/no-unused-vars': 'warn',
+		'prefer-const': 'warn',
+		'no-case-declarations': 'warn',
+		'@typescript-eslint/ban-types': 'warn',
+		'@typescript-eslint/ban-ts-comment': 'warn',
+		'no-useless-escape': 'warn',
+		'no-undef': 'warn'
 	}
 }
