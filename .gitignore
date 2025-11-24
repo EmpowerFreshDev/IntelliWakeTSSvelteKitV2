@@ -41,7 +41,7 @@ yarn-error.log*
 
 stage_files
 
-dist
+#dist
 
 ecosystem.config.*
 
