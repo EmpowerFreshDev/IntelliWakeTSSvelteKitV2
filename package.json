@@ -1,8 +1,8 @@
 {
-	"name": "@solidbasisventures/intelliwaketssveltekitv2",
-	"version": "2.0.81",
+	"name": "@empowerfreshdev/svelte-ui-library",
+	"version": "1.0.0",
 	"license": "MIT",
-	"private": false,
+	"private": true,
 	"scripts": {
 		"dev": "vite dev",
 		"Publish": "pnpm version patch && git push --tags && pnpm svelte-package && pnpm publish && git push",
